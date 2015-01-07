@@ -1,25 +1,13 @@
 {
   "name": "copaair-widgets",
   "version": "0.0.0",
-  "description": "",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Nobox/copaair-widgets.git"
-  },
-  "keywords": [
-    "copa",
-    "booking",
-    "nobox"
-  ],
-  "contributors": [
-      "Waldemar Figueroa <waldemar@nobox.com>",
-      "Alberto Estrada <alberto@nobox.com>"
-  ],
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Nobox/copaair-widgets/issues"
   },
-  "homepage": "https://github.com/Nobox/copaair-widgets",
+  "contributors": [
+    "Waldemar Figueroa <waldemar@nobox.com>",
+    "Alberto Estrada <alberto@nobox.com>"
+  ],
   "devDependencies": {
     "autoprefixer-core": "^4.0.2",
     "css-mqpacker": "^2.0.0",
@@ -29,5 +17,18 @@
     "gulp-postcss": "^3.0.0",
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^1.2.4"
+  },
+  "homepage": "https://github.com/Nobox/copaair-widgets",
+  "keywords": [
+    "nobox",
+    "copaair",
+    "copa airlines",
+    "booking",
+    "signup"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nobox/copaair-widgets.git"
   }
 }
