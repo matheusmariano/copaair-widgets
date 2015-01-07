@@ -1,0 +1,25 @@
+{
+  "name": "copaair-widgets",
+  "version": "0.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nobox/copaair-widgets.git"
+  },
+  "keywords": [
+    "copa",
+    "booking",
+    "nobox"
+  ],
+  "contributors": [
+      "Waldemar Figueroa <waldemar@nobox.com>",
+      "Alberto Estrada <alberto@nobox.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Nobox/copaair-widgets/issues"
+  },
+  "homepage": "https://github.com/Nobox/copaair-widgets",
+  "devDependencies": {
+  }
+}
