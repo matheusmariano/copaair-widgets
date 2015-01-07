@@ -2,13 +2,15 @@ var gulp       = require('gulp'),
     sass       = require('gulp-sass'),
     postcss    = require('gulp-postcss'),
     plumber    = require('gulp-plumber'),
-    rename     = require('gulp-rename')
+    rename     = require('gulp-rename'),
+    sourcemaps = require('gulp-sourcemaps'),
+    uglify     = require('gulp-uglify')
 ;
 
 // Stylesheets task
 gulp.task('styles', function() {
 
-    gulp.src(['scss/**/*.scss'])
+    gulp.src(['src/sass/**/*.scss'])
         .pipe(plumber())
         .pipe(sass())
 
@@ -18,20 +20,35 @@ gulp.task('styles', function() {
             }),
             require('css-mqpacker')
         ]))
-        .pipe(gulp.dest('css'))
+        .pipe(gulp.dest('src/css'))
 
         .pipe(postcss([ require('csswring') ]))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(gulp.dest('css'))
+        .pipe(gulp.dest('dist/css'))
+
+});
+
+// Uglify task
+gulp.task('uglify', function() {
+
+    gulp.src(['src/js/**/*.js'])
+        .pipe(plumber())
+
+        .pipe(sourcemaps.init())
+            .pipe(uglify())
+            .pipe(rename({ suffix: '.min' }))
+        .pipe(sourcemaps.write('./'))
+
+        .pipe(gulp.dest('dist/js'))
 
 });
 
 // Watch task
 gulp.task('watch', function() {
 
-    gulp.watch('scss/**/*.scss', ['styles']);
+    gulp.watch('src/sass/**/*.scss', ['styles']);
 
 });
 
 // Build task
-gulp.task('build', ['styles']);
+gulp.task('build', ['styles', 'uglify']);
