@@ -7,10 +7,22 @@ var gulp       = require('gulp'),
     uglify     = require('gulp-uglify')
 ;
 
+// Paths
+var path = {};
+    path.src = 'src';
+    path.srcJs = path.src + '/js';
+    path.sass = path.src + '/sass';
+    path.srcCss = path.src + '/css';
+    path.dist = 'dist';
+    path.distJs = path.dist + '/js';
+    path.distCss = path.dist + '/css';
+
+
+
 // Stylesheets task
 gulp.task('styles', function() {
 
-    gulp.src(['src/sass/**/*.scss'])
+    gulp.src([path.sass + '/**/*.scss'])
         .pipe(plumber())
         .pipe(sass())
 
@@ -20,18 +32,18 @@ gulp.task('styles', function() {
             }),
             require('css-mqpacker')
         ]))
-        .pipe(gulp.dest('src/css'))
+        .pipe(gulp.dest(path.srcCss))
 
         .pipe(postcss([ require('csswring') ]))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(gulp.dest('dist/css'))
+        .pipe(gulp.dest(path.distCss))
 
 });
 
 // Uglify task
 gulp.task('uglify', function() {
 
-    gulp.src(['src/js/**/*.js'])
+    gulp.src([path.srcJs + '/**/*.js'])
         .pipe(plumber())
 
         .pipe(sourcemaps.init())
@@ -39,14 +51,14 @@ gulp.task('uglify', function() {
             .pipe(rename({ suffix: '.min' }))
         .pipe(sourcemaps.write('./'))
 
-        .pipe(gulp.dest('dist/js'))
+        .pipe(gulp.dest(path.distJs))
 
 });
 
 // Watch task
 gulp.task('watch', function() {
 
-    gulp.watch('src/sass/**/*.scss', ['styles']);
+    gulp.watch(path.sass + '/**/*.scss', ['styles']);
 
 });
 
