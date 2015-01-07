@@ -20,8 +20,8 @@
             lang: 'es',
             origin: 'all',
             destination: 'all',
-            templatePath: 'copa-booking/templates/master.hbs',
-            languagePath: 'copa-booking/language/',
+            templatePath: 'bower_components/copaair-widgets/templates/master.hbs',
+            languagePath: 'bower_components/copaair-widgets/language/',
             formUrl: 'https://bookings.copaair.com/CMGS/' +
                            'AirLowFareSearchExternal.do?'
         },
