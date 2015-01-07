@@ -1,0 +1,19 @@
+{
+  "name": "copaair-widgets",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Nobox/copaair-widgets",
+  "keywords": [
+    "nobox",
+    "copaair",
+    "copa airlines",
+    "booking",
+    "signup"
+  ],
+  "authors": [
+    { "name": "Waldemar Figueroa", "email": "waldemar@nobox.com" },
+    { "name": "Alberto Estrada", "email": "alberto@nobox.com" }
+  ],
+  "license": "MIT",
+  "dependencies": {
+  }
+}
