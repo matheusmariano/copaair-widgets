@@ -1,0 +1,15 @@
+/* ==========================================================================
+   VISIBILITY
+   ========================================================================== */
+
+.hidden {
+    display: none !important;
+}
+
+@media #{$booking-palm} {
+    .hidden-palm { display: none !important; }
+}
+
+@media #{$booking-lap-and-up} {
+    .hidden-lap-and-up { display: none !important; }
+}

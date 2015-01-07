@@ -1,0 +1,84 @@
+/*------------------------------------*\
+    #SELECTMENU
+\*------------------------------------*/
+
+/**
+ * Selectmenu theme for jQuery UI v1.11.2
+ * http://jqueryui.com
+ * Based on: selectmenu.css
+ * Copyright 2014 jQuery Foundation and other contributors; Licensed MIT
+ */
+
+$booking-selectmenu-arrow-color: $booking-input-color !default;
+
+.ui-selectmenu-menu {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+
+    .ui-menu {
+        overflow: auto;
+        /* Support: IE7 */
+        overflow-x: hidden;
+
+        .ui-selectmenu-optgroup {
+            font-size: 1em;
+            font-weight: bold;
+            line-height: 1.5;
+            padding: 2px 0.4em;
+            margin: 0.5em 0 0 0;
+            height: auto;
+            border: 0;
+        }
+
+    }
+
+}
+
+.ui-selectmenu-open {
+    display: block;
+}
+
+.ui-selectmenu-button {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    width: 100% !important; /* override inline javascript */
+    background-color: $booking-input-bg-color;
+    color: $booking-input-color;
+    cursor: pointer;
+    text-decoration: none;
+    vertical-align: middle;
+
+    &:focus {
+        outline: none;
+    }
+
+    .ui-icon {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        left: auto;
+        margin-top: -2.5px;
+        width: 0;
+        height: 0;
+        border-style: inset;
+        border-top-style: solid;
+        border-width: 7px 5px 0 5px;
+        border-color: $booking-selectmenu-arrow-color transparent transparent transparent;
+    }
+
+    .ui-selectmenu-text {
+        display: block;
+        overflow: hidden;
+        padding: $booking-input-padding;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+}
+

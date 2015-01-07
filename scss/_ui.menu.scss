@@ -1,0 +1,100 @@
+/*------------------------------------*\
+    #MENU
+\*------------------------------------*/
+
+/**
+ * Datepicker theme for jQuery UI v1.11.2
+ * http://jqueryui.com
+ * Based on: menu.css
+ * Copyright 2014 jQuery Foundation and other contributors; Licensed MIT
+ */
+
+$menu-bg: #fff !default;
+$menu-border: 1px solid #6A737B !default;
+$menu-shadow: 0 1px 2px rgba(#000, .3) !default;
+$menu-padding: 0 !default;
+
+$menu-item-padding: 5px 7px !default;
+$menu-item-font-size: 11px !default;
+$menu-item-color: #777 !default;
+$menu-item-hover-bg: #E5ECF2 !default;
+$menu-item-hover-color: #777 !default;
+
+
+
+
+
+.ui-menu {
+    display: block;
+    margin: 0;
+    max-height: 175px;
+    padding: $menu-padding;
+    overflow-y: scroll;
+    background: $menu-bg;
+    border: $menu-border;
+    box-shadow: $menu-shadow;
+    list-style: none;
+    outline: none;
+
+    .ui-menu {
+        position: absolute;
+    }
+
+    .ui-menu-item {
+        position: relative;
+        margin: 0;
+        padding: $menu-item-padding;
+        min-height: 0; /* support: IE7 */
+        cursor: pointer;
+        /* support: IE10, see #8844 */
+        list-style-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
+        color: $menu-item-color;
+        font-size: $menu-item-font-size;
+
+        b {
+            color: #004982;
+            font-weight: bold;
+        }
+
+    }
+
+    .ui-menu-divider {
+        margin: 5px 0;
+        height: 0;
+        font-size: 0;
+        line-height: 0;
+        border-width: 1px 0 0 0;
+    }
+
+    .ui-state-focus,
+    .ui-state-active {
+        background-color: $menu-item-hover-bg;
+        color: $menu-item-hover-color;
+    }
+
+}
+
+/* icon support */
+.ui-menu-icons {
+    position: relative;
+
+    .ui-menu-item {
+        padding-left: 2em;
+    }
+
+}
+
+/* left-aligned */
+.ui-menu .ui-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: .2em;
+    margin: auto 0;
+}
+
+/* right-aligned */
+.ui-menu .ui-menu-icon {
+    left: auto;
+    right: 0;
+}

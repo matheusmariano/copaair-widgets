@@ -1,0 +1,33 @@
+/*------------------------------------*\
+    #LAYOUT
+\*------------------------------------*/
+
+$booking-max-width: 1000px !default;
+$booking-column-gutter: 12px !default;
+
+
+
+
+
+.booking {
+    padding-right: $booking-column-gutter;
+    padding-left: $booking-column-gutter;
+}
+
+.booking-wrapper {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: $booking-max-width;
+}
+
+.booking-layout {
+    margin-left: -($booking-column-gutter);
+}
+
+    .booking-layout__item {
+        display: inline-block;
+        padding-left: $booking-column-gutter;
+        width: 100%;
+        vertical-align: middle;
+    }

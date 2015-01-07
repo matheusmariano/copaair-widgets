@@ -1,0 +1,29 @@
+/*------------------------------------*\
+    #BASE
+\*------------------------------------*/
+
+.booking {
+
+    & *,
+    & *:after,
+    & *:before {
+        box-sizing: border-box;
+    }
+
+    input[type="text"],
+    input[type="submit"],
+    select {
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+    }
+
+    label {
+        cursor: pointer;
+    }
+
+    input[type="submit"] {
+        cursor: pointer;
+    }
+
+}

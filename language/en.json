@@ -1,0 +1,19 @@
+{
+    "language": "en",
+    "form": {
+        "origin": "From",
+        "destination": "To",
+        "departure": "Departure",
+        "return": "Return",
+        "economic": "Business Class",
+        "business": "Economy Class",
+        "submit": "Find flights",
+        "adults": "Adults",
+        "children": "Children",
+        "infants" : "Infants"
+    },
+    "messages": {
+        "notification": "Please complete all the ...",
+        "error": "Please complete all the ..."
+    }
+}
