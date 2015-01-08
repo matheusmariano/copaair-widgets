@@ -229,7 +229,7 @@
                         $('.js-' + fieldType + '-input-outbound').val(ui.item.value);
                         $('.js-' + fieldType + '-input-inbound').val(ui.item.value);
                     } else {
-                        console.log('The form needs two trip type inputs: origin and destination')
+                        console.log('The form needs two trip type inputs: origin and destination');
                     }
 
                     return false;
