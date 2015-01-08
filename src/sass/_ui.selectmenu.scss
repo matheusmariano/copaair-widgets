@@ -12,12 +12,12 @@
 $booking-selectmenu-arrow-color: $booking-input-color !default;
 
 .ui-selectmenu-menu {
+    display: none;
     padding: 0;
     margin: 0;
     position: absolute;
     top: 0;
     left: 0;
-    display: none;
 
     .ui-menu {
         overflow: auto;
@@ -28,8 +28,8 @@ $booking-selectmenu-arrow-color: $booking-input-color !default;
             font-size: 1em;
             font-weight: bold;
             line-height: 1.5;
-            padding: 2px 0.4em;
-            margin: 0.5em 0 0 0;
+            padding: 2px .4em;
+            margin: .5em 0 0;
             height: auto;
             border: 0;
         }
@@ -67,8 +67,8 @@ $booking-selectmenu-arrow-color: $booking-input-color !default;
         height: 0;
         border-style: inset;
         border-top-style: solid;
-        border-width: 7px 5px 0 5px;
-        border-color: $booking-selectmenu-arrow-color transparent transparent transparent;
+        border-width: 7px 5px 0;
+        border-color: $booking-selectmenu-arrow-color transparent transparent;
     }
 
     .ui-selectmenu-text {

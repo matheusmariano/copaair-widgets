@@ -42,7 +42,7 @@
 
 .ui-helper-clearfix:before,
 .ui-helper-clearfix:after {
-    content: "";
+    content: '';
     display: table;
     border-collapse: collapse;
 }
@@ -62,7 +62,6 @@
     left: 0;
     position: absolute;
     opacity: 0;
-    filter:Alpha(Opacity=0); /* support: IE8 */
 }
 
 .ui-front {

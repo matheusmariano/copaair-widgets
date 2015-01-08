@@ -10,14 +10,14 @@ $booking-column-gutter: 12px !default;
 
 
 .booking {
-    padding-right: $booking-column-gutter;
     padding-left: $booking-column-gutter;
+    padding-right: $booking-column-gutter;
 }
 
 .booking-wrapper {
     display: block;
-    margin-right: auto;
     margin-left: auto;
+    margin-right: auto;
     max-width: $booking-max-width;
 }
 
@@ -25,9 +25,9 @@ $booking-column-gutter: 12px !default;
     margin-left: -($booking-column-gutter);
 }
 
-    .booking-layout__item {
-        display: inline-block;
-        padding-left: $booking-column-gutter;
-        width: 100%;
-        vertical-align: middle;
-    }
+.booking-layout__item {
+    display: inline-block;
+    padding-left: $booking-column-gutter;
+    vertical-align: middle;
+    width: 100%;
+}

@@ -12,11 +12,11 @@ $booking-datepicker-bg: #fff !default;
 $booking-datepicker-shadow: 0 1px 2px rgba(#000, .3) !default;
 
 $booking-datepicker-header-bg: linear-gradient(#0060aa, #004d85) !default;
-$booking-datepicker-header-bg-fallback: #0062AD !default;
+$booking-datepicker-header-bg-fallback: #0062ad !default;
 $booking-datepicker-header-color: #fff !default;
 
 $booking-datepicker-arrow-bg: #fff !default;
-$booking-datepicker-arrow-color: #0062AD !default;
+$booking-datepicker-arrow-color: #0062ad !default;
 
 $booking-datepicker-th-bg: #f0f0f0 !default;
 $booking-datepicker-th-color: #333 !default;
@@ -25,8 +25,8 @@ $booking-datepicker-day-bg: transparent !default;
 $booking-datepicker-day-color: #777 !default;
 $booking-datepicker-day-disabled-bg: #f7f7f7 !default;
 $booking-datepicker-day-disabled-color: #ccc !default;
-$booking-datepicker-day-active-bg: #E5ECF2 !default;
-$booking-datepicker-day-active-color: #0062AD !default;
+$booking-datepicker-day-active-bg: #e5ecf2 !default;
+$booking-datepicker-day-active-color: #0062ad !default;
 
 
 /* Layout helpers
@@ -60,7 +60,7 @@ $booking-datepicker-day-active-color: #0062AD !default;
 
 .ui-helper-clearfix:before,
 .ui-helper-clearfix:after {
-    content: "";
+    content: '';
     display: table;
     border-collapse: collapse;
 }
@@ -80,7 +80,6 @@ $booking-datepicker-day-active-color: #0062AD !default;
     left: 0;
     position: absolute;
     opacity: 0;
-    filter:Alpha(Opacity=0); /* support: IE8 */
 }
 
 .ui-front {
@@ -136,35 +135,35 @@ $booking-datepicker-day-active-color: #0062AD !default;
         width: 30px;
         cursor: pointer;
 
-        .ui-icon {
-            position: absolute;
-            top: 50%; left: 50%;
-            display: block;
-            width: 16px;
-            height: 16px;
-            margin-top: -8px;
-            margin-left: -8px;
-            overflow: hidden;
-            background-color: $booking-datepicker-arrow-bg;
-            border-radius: 100px;
-            text-indent: 102%;
-            white-space: nowrap;
-
-            &:after {
-                position: absolute;
-                top: 4px;
-                height: 0px;
-                width: 0px;
-                border-color: rgba(#fff, 0);
-                border-style: inset;
-                content: '';
-                transform: scale(.9999);
-            }
-
-        }
-
         &.ui-state-disabled {
             display: none;
+        }
+
+    }
+
+    .ui-icon {
+        position: absolute;
+        top: 50%; left: 50%;
+        display: block;
+        width: 16px;
+        height: 16px;
+        margin-top: -8px;
+        margin-left: -8px;
+        overflow: hidden;
+        background-color: $booking-datepicker-arrow-bg;
+        border-radius: 100px;
+        text-indent: 102%;
+        white-space: nowrap;
+
+        &:after {
+            position: absolute;
+            top: 4px;
+            height: 0;
+            width: 0;
+            border-color: rgba(#fff, 0);
+            border-style: inset;
+            content: '';
+            transform: scale(.9999);
         }
 
     }
@@ -179,7 +178,7 @@ $booking-datepicker-day-active-color: #0062AD !default;
 
         .ui-icon:after {
             left: 4px;
-            border-width: 4.5px 6px 4.5px 0px;
+            border-width: 4.5px 6px 4.5px 0;
             border-right-color: $booking-datepicker-arrow-color;
             border-right-style: solid;
         }
@@ -191,20 +190,15 @@ $booking-datepicker-day-active-color: #0062AD !default;
 
         .ui-icon:after {
             right: 4px;
-            border-width: 4.5px 0px 4.5px 6px;
+            border-width: 4.5px 0 4.5px 6px;
             border-left-color: $booking-datepicker-arrow-color;
             border-left-style: solid;
         }
 
     }
 
-    .ui-datepicker-prev-hover {
-
-    }
-
-    .ui-datepicker-next-hover {
-
-    }
+    //.ui-datepicker-prev-hover {}
+    //.ui-datepicker-next-hover {}
 
     .ui-datepicker-title {
         margin: 0 2.3em;
@@ -277,7 +271,7 @@ $booking-datepicker-day-active-color: #0062AD !default;
 
     .ui-datepicker-buttonpane {
         background-image: none;
-        margin: .7em 0 0 0;
+        margin: .7em 0 0;
         padding: 0 .2em;
         border-left: 0;
         border-right: 0;
@@ -287,14 +281,15 @@ $booking-datepicker-day-active-color: #0062AD !default;
             float: right;
             margin: .5em .2em .4em;
             cursor: pointer;
-            padding: .2em .6em .3em .6em;
+            padding: .2em .6em .3em;
             width: auto;
             overflow: visible;
-
-            &.ui-datepicker-current {
-                float: left;
-            }
         }
+
+        .ui-datepicker-current {
+            float: left;
+        }
+
     }
 
     /* with multiple calendars */
@@ -371,11 +366,10 @@ $booking-datepicker-day-active-color: #0062AD !default;
 
         button {
             float: left;
+        }
 
-            &.ui-datepicker-current {
-                float: right;
-            }
-
+        .ui-datepicker-current {
+            float: right;
         }
 
     }

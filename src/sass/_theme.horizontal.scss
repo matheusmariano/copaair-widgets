@@ -34,7 +34,7 @@
 
     .booking-cabin {
 
-       @media #{$booking-lap-and-up} {
+        @media #{$booking-lap-and-up} {
             display: block;
             width: 100%;
         }

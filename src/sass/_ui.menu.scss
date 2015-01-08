@@ -10,14 +10,14 @@
  */
 
 $menu-bg: #fff !default;
-$menu-border: 1px solid #6A737B !default;
+$menu-border: 1px solid #6a737b !default;
 $menu-shadow: 0 1px 2px rgba(#000, .3) !default;
 $menu-padding: 0 !default;
 
 $menu-item-padding: 5px 7px !default;
 $menu-item-font-size: 11px !default;
 $menu-item-color: #777 !default;
-$menu-item-hover-bg: #E5ECF2 !default;
+$menu-item-hover-bg: #e5ecf2 !default;
 $menu-item-hover-color: #777 !default;
 
 
@@ -47,7 +47,7 @@ $menu-item-hover-color: #777 !default;
         min-height: 0; /* support: IE7 */
         cursor: pointer;
         /* support: IE10, see #8844 */
-        list-style-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
+        list-style-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
         color: $menu-item-color;
         font-size: $menu-item-font-size;
 
@@ -63,13 +63,28 @@ $menu-item-hover-color: #777 !default;
         height: 0;
         font-size: 0;
         line-height: 0;
-        border-width: 1px 0 0 0;
+        border-width: 1px 0 0;
     }
 
     .ui-state-focus,
     .ui-state-active {
         background-color: $menu-item-hover-bg;
         color: $menu-item-hover-color;
+    }
+
+    /* left-aligned */
+    .ui-icon {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: .2em;
+        margin: auto 0;
+    }
+
+    /* right-aligned */
+    .ui-menu-icon {
+        left: auto;
+        right: 0;
     }
 
 }
@@ -84,17 +99,3 @@ $menu-item-hover-color: #777 !default;
 
 }
 
-/* left-aligned */
-.ui-menu .ui-icon {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: .2em;
-    margin: auto 0;
-}
-
-/* right-aligned */
-.ui-menu .ui-menu-icon {
-    left: auto;
-    right: 0;
-}
