@@ -1,5 +1,6 @@
 var gulp       = require('gulp'),
     sass       = require('gulp-sass'),
+    minifyCSS  = require('gulp-minify-css'),
     postcss    = require('gulp-postcss'),
     plumber    = require('gulp-plumber'),
     rename     = require('gulp-rename'),
@@ -24,19 +25,26 @@ gulp.task('styles', function() {
 
     gulp.src([path.sass + '/**/*.scss'])
         .pipe(plumber())
-        .pipe(sass())
 
-        .pipe(postcss([
-            require('autoprefixer-core')({
-                browsers: ['last 2 versions', 'Explorer 9'],
-            }),
-            require('css-mqpacker')
-        ]))
+        .pipe(sourcemaps.init())
+            .pipe(sass())
+        .pipe(sourcemaps.write({ includeContent: false, sourceRoot: '/' + path.srcSass }))
+
+        .pipe(sourcemaps.init({ loadMaps: true }))
+            .pipe(postcss([
+                require('autoprefixer-core')({
+                    browsers: ['last 2 versions', 'Explorer 9'],
+                }),
+                require('css-mqpacker'),
+            ]))
+        .pipe(sourcemaps.write({ includeContent: false, sourceRoot: '/' + path.srcCss }))
         .pipe(gulp.dest(path.srcCss))
 
-        .pipe(postcss([ require('csswring') ]))
+        .pipe(minifyCSS({
+            keepSpecialComments: 0
+        }))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(gulp.dest(path.distCss))
+        .pipe(gulp.dest(path.distCss));
 
 });
 
@@ -49,9 +57,9 @@ gulp.task('uglify', function() {
         .pipe(sourcemaps.init())
             .pipe(uglify())
             .pipe(rename({ suffix: '.min' }))
-        .pipe(sourcemaps.write('./'))
+        .pipe(sourcemaps.write('./maps'))
 
-        .pipe(gulp.dest(path.distJs))
+        .pipe(gulp.dest(path.distJs));
 
 });
 
