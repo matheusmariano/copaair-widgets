@@ -2,13 +2,13 @@
     #HORIZONTAL
 \*------------------------------------*/
 
-.booking-theme-horizontal {
+.copaair-booking-theme-horizontal {
 
-    .booking-top {
+    .copaair-booking-top {
 
-        @media #{$booking-lap-and-up} {
+        @media #{$copaair-widget-lap-and-up} {
 
-            > .booking-layout__item {
+            > .copaair-booking-layout__item {
                 width: 20%;
             }
 
@@ -16,15 +16,15 @@
 
     }
 
-    .booking-bottom {
+    .copaair-booking-bottom {
 
-        @media #{$booking-lap-and-up} {
+        @media #{$copaair-widget-lap-and-up} {
 
-            > .booking-layout__item {
+            > .copaair-booking-layout__item {
                 width: 20%;
             }
 
-            .booking-control {
+            .copaair-booking-control {
                 margin-bottom: 0;
             }
 
@@ -32,33 +32,33 @@
 
     }
 
-    .booking-cabin {
+    .copaair-booking-cabin {
 
-        @media #{$booking-lap-and-up} {
+        @media #{$copaair-widget-lap-and-up} {
             display: block;
             width: 100%;
         }
 
     }
 
-    .booking-passengers {
+    .copaair-booking-passengers {
 
-        .booking-control {
+        .copaair-booking-control {
             margin-bottom: 0;
         }
 
-        @media #{$booking-palm} {
+        @media #{$copaair-widget-palm} {
             width: 33.33333%;
 
-            .booking-layout__item {
-                margin-bottom: $booking-column-gutter;
+            .copaair-booking-layout__item {
+                margin-bottom: $copaair-widget-column-gutter;
             }
 
         }
 
-        @media #{$booking-lap-and-up} {
+        @media #{$copaair-widget-lap-and-up} {
 
-            .booking-layout__item {
+            .copaair-booking-layout__item {
                 width: 50%;
                 text-align: right;
             }

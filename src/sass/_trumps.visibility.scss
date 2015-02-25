@@ -2,14 +2,14 @@
    VISIBILITY
    ========================================================================== */
 
-.hidden {
+.copaair-hidden {
     display: none !important;
 }
 
-@media #{$booking-palm} {
-    .hidden-palm { display: none !important; }
+@media #{$copaair-widget-palm} {
+    .copaair-hidden-palm { display: none !important; }
 }
 
-@media #{$booking-lap-and-up} {
-    .hidden-lap-and-up { display: none !important; }
+@media #{$copaair-widget-lap-and-up} {
+    .copaair-hidden-lap-and-up { display: none !important; }
 }

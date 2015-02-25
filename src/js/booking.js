@@ -4,7 +4,7 @@
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
+    } else if (typeof exports !== 'undefined') {
         // Node/CommonJS
         factory(require('jquery'));
     } else {
@@ -20,7 +20,7 @@
             lang: 'es',
             origin: 'all',
             destination: 'all',
-            templatePath: 'bower_components/copaair-widgets/templates/master.hbs',
+            templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
             languagePath: 'bower_components/copaair-widgets/language/',
             formUrl: 'https://bookings.copaair.com/CMGS/' +
                            'AirLowFareSearchExternal.do?'
@@ -137,7 +137,7 @@
             // [2]
             _this.buildAutocomplete(function() {
 
-                console.log('boom');
+                console.log('boomshakalaka');
 
             });
 
@@ -221,6 +221,7 @@
             $input.autocomplete({
                 delay: 0,
                 minLength: 0,
+                appendTo: _this.$booking,
                 source: _this.destinations,
                 select: function(event, ui) {
                     $input.val(ui.item.display);
@@ -238,7 +239,7 @@
 
             // Add styling
             $input
-                .addClass('booking-control  booking-combobox-input')
+                .addClass('copaair-booking-control  copaair-booking-combobox-input')
                 .addClass('ui-widget  ui-widget-content  ui-state-default');
 
             // Insert into DOM
@@ -321,15 +322,21 @@
     * @return void
     */
     Booking.prototype.setupDatePickers = function setupDatePickers() {
-        $('.booking-datepicker-departure').datepicker({minDate: new Date()});
-        $('.booking-datepicker-return').datepicker({minDate: new Date()});
+        var _this = this;
+
+        $('.copaair-booking-datepicker-departure').datepicker({
+            minDate: new Date()
+        });
+        $('.copaair-booking-datepicker-return').datepicker({
+            minDate: new Date()
+        });
 
         var today = new Date();
         var weekLater = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
 
         // the picker.
-        $('.booking-datepicker-departure').datepicker("setDate", today);
-        $('.booking-datepicker-return').datepicker("setDate", weekLater);
+        $('.copaair-booking-datepicker-departure').datepicker("setDate", today);
+        $('.copaair-booking-datepicker-return').datepicker("setDate", weekLater);
 
         this.defaultDates();
 
@@ -342,9 +349,9 @@
     Booking.prototype.defaultDates = function defaultDates() {
         var $form = this.$booking;
 
-        var $departurePicker = $('.booking-datepicker-departure')
+        var $departurePicker = $('.copaair-booking-datepicker-departure')
             .datepicker("getDate");
-        var $returnPicker = $('.booking-datepicker-return')
+        var $returnPicker = $('.copaair-booking-datepicker-return')
             .datepicker("getDate");
 
         $form.find('input[name="inboundOption.departureDay"]')
@@ -371,11 +378,11 @@
      */
     Booking.prototype.bookingEvents = function bookingEvents() {
 
-        var $form = $('.booking'),
-            $departurePicker = $('.booking-datepicker-departure'),
-            $returnPicker = $('.booking-datepicker-return'),
-            $origin = $('.booking-origin'),
-            $destination = $('.booking-destination')
+        var $form = $('.copaair-booking'),
+            $departurePicker = $('.copaair-booking-datepicker-departure'),
+            $returnPicker = $('.copaair-booking-datepicker-return'),
+            $origin = $('.copaair-booking-origin'),
+            $destination = $('.copaair-booking-destination')
         ;
 
         var onSelectOutbound = function(dateText, inst) {

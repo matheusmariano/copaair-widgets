@@ -9,7 +9,7 @@
  * Copyright 2014 jQuery Foundation and other contributors; Licensed MIT
  */
 
-$booking-selectmenu-arrow-color: $booking-input-color !default;
+$copaair-widget-selectmenu-arrow-color: $copaair-widget-input-color !default;
 
 .ui-selectmenu-menu {
     display: none;
@@ -47,8 +47,8 @@ $booking-selectmenu-arrow-color: $booking-input-color !default;
     display: inline-block;
     overflow: hidden;
     width: 100% !important; /* override inline javascript */
-    background-color: $booking-input-bg-color;
-    color: $booking-input-color;
+    background-color: $copaair-widget-input-bg-color;
+    color: $copaair-widget-input-color;
     cursor: pointer;
     text-decoration: none;
     vertical-align: middle;
@@ -68,13 +68,13 @@ $booking-selectmenu-arrow-color: $booking-input-color !default;
         border-style: inset;
         border-top-style: solid;
         border-width: 7px 5px 0;
-        border-color: $booking-selectmenu-arrow-color transparent transparent;
+        border-color: $copaair-widget-selectmenu-arrow-color transparent transparent;
     }
 
     .ui-selectmenu-text {
         display: block;
         overflow: hidden;
-        padding: $booking-input-padding;
+        padding: $copaair-widget-input-padding;
         text-align: left;
         text-overflow: ellipsis;
         white-space: nowrap;
