@@ -5,7 +5,11 @@ var gulp       = require('gulp'),
     plumber    = require('gulp-plumber'),
     rename     = require('gulp-rename'),
     sourcemaps = require('gulp-sourcemaps'),
-    uglify     = require('gulp-uglify')
+    uglify     = require('gulp-uglify'),
+    browserify = require('browserify'),
+    babelify   = require('babelify'),
+    source     = require('vinyl-source-stream'),
+    buffer     = require('vinyl-buffer')
 ;
 
 // Paths
@@ -17,8 +21,6 @@ var path = {};
     path.dist = 'dist';
     path.distJs = path.dist + '/js';
     path.distCss = path.dist + '/css';
-
-
 
 // Stylesheets task
 gulp.task('styles', function() {
@@ -48,19 +50,28 @@ gulp.task('styles', function() {
 
 });
 
-// Uglify task
-gulp.task('uglify', function() {
+// Browserify with babelify
+gulp.task('browserify', function() {
 
-    gulp.src([path.srcJs + '/**/*.js'])
-        .pipe(plumber())
+    var bundler = browserify({
+        entries: ['./' + path.srcJs + '/index.js'],
+        transform: [babelify],
+        debug: true
+    });
 
-        .pipe(sourcemaps.init())
-            .pipe(uglify())
-            .pipe(rename({ suffix: '.min' }))
-        .pipe(sourcemaps.write('./maps'))
+    var bundle = function() {
+        return bundler
+            .bundle()
+            .pipe(source('copaair-widgets.js'))
+            .pipe(buffer())
+            .pipe(sourcemaps.init({ loadMaps: true }))
+                .pipe(uglify())
+                .pipe(rename({ suffix: '.min' }))
+            .pipe(sourcemaps.write('./'))
+            .pipe(gulp.dest(path.distJs));
+    };
 
-        .pipe(gulp.dest(path.distJs));
-
+    return bundle();
 });
 
 // Watch task
@@ -71,4 +82,4 @@ gulp.task('watch', function() {
 });
 
 // Build task
-gulp.task('build', ['styles', 'uglify']);
+gulp.task('build', ['styles', 'browserify']);
