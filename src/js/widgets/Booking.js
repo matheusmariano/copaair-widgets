@@ -1,5 +1,6 @@
 // Create the defaults
 var $ = require('jquery'),
+    Datepicker = require('../lib/Datepicker'),
     defaults = {
         lang: 'es',
         origin: 'all',
@@ -15,6 +16,7 @@ var $ = require('jquery'),
     }
 ;
 
+
 class Booking {
 
     /**
@@ -26,9 +28,12 @@ class Booking {
     constructor(element, options) {
         this.$booking = $(element);
 
+
         this.options = $.extend({}, defaults, options);
 
         this._defaults = defaults;
+
+
 
         $.getJSON(
             this.options.languagePath + this.options.lang + '.json',
@@ -41,7 +46,17 @@ class Booking {
                     // When finished, build all the widgets
                     this.setupSelectMenus();
                     this.setupAutocomplete();
-                    this.setupDatePickers();
+                    // setup datepicker
+                    var datepicker = new Datepicker();
+                    datepicker.render();
+
+                    //set form defualt values afected
+                    //by datepicker
+                    this.setFormValues(datepicker);
+
+                    //datepicker events that modify
+                    //form values
+                    this.datepickerFormEvents(datepicker);
 
                 });
             }
@@ -241,76 +256,62 @@ class Booking {
         return this;
     }
 
-    /**
-    * Setup datepickers
-    *
-    * @return void
-    */
-    setupDatePickers() {
-        $('.copaair-booking-datepicker-departure').datepicker({
-            minDate: new Date()
-        });
-        $('.copaair-booking-datepicker-return').datepicker({
-            minDate: new Date()
-        });
 
-        var today = new Date();
-        var weekLater = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
-
-        // the picker.
-        $('.copaair-booking-datepicker-departure').datepicker("setDate", today);
-        $('.copaair-booking-datepicker-return').datepicker("setDate", weekLater);
-
-        this.defaultDates();
-
-        return this;
-    }
-
-    /**
-     * Set hidden date inputs with default date values
-     */
-    defaultDates() {
-        var $form = this.$booking;
-
-        var $departurePicker = $('.copaair-booking-datepicker-departure')
-            .datepicker('getDate');
-        var $returnPicker = $('.copaair-booking-datepicker-return')
-            .datepicker('getDate');
-
-        $form.find('input[name="inboundOption.departureDay"]')
-            .attr('value', $returnPicker.getUTCDate());
-        $form.find('input[name="inboundOption.departureMonth"]')
-            .attr('value', $returnPicker.getMonth() + 1);
-        $form.find('input[name="inboundOption.departureYear"]')
-            .attr('value', $returnPicker.getFullYear());
-
-        $form.find('input[name="outboundOption.departureDay"]')
-            .attr('value', $departurePicker.getUTCDate());
-        $form.find('input[name="outboundOption.departureMonth"]')
-            .attr('value', $departurePicker.getMonth() + 1);
-        $form.find('input[name="outboundOption.departureYear"]')
-            .attr('value', $departurePicker.getFullYear());
-
-        return this;
-    }
 
     /**
      * Bind events related to booking interaction
      */
     bookingEvents() {
-        var $form = $('.copaair-booking'),
-            $departurePicker = $('.copaair-booking-datepicker-departure'),
-            $returnPicker = $('.copaair-booking-datepicker-return'),
-            $origin = $('.copaair-booking-origin'),
-            $destination = $('.copaair-booking-destination')
-        ;
+        var $form = $('.copaair-booking');
+        // Load form submition events
+        this.submitForm($form);
+    }
+
+    /**
+     * Since some defaults values are set on the datepickers
+     * the form have some hidden inputs that use this values
+     */
+    setFormValues(datepicker) {
+
+        var $form = this.$booking,
+
+        // get current datepickers dates
+        departureDate = $(datepicker.options.departureSelector).datepicker('getDate'),
+        returnDate = $(datepicker.options.returnSelector).datepicker('getDate');
+
+        // Lest migrate date pickers date to the hidden
+        // date form fields. This fields are required by
+        // Copa Booking
+
+        $form.find('input[name="inboundOption.departureDay"]')
+            .attr('value', returnDate.getUTCDate());
+        $form.find('input[name="inboundOption.departureMonth"]')
+            .attr('value', returnDate.getMonth() + 1);
+        $form.find('input[name="inboundOption.departureYear"]')
+            .attr('value', returnDate.getFullYear());
+
+        // set outboundOption departure dates
+        $form.find('input[name="outboundOption.departureDay"]')
+            .attr('value', departureDate.getUTCDate());
+        $form.find('input[name="outboundOption.departureMonth"]')
+            .attr('value', departureDate.getMonth() + 1);
+        $form.find('input[name="outboundOption.departureYear"]')
+            .attr('value', departureDate.getFullYear());
+    }
+
+
+    datepickerFormEvents(datepicker) {
+
+        var $departureField = $(datepicker.options.departureSelector),
+            $returnField = $(datepicker.options.returnSelector),
+            $form = this.$booking;
 
         var onSelectOutbound = function(dateText, inst) {
             var date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
 
             //this sets the inbound date picker to a week later of current selection
             var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
-            $returnPicker.datepicker('setDate', weeklater);
+            $returnField.datepicker('setDate', weeklater);
 
             $form.find('input[name="inboundOption.departureDay"]')
                 .attr('value', weeklater.getUTCDate());
@@ -320,7 +321,7 @@ class Booking {
                 .attr('value', weeklater.getFullYear());
 
             //this helps that the user doesnt travel back in time
-            $returnPicker.datepicker('option', 'minDate', date);
+            $returnField.datepicker('option', 'minDate', date);
             $form.find('input[name="outboundOption.departureDay"]')
                 .attr('value', inst.selectedDay);
             $form.find('input[name="outboundOption.departureMonth"]')
@@ -338,11 +339,8 @@ class Booking {
                 .attr('value', inst.selectedYear);
         };
 
-        $departurePicker.datepicker('option', 'onSelect', onSelectOutbound);
-        $returnPicker.datepicker('option', 'onSelect', onSelectInbound);
-
-        // Load form submition events
-        this.submitForm($form);
+        $departureField.datepicker('option', 'onSelect', onSelectOutbound);
+        $returnField.datepicker('option', 'onSelect', onSelectInbound);
     }
 
     /**
