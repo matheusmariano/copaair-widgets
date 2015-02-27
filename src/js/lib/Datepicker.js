@@ -1,17 +1,23 @@
 var $ = require('jquery'),
-
+    i18n = require('../../../lang/datepicker.json'),
     defaults = {
         departureSelector: '.copaair-booking-datepicker-departure',
         returnSelector: '.copaair-booking-datepicker-return',
         dateRules: {
             today: new Date(),
             weekLater: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
-        }
-    };
+        },
+        lang: 'es'
+    }
+;
 
+/**
+ * Datepicker module
+ */
 class Datepicker {
 
     constructor(formElement, options) {
+
         this.options = $.extend({}, defaults, options);
         this._defaults = defaults;
         this.formElement = formElement;
@@ -24,7 +30,7 @@ class Datepicker {
     render() {
 
         this.setDefaultDates();
-        // this.setLocale();
+        this.setLocale();
 
     }
 
@@ -57,6 +63,7 @@ class Datepicker {
      * localization
      */
     setLocale() {
+        var regional = i18n[this.options.lang].regional;
         $.datepicker.setDefaults(regional);
     }
 
