@@ -2,6 +2,7 @@
 var $ = require('jquery'),
     Datepicker = require('../lib/Datepicker'),
     Template = require('../lib/Template'),
+    FlightControl = require('../lib/FlightControl'),
     defaults = {
         lang: 'es',
         origin: 'all',

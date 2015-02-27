@@ -1,13 +1,17 @@
 {
   "name": "copaair-widgets",
   "version": "0.0.0",
+  "browser": {
+    "store-js": "./bower_components/store.js/store.min.js"
+  },
   "browserify": {
     "transform": [
       "browserify-shim"
     ]
   },
   "browserify-shim": {
-    "jquery": "global:$"
+    "jquery": "global:$",
+    "store-js": {"exports": "store"}
   },
   "bugs": {
     "url": "https://github.com/Nobox/copaair-widgets/issues"

@@ -10,11 +10,18 @@
     "signup"
   ],
   "authors": [
-    { "name": "Waldemar Figueroa", "email": "waldemar@nobox.com" },
-    { "name": "Alberto Estrada", "email": "alberto@nobox.com" }
+    {
+      "name": "Waldemar Figueroa",
+      "email": "waldemar@nobox.com"
+    },
+    {
+      "name": "Alberto Estrada",
+      "email": "alberto@nobox.com"
+    }
   ],
   "license": "MIT",
   "dependencies": {
-    "handlebars": "~2.0.0"
+    "handlebars": "~2.0.0",
+    "store.js": "~1.3.17"
   }
 }
