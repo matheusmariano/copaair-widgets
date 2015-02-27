@@ -1,8 +1,9 @@
 // Create the defaults
 var $ = require('jquery'),
-    Datepicker = require('../lib/Datepicker'),
     Template = require('../lib/Template'),
     FlightControl = require('../lib/FlightControl'),
+    Datepicker = require('../lib/Datepicker'),
+    Autocomplete = require('../lib/Autocomplete'),
     defaults = {
         lang: 'es',
         origin: 'all',
@@ -35,16 +36,19 @@ class Booking {
         this._defaults = defaults;
 
         new Template('booking', {
+            'lang': this.options.lang,
             callback: (html) => {
                 this.$booking.html(html);
 
                 // When finished, build all the widgets
                 this.setupSelectMenus();
-                this.setupAutocomplete();
 
                 // setup datepicker
                 var datepicker = new Datepicker();
                 datepicker.render();
+
+                // Autocomplete widgets
+                this.autocompletes();
 
                 //set form defualt values afected
                 //by datepicker
@@ -57,6 +61,16 @@ class Booking {
         });
     }
 
+    autocompletes() {
+        var autocomplete = new Autocomplete();
+        autocomplete.getDestinations(function() {
+            $('.js-booking-autocomplete').each(function() {
+                autocomplete.render(this);
+            });
+        });
+    }
+
+
     /**
      * Replaces select menus with custom UI widgets
      *
@@ -64,33 +78,6 @@ class Booking {
      */
     setupSelectMenus() {
         $('.js-selectmenu').selectmenu();
-        return this;
-    }
-
-    /**
-     * Setup autocomplete jQuery UI widget.
-     *
-     * @return {void}
-     */
-    setupAutocomplete() {
-        /**
-         * Callback chain
-         *
-         * 1. Fetch destinations
-         * 2. Setup autocomplete
-         * 3. Init combobox
-         */
-        this.fetchDestinations(() => {
-
-            // [2]
-            this.buildAutocomplete(() => {
-
-                console.log('boomshakalaka');
-
-            });
-
-        });
-
         return this;
     }
 
@@ -143,82 +130,6 @@ class Booking {
 
         return this;
     }
-
-    /**
-     * Autocomplete menu widget
-     *
-     * @param  {Function} cb Callback when widget is ready for use
-     * @return {void}
-     */
-    buildAutocomplete(cb) {
-        var _this = this;
-
-        this.$booking.find('.js-booking-autocomplete').each(function createAutocomplete() {
-            var $this = $(this).hide(),
-                sourceValue = $this.val(),
-                sourcePlaceholder = $this.attr('placeholder'),
-                fieldType = $this.data('input-field')
-            ;
-
-            var $input = $('<input />')
-                .val(sourceValue)
-                .attr('type', 'text')
-                .attr('placeholder', sourcePlaceholder)
-            ;
-
-            // Add autocomplete functionality
-            $input.autocomplete({
-                delay: 0,
-                minLength: 0,
-                appendTo: _this.$booking,
-                source: _this.destinations,
-                select: function(event, ui) {
-                    $input.val(ui.item.display);
-
-                    if (fieldType === 'origin' || fieldType === 'destination') {
-                        $('.js-' + fieldType + '-input-outbound').val(ui.item.value);
-                        $('.js-' + fieldType + '-input-inbound').val(ui.item.value);
-                    } else {
-                        console.log('The form needs two trip type inputs: origin and destination');
-                    }
-
-                    return false;
-                }
-            });
-
-            // Add styling
-            $input
-                .addClass('copaair-booking-control  copaair-booking-combobox-input')
-                .addClass('ui-widget  ui-widget-content  ui-state-default');
-
-            // Insert into DOM
-            $input.insertAfter($this);
-
-            // Overwrite autocomplete item rendering with custom markup
-            $input.autocomplete('instance')._renderItem = function(ul, item) {
-                return $('<li>')
-                    .append(item.label)
-                    .appendTo(ul);
-            };
-
-            // Custom filtering function
-            $.ui.autocomplete.filter = function autoCompleteFilter(array, term) {
-                var matcher = new RegExp('\\b' + $.ui.autocomplete.escapeRegex(term), 'i');
-                return $.grep(array, function (value) {
-                    return matcher.test(value.label || value.value || value);
-                });
-            };
-        });
-
-        // Callback
-        if (typeof cb === 'function') {
-            cb();
-        }
-
-        return this;
-    }
-
-
 
     /**
      * Bind events related to booking interaction

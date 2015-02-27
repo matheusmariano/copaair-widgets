@@ -32,14 +32,14 @@ class FlightControl {
     }
 
 
-    fetch(cb, resourceName) {
+    fetch(resourceName, cb) {
         var resourceValue = {};
 
         if(storeWidthExpiration.get(resourceName) && storeWidthExpiration.get(resourceName + '.count')) {
             resourceValue.list = storeWidthExpiration.get(resourceName);
             resourceValue.count = storeWidthExpiration.get(resourceName + '.count');
 
-            cb(resourceValue);
+           return cb(resourceValue);
         }
 
         $.getJSON(endPoints[resourceName], (data) => {
@@ -53,8 +53,6 @@ class FlightControl {
 
             cb(resourceValue);
         });
-
-
     }
 
     //to be defined
