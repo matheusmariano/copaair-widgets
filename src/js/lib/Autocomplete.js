@@ -15,7 +15,8 @@ class Autocomplete
      */
     constructor(options) {
         var defaults = {
-            lang: 'es'
+            lang: 'es',
+            fixed: true
         };
 
         this.options = $.extend({}, defaults, options);
@@ -40,6 +41,7 @@ class Autocomplete
 
         // Add autocomplete functionality
         $input.autocomplete({
+            autoFocus: true,
             delay: 0,
             minLength: 0,
             source: this.format(this.destinations.list),
@@ -50,11 +52,16 @@ class Autocomplete
                     $('.js-' + fieldType + '-input-outbound').val(ui.item.value);
                     $('.js-' + fieldType + '-input-inbound').val(ui.item.value);
                 } else {
-                    console.log('The form needs two trip type inputs: origin and destination');
+                    console.error('The form needs two trip type inputs: origin and destination');
                 }
 
                 return false;
             }
+        });
+
+        // Open list on input focus
+        $input.on('focus', function() {
+            $(this).autocomplete('search');
         });
 
         // Add styling
