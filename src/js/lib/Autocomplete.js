@@ -2,8 +2,17 @@ var $ = require('jquery'),
     FlightControl = require('./FlightControl')
 ;
 
+/**
+ * Autocomplete widget with list of Copa's destinations
+ * for better usability than a native select menu.
+ * @class
+ */
 class Autocomplete
 {
+    /**
+     * Constructor
+     * @param  {Object} options Custom options for this widget instance.
+     */
     constructor(options) {
         var defaults = {
             lang: 'es'
@@ -12,36 +21,10 @@ class Autocomplete
         this.options = $.extend({}, defaults, options);
     }
 
-    getDestinations(cb) {
-        var flightControl = new FlightControl();
-        flightControl.fetch('destinations', (destinations) => {
-            this.destinations = destinations;
-
-            if (typeof cb === 'function') {
-                cb();
-            }
-        });
-    }
-
-    format(destinations) {
-        var result = [];
-
-        $.each(destinations, (i, dest) => {
-            var tempLabel = '<b>' + dest.name[this.options.lang] + ', ' + dest.country +
-                '</b><span class="code"> | ' + dest.id + '</span>';
-            var tempValue = dest.id;
-            var textValue = dest.name[this.options.lang] + ', ' + dest.id;
-
-            result.push({
-                label: tempLabel,
-                value: tempValue,
-                display: textValue
-            });
-        });
-
-        return result;
-    }
-
+    /**
+     * Render autocomplete widget
+     * @param  {Object} element DOM element to attach widget to
+     */
     render(element) {
         var $this = $(element).hide(),
             sourceValue = $this.val(),
@@ -99,6 +82,53 @@ class Autocomplete
 
         return this;
     }
+
+    /**
+     * Get destinations from Flight Control API
+     * @param  {Function} cb Callback when API call finishes
+     *                       and destinations are fetched
+     * @return {void}
+     */
+    getDestinations(cb) {
+        var flightControl = new FlightControl();
+        flightControl.fetch('destinations', (destinations) => {
+            this.destinations = destinations;
+
+            if (typeof cb === 'function') {
+                cb();
+            }
+        });
+    }
+
+    /**
+     * Formats destinations into the needed structure to be displayed
+     * on the autocomplete menu widget.
+     * @param  {Array} destinations Raw data returned from Flight Control
+     * @return {Array}              Formatted destinations
+     */
+    format(destinations) {
+        var result = [];
+
+        $.each(destinations, (i, dest) => {
+            let tempLabel =
+                    `<b>${ dest.name[this.options.lang] }, ${ dest.country }</b>
+                    <span class="code"> | ${ dest.id }</span>`,
+                tempValue = dest.id,
+                textValue = dest.name[this.options.lang] + ', ' + dest.id;
+
+            result.push({
+                label: tempLabel,
+                value: tempValue,
+                display: textValue
+            });
+        });
+
+        return result;
+    }
 }
 
+/**
+ * Export
+ * @exports Autocomplete
+ */
 module.exports = Autocomplete;
