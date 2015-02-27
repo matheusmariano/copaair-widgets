@@ -1,0 +1,56 @@
+{
+    "es": {
+        "form": {
+            "origin": "Desde",
+            "destination": "Hacia",
+            "departure": "Salida",
+            "return": "Regreso",
+            "economic": "Clase Económica",
+            "business": "Clase Ejecutiva",
+            "submit": "Ver Vuelos",
+            "adults": "Adultos",
+            "children": "Niños",
+            "infants" : "Infantes"
+        },
+        "messages": {
+            "notification": "Por favor completa todos los campos.",
+            "error": "Por favor completa todos los campos."
+        }
+    },
+    "en": {
+        "form": {
+            "origin": "From",
+            "destination": "To",
+            "departure": "Departure",
+            "return": "Return",
+            "economic": "Business Class",
+            "business": "Economy Class",
+            "submit": "Find flights",
+            "adults": "Adults",
+            "children": "Children",
+            "infants" : "Infants"
+        },
+        "messages": {
+            "notification": "Please complete all the ...",
+            "error": "Please complete all the ..."
+        }
+    },
+    "pt": {
+        "form": {
+            "origin": "De",
+            "destination": "Para",
+            "departure": "Saída",
+            "return": "Regresso",
+            "economic": "Classe econômica",
+            "business": "Classe Executiva",
+            "submit": "Buscar voos",
+            "adults": "Adultos",
+            "children": "Crianças",
+            "infants" : "Bebês"
+        },
+        "messages": {
+            "notification": "Por favor completa todos los campos.",
+            "error": "Por favor completa todos los campos."
+        }
+    }
+}

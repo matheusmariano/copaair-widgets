@@ -1,6 +1,7 @@
 // Create the defaults
 var $ = require('jquery'),
     Datepicker = require('../lib/Datepicker'),
+    Template = require('../lib/Template'),
     defaults = {
         lang: 'es',
         origin: 'all',
@@ -28,69 +29,31 @@ class Booking {
     constructor(element, options) {
         this.$booking = $(element);
 
-
         this.options = $.extend({}, defaults, options);
 
         this._defaults = defaults;
 
+        new Template('booking', {
+            callback: (html) => {
+                this.$booking.html(html);
 
+                // When finished, build all the widgets
+                this.setupSelectMenus();
+                this.setupAutocomplete();
 
-        $.getJSON(
-            this.options.languagePath + this.options.lang + '.json',
-            (languageStrings) => {
-                this.languageStrings = languageStrings;
+                // setup datepicker
+                var datepicker = new Datepicker();
+                datepicker.render();
 
-                // Compile template
-                this.compileTemplate(() => {
+                //set form defualt values afected
+                //by datepicker
+                this.setFormValues(datepicker);
 
-                    // When finished, build all the widgets
-                    this.setupSelectMenus();
-                    this.setupAutocomplete();
-                    // setup datepicker
-                    var datepicker = new Datepicker();
-                    datepicker.render();
-
-                    //set form defualt values afected
-                    //by datepicker
-                    this.setFormValues(datepicker);
-
-                    //datepicker events that modify
-                    //form values
-                    this.datepickerFormEvents(datepicker);
-
-                });
+                //datepicker events that modify
+                //form values
+                this.datepickerFormEvents(datepicker);
             }
-        );
-    }
-
-    /**
-     * Compiles Handlebars template and inserts into DOM.
-     *
-     * @param  {Function} cb Callback function when template is finished compiling
-     * @return void
-     */
-    compileTemplate(cb) {
-        if (typeof Handlebars !== 'undefined' && Handlebars !== null) {
-            $.ajax({
-                url: this.options.templatePath,
-                success: (source) => {
-                    var template = Handlebars.compile(source);
-
-                    // Load localized strings into the template
-                    var html = template(this.languageStrings);
-                    this.$booking.html(html);
-                },
-                complete: function() {
-                    if (typeof cb === 'function') {
-                        cb();
-                    }
-                }
-            });
-        } else {
-            console.error('This plugin requires Handlebars.js');
-        }
-
-        return this;
+        });
     }
 
     /**
@@ -109,8 +72,6 @@ class Booking {
      * @return {void}
      */
     setupAutocomplete() {
-        var _this = this;
-
         /**
          * Callback chain
          *
