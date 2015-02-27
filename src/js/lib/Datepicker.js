@@ -16,11 +16,10 @@ var $ = require('jquery'),
  */
 class Datepicker {
 
-    constructor(formElement, options) {
+    constructor(options) {
 
         this.options = $.extend({}, defaults, options);
         this._defaults = defaults;
-        this.formElement = formElement;
     }
 
     /**

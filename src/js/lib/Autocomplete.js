@@ -97,7 +97,7 @@ class Autocomplete
      * @return {void}
      */
     getDestinations(cb) {
-        var flightControl = new FlightControl();
+        var flightControl = new FlightControl({lang:this.options.lang});
         flightControl.fetch('destinations', (destinations) => {
             this.destinations = destinations;
 

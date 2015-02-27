@@ -44,7 +44,7 @@ class Booking {
                 this.setupSelectMenus();
 
                 // setup datepicker
-                var datepicker = new Datepicker();
+                var datepicker = new Datepicker({lang:this.options.lang});
                 datepicker.render();
 
                 // Autocomplete widgets
