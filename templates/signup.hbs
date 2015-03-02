@@ -3,44 +3,44 @@
         <div class="copaair-widget-layout__item">
             <input class="copaair-form-control"
                    type="text"
-                   placeholder="Nombre"
+                   placeholder="{{ form.fname }}"
                    required>
         </div
         ><div class="copaair-widget-layout__item">
             <input class="copaair-form-control"
                    type="text"
-                   placeholder="Apellido"
+                   placeholder="{{ form.lname }}"
                    required>
         </div
         ><div class="copaair-widget-layout__item">
             <input class="copaair-form-control"
                    type="email"
-                   placeholder="Email"
+                   placeholder="{{ form.email }}"
                    required>
         </div
         ><div class="copaair-widget-layout__item">
             <input class="copaair-widget-submit  copaair-form-control"
                    type="submit"
-                   value="Subscribirse">
+                   value="{{ form.subscribe }}">
         </div>
     </div>
     <div class="copaair-widget-layout">
         <div class="copaair-widget-layout__item">
             <input class="copaair-form-control"
                    type="text"
-                   placeholder="País"
+                   placeholder="{{ form.country }}"
                    required>
         </div
         ><div class="copaair-widget-layout__item">
             <input class="copaair-form-control"
                    type="text"
-                   placeholder="Ciudad"
+                   placeholder="{{ form.city }}"
                    required>
         </div
         ><div class="copaair-widget-layout__item">
             <input class="copaair-form-control"
                    type="tel"
-                   placeholder="Móvil"
+                   placeholder="{{ form.phone }}"
                    required>
         </div
         ><div class="copaair-widget-layout__item">

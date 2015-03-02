@@ -1,6 +1,9 @@
 var $ = require('jquery'),
     Handlebars = require('handlebars'),
-    i18n = require('../../../lang/booking.json'),
+    i18n = {
+        booking: require('../../../lang/booking.json'),
+        signup: require('../../../lang/signup.json'),
+    },
     defaults = {
         lang: 'es',
         src: 'bower_components/copaair-widgets/templates',
@@ -10,14 +13,14 @@ var $ = require('jquery'),
 
 class Template
 {
-    constructor(template, options) {
+    constructor(widget, options) {
         this.options = $.extend({}, defaults, options);
 
         if (typeof Handlebars !== 'undefined' && Handlebars !== null) {
             $.ajax({
-                url: `${this.options.src}/${template}.hbs`,
+                url: `${this.options.src}/${widget}.hbs`,
                 success: (tpl) => {
-                    var html = this.compile(tpl);
+                    var html = this.compile(widget, tpl);
                     this.options.callback(html);
                 }
             });
@@ -26,9 +29,9 @@ class Template
         }
     }
 
-    compile(tpl) {
+    compile(widget, tpl) {
         var template = Handlebars.compile(tpl);
-        var html = template(i18n[this.options.lang]);
+        var html = template(i18n[widget][this.options.lang]);
         return html;
     }
 }
