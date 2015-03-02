@@ -32,11 +32,11 @@
         });
     };
 
-    // $.fn.copaairSignup = function copaairSignup(options) {
-    //     return this.each(function() {
-    //         if (!$.data(this, 'plugin_copaairSignup')) {
-    //             $.data(this, 'plugin_copaairSignup', new Signup(this, options));
-    //         }
-    //     });
-    // };
+    $.fn.copaairSignup = function copaairSignup(options) {
+        return this.each(function() {
+            if (!$.data(this, 'plugin_copaairSignup')) {
+                $.data(this, 'plugin_copaairSignup', new Signup(this, options));
+            }
+        });
+    };
 }));
