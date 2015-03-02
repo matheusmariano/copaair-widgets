@@ -28,60 +28,54 @@ $copaair-booking-datepicker-icon-position: 93% 50% !default;
 
 
 
-.copaair-booking {
-    color: $copaair-booking-font-color;
-    font-family: $copaair-booking-font-family;
-    font-size: $copaair-booking-font-size;
-}
+/**
+ * Subsection
+ */
 
-.copaair-booking-control {
-    margin-bottom: $copaair-widget-column-gutter;
-    height: $copaair-booking-input-height;
-    padding: $copaair-booking-input-padding;
-    background-color: $copaair-booking-input-bg-color;
-    border: $copaair-booking-input-border;
-    border-radius: $copaair-booking-input-radius;
-    color: $copaair-booking-input-color;
-    font-size: $copaair-booking-input-font-size;
-
-    &::placeholder {
-        opacity: 1;
-    }
-
-}
-
-.copaair-booking-datepicker {
-    background-image: $copaair-booking-datepicker-icon;
-    background-position: $copaair-booking-datepicker-icon-position;
-    background-repeat: no-repeat;
-}
-
-.copaair-booking-cabin {
-    display: inline-block;
-    margin-top: $copaair-widget-column-gutter;
-    margin-bottom: $copaair-widget-column-gutter * 2;
-    width: 50%;
+.copaair-booking.copaair-theme-horizontal {
+    @import 'theme.widget';
 
     @media #{$copaair-widget-lap-and-up} {
-        display: block;
-        margin-top: 0;
-        margin-bottom: 0;
-        width: auto;
-        line-height: 1.6;
+
+        .copaair-widget-layout__item {
+            width: 20%;
+        }
+
+        .copaair-booking-cabin {
+            display: block;
+            width: 100%;
+        }
+
     }
 
-}
+    .copaair-booking-bottom {
 
-.copaair-booking-submit {
-    background: $copaair-booking-submit-bg;
-    border: $copaair-booking-submit-border;
-    box-shadow: $copaair-booking-submit-dropshadow;
-    color: $copaair-booking-submit-font-color;
-    text-shadow: $copaair-booking-submit-text-shadow;
+        .copaair-form-control {
+            margin-bottom: 0;
+        }
 
-    &:hover,
-    &:focus {
-        background-image: $copaair-booking-submit-bg-hover;
+    }
+
+    .copaair-booking-passengers {
+
+        @media #{$copaair-widget-palm} {
+            width: 33.33333%;
+
+            .copaair-widget-layout__item {
+                margin-bottom: $copaair-widget-column-gutter;
+            }
+
+        }
+
+        @media #{$copaair-widget-lap-and-up} {
+
+            .copaair-widget-layout__item {
+                width: 50%;
+                text-align: right;
+            }
+
+        }
+
     }
 
 }

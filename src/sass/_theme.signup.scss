@@ -1,0 +1,42 @@
+/* ==========================================================================
+   THEME SIGNUP
+   ========================================================================== */
+
+$copaair-signup-font-color: $copaair-widget-font-color !default;
+$copaair-signup-font-size: $copaair-widget-font-size !default;
+$copaair-signup-font-family: $copaair-widget-font-family !default;
+
+$copaair-signup-input-bg-color: $copaair-widget-input-bg-color !default;
+$copaair-signup-input-border: $copaair-widget-input-border !default;
+$copaair-signup-input-color: $copaair-widget-input-color !default;
+$copaair-signup-input-font-size: $copaair-widget-input-font-size !default;
+$copaair-signup-input-radius: $copaair-widget-input-radius !default;
+$copaair-signup-input-padding: $copaair-widget-input-padding !default;
+$copaair-signup-input-height: $copaair-widget-column-gutter * 3 !default;
+
+$copaair-signup-submit-bg: $copaair-widget-submit-bg !default;
+$copaair-signup-submit-bg-hover: $copaair-widget-submit-bg-hover !default;
+$copaair-signup-submit-border: $copaair-widget-submit-border !default;
+$copaair-signup-submit-dropshadow: $copaair-widget-submit-dropshadow !default;
+$copaair-signup-submit-font-color: $copaair-widget-submit-font-color !default;
+$copaair-signup-submit-text-shadow: $copaair-widget-submit-text-shadow !default;
+
+$copaair-signup-datepicker-icon: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAMCAYAAAC0qUeeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2xpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDowNjgwMTE3NDA3MjA2ODExODIyQUU3ODNEODZCNzAxNCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4MDgyNDk5REUwNjUxMUUzQkNBNUVCNTIzRkUzMDA1NSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4MDgyNDk5Q0UwNjUxMUUzQkNBNUVCNTIzRkUzMDA1NSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NzlmNDg1MDQtOTkxMy00YWY4LWI2ZTktM2JiNzY4ZWZkNjM5IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjA2ODAxMTc0MDcyMDY4MTE4MjJBRTc4M0Q4NkI3MDE0Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+NjmCHQAAAP1JREFUeNpc0E9KQlEUx/GjJAoSiAZaBBm5AEGwBbQG5+USpGELcAUNG0fNGzsMypAGhthAGkhERX+00NTX99TvwcMLn3c89/043vssCAJzdnB2g7R+91TX0QozMZqmmQ3RkBSOcYg3HOEUGQ8zwtq4QB5Z9FHFLV6wj9KK/a8KthU0BXLY0/SMb3r4G0Xs4FnhNdxhC19I4srDU2xgF48KFxQoYYQPTOL+JjipdSjuUjrstajX6rvhMSxWPy9Typr4N5k9W5ps4QXvsYkH9SP90xzvmEXDBVlE+qLusopxGHYDTRoq/OT34Cj+pT6VSfhjgh9bWjpzdL3+CjAAxthabQzpFF4AAAAASUVORK5CYII=') !default;
+$copaair-signup-datepicker-icon-position: 93% 50% !default;
+
+
+
+
+
+.copaair-signup {
+    @import 'theme.widget';
+
+    @media #{$copaair-widget-lap-and-up} {
+
+        .copaair-widget-layout__item {
+            width: 25%;
+        }
+
+    }
+
+}

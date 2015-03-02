@@ -21,7 +21,56 @@ $copaair-widget-submit-dropshadow: inset 0 1px rgba(255, 255, 255, .4) !default;
 $copaair-widget-submit-font-color: #fff !default;
 $copaair-widget-submit-text-shadow: 0 -1px rgba(0, 0, 0, .5) !default;
 
+$copaair-widget-datepicker-icon: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAMCAYAAAC0qUeeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2xpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDowNjgwMTE3NDA3MjA2ODExODIyQUU3ODNEODZCNzAxNCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4MDgyNDk5REUwNjUxMUUzQkNBNUVCNTIzRkUzMDA1NSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4MDgyNDk5Q0UwNjUxMUUzQkNBNUVCNTIzRkUzMDA1NSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NzlmNDg1MDQtOTkxMy00YWY4LWI2ZTktM2JiNzY4ZWZkNjM5IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjA2ODAxMTc0MDcyMDY4MTE4MjJBRTc4M0Q4NkI3MDE0Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+NjmCHQAAAP1JREFUeNpc0E9KQlEUx/GjJAoSiAZaBBm5AEGwBbQG5+USpGELcAUNG0fNGzsMypAGhthAGkhERX+00NTX99TvwcMLn3c89/043vssCAJzdnB2g7R+91TX0QozMZqmmQ3RkBSOcYg3HOEUGQ8zwtq4QB5Z9FHFLV6wj9KK/a8KthU0BXLY0/SMb3r4G0Xs4FnhNdxhC19I4srDU2xgF48KFxQoYYQPTOL+JjipdSjuUjrstajX6rvhMSxWPy9Typr4N5k9W5ps4QXvsYkH9SP90xzvmEXDBVlE+qLusopxGHYDTRoq/OT34Cj+pT6VSfhjgh9bWjpzdL3+CjAAxthabQzpFF4AAAAASUVORK5CYII=') !default;
+$copaair-widget-datepicker-icon-position: 93% 50% !default;
 
 
 
 
+
+/**
+ * Styles
+ */
+
+.copaair-widget {
+    color: $copaair-widget-font-color;
+    font-family: $copaair-widget-font-family;
+    font-size: $copaair-widget-font-size;
+}
+
+.copaair-form-control {
+    margin-bottom: $copaair-widget-column-gutter;
+    height: $copaair-widget-input-height;
+    padding: $copaair-widget-input-padding;
+    background-color: $copaair-widget-input-bg-color;
+    border: $copaair-widget-input-border;
+    border-radius: $copaair-widget-input-radius;
+    color: $copaair-widget-input-color;
+    font-size: $copaair-widget-input-font-size;
+
+    &::placeholder {
+        opacity: 1;
+    }
+
+}
+
+.copaair-booking-datepicker {
+    background-image: $copaair-widget-datepicker-icon;
+    background-position: $copaair-widget-datepicker-icon-position;
+    background-repeat: no-repeat;
+}
+
+.copaair-widget-submit {
+    background: $copaair-widget-submit-bg;
+    border: $copaair-widget-submit-border;
+    box-shadow: $copaair-widget-submit-dropshadow;
+    color: $copaair-widget-submit-font-color;
+    text-shadow: $copaair-widget-submit-text-shadow;
+
+    &:hover,
+    &:focus {
+        background-image: $copaair-widget-submit-bg-hover;
+        outline: 0;
+    }
+
+}

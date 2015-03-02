@@ -2,7 +2,7 @@
     #BASE
 \*------------------------------------*/
 
-.copaair-booking {
+.copaair-widget {
 
     *,
     & *:after,
@@ -11,6 +11,8 @@
     }
 
     input[type="text"],
+    input[type="email"],
+    input[type="tel"],
     input[type="submit"],
     select {
         box-sizing: border-box;
