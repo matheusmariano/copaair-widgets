@@ -1,0 +1,35 @@
+{
+    "es": {
+        "form": {
+            "fname": "Nombre",
+            "lname": "Apellido",
+            "email": "Email",
+            "country": "País",
+            "city": "Ciudad",
+            "phone": "Móvil",
+            "subscribe": "Subscribirse"
+        }
+    },
+    "en": {
+        "form": {
+            "fname": "Name",
+            "lname": "Last Name",
+            "email": "Email",
+            "country": "Country",
+            "city": "City",
+            "phone": "Mobile",
+            "subscribe": "Subscribe"
+        }
+    },
+    "pt": {
+        "form": {
+            "fname": "Nome",
+            "lname": "Sobrenome",
+            "email": "E-mail",
+            "country": "País",
+            "city": "Cidade",
+            "phone": "Celular",
+            "subscribe": "Inscrever-se"
+        }
+    }
+}
