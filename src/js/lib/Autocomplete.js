@@ -48,6 +48,7 @@ class Autocomplete
      */
     render(element) {
         var $this = $(element).hide(),
+            sourceClasses = $this.attr('class'),
             sourceValue = $this.val(),
             sourcePlaceholder = $this.attr('placeholder')
         ;
@@ -71,7 +72,7 @@ class Autocomplete
 
         // Add styling
         $input
-            .addClass('copaair-booking-control  copaair-booking-combobox-input')
+            .addClass(sourceClasses)
             .addClass('ui-widget  ui-widget-content  ui-state-default');
 
         // Insert into DOM
