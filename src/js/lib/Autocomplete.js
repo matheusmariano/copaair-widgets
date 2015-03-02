@@ -15,11 +15,31 @@ class Autocomplete
      */
     constructor(options) {
         var defaults = {
+            delay: 0,
             lang: 'es',
-            fixed: true
+            minLength: 0,
         };
 
         this.options = $.extend({}, defaults, options);
+    }
+
+    /**
+     * Get destinations from Flight Control API
+     * @param  {Function} cb Callback when API call finishes
+     *                       and destinations are fetched
+     * @return {void}
+     */
+    start(cb) {
+        var flightControl = new FlightControl({ lang: this.options.lang });
+
+        flightControl.fetch('destinations', (destinations) => {
+            // Format raw destinations to autocomplete structure
+            this.options.source = this.format(destinations.list);
+
+            if (typeof cb === 'function') {
+                cb();
+            }
+        });
     }
 
     /**
@@ -29,8 +49,7 @@ class Autocomplete
     render(element) {
         var $this = $(element).hide(),
             sourceValue = $this.val(),
-            sourcePlaceholder = $this.attr('placeholder'),
-            fieldType = $this.data('input-field')
+            sourcePlaceholder = $this.attr('placeholder')
         ;
 
         var $input = $('<input />')
@@ -40,28 +59,14 @@ class Autocomplete
         ;
 
         // Add autocomplete functionality
-        $input.autocomplete({
-            autoFocus: true,
-            delay: 0,
-            minLength: 0,
-            source: this.format(this.destinations.list),
-            select: function(event, ui) {
-                $input.val(ui.item.display);
-
-                if (fieldType === 'origin' || fieldType === 'destination') {
-                    $('.js-' + fieldType + '-input-outbound').val(ui.item.value);
-                    $('.js-' + fieldType + '-input-inbound').val(ui.item.value);
-                } else {
-                    console.error('The form needs two trip type inputs: origin and destination');
-                }
-
-                return false;
-            }
-        });
+        $input.autocomplete(this.options);
 
         // Open list on input focus
         $input.on('focus', function() {
-            $(this).autocomplete('search');
+            var $this = $(this);
+
+            if ($this.val().length === 0)
+                $this.autocomplete('search');
         });
 
         // Add styling
@@ -88,23 +93,6 @@ class Autocomplete
         };
 
         return this;
-    }
-
-    /**
-     * Get destinations from Flight Control API
-     * @param  {Function} cb Callback when API call finishes
-     *                       and destinations are fetched
-     * @return {void}
-     */
-    getDestinations(cb) {
-        var flightControl = new FlightControl({lang:this.options.lang});
-        flightControl.fetch('destinations', (destinations) => {
-            this.destinations = destinations;
-
-            if (typeof cb === 'function') {
-                cb();
-            }
-        });
     }
 
     /**

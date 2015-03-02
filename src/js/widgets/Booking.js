@@ -24,7 +24,6 @@ class Booking {
 
     /**
      * Widget constructor
-     *
      * @param {Object} selector element DOM object
      * @param {Object} options  Options passed on plugin instance
      */
@@ -44,11 +43,11 @@ class Booking {
                 this.setupSelectMenus();
 
                 // setup datepicker
-                var datepicker = new Datepicker({lang:this.options.lang});
+                var datepicker = new Datepicker();
                 datepicker.render();
 
                 // Autocomplete widgets
-                this.autocompletes();
+                this.initAutocomplete();
 
                 //set form defualt values afected
                 //by datepicker
@@ -61,20 +60,35 @@ class Booking {
         });
     }
 
-    autocompletes() {
-        var autocomplete = new Autocomplete();
-        autocomplete.getDestinations(function() {
+    /**
+     * Setup autocomplete destination widgets
+     * @see module:Autocomplete
+     */
+    initAutocomplete() {
+        // Init class with options
+        var autocomplete = new Autocomplete({
+            lang: this.options.lang,
+            select: (e, ui) => {
+                console.log(e.target, ui.item.display);
+                $(e.target).attr('value', ui.item.display);
+            },
+            // @todo Make this dynamic
+            position: {
+                my: 'left bottom',
+                at: 'left top'
+            }
+        });
+
+        // Build
+        autocomplete.start(function() {
             $('.js-booking-autocomplete').each(function() {
                 autocomplete.render(this);
             });
         });
     }
 
-
     /**
      * Replaces select menus with custom UI widgets
-     *
-     * @return {void}
      */
     setupSelectMenus() {
         $('.js-selectmenu').selectmenu();
@@ -83,7 +97,6 @@ class Booking {
 
     /**
      * Fetch and store Copa destinations from API
-     *
      * @param  {Function} cb Callback function when destinations are ready
      * @return {void}
      */
