@@ -10,8 +10,11 @@
     ]
   },
   "browserify-shim": {
-    "jquery": "global:$",
-    "store-js": {"exports": "store"}
+    "jquery": "global:jQuery",
+    "handlebars": "global:Handlebars",
+    "store-js": {
+      "exports": "store"
+    }
   },
   "bugs": {
     "url": "https://github.com/Nobox/copaair-widgets/issues"
