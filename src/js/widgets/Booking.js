@@ -4,14 +4,13 @@ var $ = require('jquery'),
     FlightControl = require('../lib/FlightControl'),
     Datepicker = require('../lib/Datepicker'),
     Autocomplete = require('../lib/Autocomplete'),
+    Book = require('../lib/Book'),
     defaults = {
         lang: 'es',
         origin: 'all',
         destination: 'all',
         templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
-        languagePath: 'bower_components/copaair-widgets/language/',
-        formUrl: 'https://bookings.copaair.com/CMGS/' +
-                       'AirLowFareSearchExternal.do?'
+        languagePath: 'bower_components/copaair-widgets/lang/'
     },
     copaApiUrls = {
         allDestinations: 'https://copaapi.nbxapps.com/destinations/',
@@ -56,6 +55,8 @@ class Booking {
                 //datepicker events that modify
                 //form values
                 this.datepickerFormEvents(datepicker);
+
+                var book = new Book();
             }
         });
     }
@@ -70,6 +71,7 @@ class Booking {
             lang: this.options.lang,
             select: (e, ui) => {
                 console.log(e.target, ui.item.display);
+                console.log(ui.item);
                 $(e.target).attr('value', ui.item.display);
             },
             // @todo Make this dynamic

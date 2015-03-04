@@ -65,7 +65,7 @@ class Autocomplete
         // Open list on input focus
         $input.on('focus', function() {
             var $this = $(this);
-
+            console.log('ht');
             if ($this.val().length === 0)
                 $this.autocomplete('search');
         });
