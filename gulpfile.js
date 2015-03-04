@@ -79,7 +79,7 @@ gulp.task('browserify', function() {
 gulp.task('watch', function() {
 
     gulp.watch(path.sass + '/**/*.scss', ['styles']);
-    gulp.watch(path.srcJs + '/index.js', ['browserify']);
+    gulp.watch(path.srcJs + '/**/*.js', ['browserify']);
 
 });
 
