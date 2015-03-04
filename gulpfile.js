@@ -64,6 +64,7 @@ gulp.task('browserify', function() {
             .bundle()
             .pipe(source('copaair-widgets.js'))
             .pipe(buffer())
+            .pipe(gulp.dest(path.distJs))
             .pipe(sourcemaps.init({ loadMaps: true }))
                 .pipe(uglify())
                 .pipe(rename({ suffix: '.min' }))
