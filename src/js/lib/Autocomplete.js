@@ -50,13 +50,15 @@ class Autocomplete
         var $this = $(element).hide(),
             sourceClasses = $this.attr('class'),
             sourceValue = $this.val(),
-            sourcePlaceholder = $this.attr('placeholder')
+            sourcePlaceholder = $this.attr('placeholder'),
+            dataInput = $this.data('input-field')
         ;
 
         var $input = $('<input />')
             .val(sourceValue)
             .attr('type', 'text')
             .attr('placeholder', sourcePlaceholder)
+            .attr('data-input-field', dataInput)
         ;
 
         // Add autocomplete functionality
@@ -65,7 +67,6 @@ class Autocomplete
         // Open list on input focus
         $input.on('focus', function() {
             var $this = $(this);
-            console.log('ht');
             if ($this.val().length === 0)
                 $this.autocomplete('search');
         });
@@ -111,7 +112,6 @@ class Autocomplete
                     <span class="code"> | ${ dest.id }</span>`,
                 tempValue = dest.id,
                 textValue = dest.name[this.options.lang] + ', ' + dest.id;
-
             result.push({
                 label: tempLabel,
                 value: tempValue,

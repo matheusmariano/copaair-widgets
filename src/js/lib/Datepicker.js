@@ -27,10 +27,9 @@ class Datepicker {
      * setups the defaults dates and language
      */
     render() {
-
-        this.setDefaultDates();
         this.setLocale();
-
+        this.setDefaultDates();
+        this.events();
     }
 
     /**
@@ -41,8 +40,8 @@ class Datepicker {
     setDefaultDates() {
 
         var dateRules = this.options.dateRules,
-        $departureField = $(this.options.departureSelector),
-        $returnField = $(this.options.returnSelector);
+            $departureField = $(this.options.departureSelector),
+            $returnField = $(this.options.returnSelector);
 
 
         $departureField.datepicker({
@@ -57,6 +56,22 @@ class Datepicker {
         $returnField.datepicker("setDate", dateRules.weekLater);
     }
 
+    events() {
+        var $departureField = $(this.options.departureSelector),
+            $returnField = $(this.options.returnSelector);
+
+        // $departureField.datepicker('option', 'onSelect', this.onSelectOutbound);
+    }
+
+
+    onSelectOutbound(dateText, inst) {
+            var $returnField = $(this.options.returnSelector),
+                date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+
+            //this sets the inbound date picker to a week later of current selection
+            var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+            $returnField.datepicker('setDate', weeklater);
+    }
     /**
      * Configure datepicker depending on the
      * localization

@@ -4,7 +4,7 @@ var $ = require('jquery'),
     FlightControl = require('../lib/FlightControl'),
     Datepicker = require('../lib/Datepicker'),
     Autocomplete = require('../lib/Autocomplete'),
-    Book = require('../lib/Book'),
+    FormHelper = require('../lib/FormHelper'),
     defaults = {
         lang: 'es',
         origin: 'all',
@@ -45,18 +45,20 @@ class Booking {
                 var datepicker = new Datepicker();
                 datepicker.render();
 
+
+                var formHelper = new FormHelper({datepicker:datepicker});
+
                 // Autocomplete widgets
-                this.initAutocomplete();
+                this.initAutocomplete(formHelper);
 
                 //set form defualt values afected
                 //by datepicker
-                this.setFormValues(datepicker);
 
                 //datepicker events that modify
                 //form values
-                this.datepickerFormEvents(datepicker);
+                // this.datepickerFormEvents(datepicker);
 
-                var book = new Book();
+
             }
         });
     }
@@ -65,14 +67,16 @@ class Booking {
      * Setup autocomplete destination widgets
      * @see module:Autocomplete
      */
-    initAutocomplete() {
+    initAutocomplete(formHelper) {
         // Init class with options
         var autocomplete = new Autocomplete({
             lang: this.options.lang,
-            select: (e, ui) => {
-                console.log(e.target, ui.item.display);
-                console.log(ui.item);
-                $(e.target).attr('value', ui.item.display);
+            select: function (e, ui) {
+                e.preventDefault();
+                // set display value to the input
+                $(this).val(ui.item.display);
+                //set actual value at the booking object
+                formHelper.setBounds($(this).data('input-field'), ui.item.value);
             },
             // @todo Make this dynamic
             position: {
@@ -94,55 +98,6 @@ class Booking {
      */
     setupSelectMenus() {
         $('.js-selectmenu').selectmenu();
-        return this;
-    }
-
-    /**
-     * Fetch and store Copa destinations from API
-     * @param  {Function} cb Callback function when destinations are ready
-     * @return {void}
-     */
-    fetchDestinations(cb) {
-        var url = copaApiUrls.allDestinations,
-            lang = this.options.lang
-        ;
-
-        this.destinations = [];
-
-        $.getJSON(url, (destinations) => {
-            // Sort destinations
-            destinations.sort(function(a, b) {
-                if (a.name[lang] > b.name[lang]) return 1;
-                if (a.name[lang] < b.name[lang]) return -1;
-
-                return 0;
-            });
-
-            var destinationsData = [];
-
-            // Organize data result
-            $.each(destinations, function(i, dest) {
-                var tempLabel = '<b>' + dest.name[lang] + ', ' + dest.country +
-                    '</b><span class="code"> | ' + dest.id + '</span>';
-                var tempValue = dest.id;
-                var textValue = dest.name[lang] + ', ' + dest.id;
-
-                destinationsData.push({
-                    label: tempLabel,
-                    value: tempValue,
-                    display: textValue
-                });
-            });
-
-            // Store result
-            this.destinations = destinationsData;
-
-            // Callback
-            if (typeof cb === 'function') {
-                cb();
-            }
-        });
-
         return this;
     }
 

@@ -4,17 +4,15 @@
             <input class="copaair-form-control  js-booking-autocomplete"
                    type="text"
                    placeholder="{{ form.origin }}"
-                   data-input-field="origin">
-            <input name="outboundOption.originLocationCode" type="hidden" value="" class="js-origin-input-outbound" data-validate="true">
-            <input name="inboundOption.destinationLocationCode" type="hidden" value="" class="js-origin-input-inbound" data-validate="true">
+                   data-input-field="origin"
+                   data-value="">
         </div
         ><div class="copaair-widget-layout__item">
             <input class="copaair-form-control  js-booking-autocomplete"
                    type="text"
                    placeholder="{{ form.destination }}"
-                   data-input-field="destination">
-            <input name="outboundOption.destinationLocationCode" type="hidden" value="" class="js-destination-input-outbound" data-validate="true">
-            <input name="inboundOption.originLocationCode" type="hidden" value="" class="js-destination-input-inbound" data-validate="true">
+                   data-input-field="destination"
+                   data-value="">
         </div
         ><div class="copaair-widget-layout__item">
             <input class="copaair-form-control  copaair-widget-datepicker  copaair-booking-datepicker-departure" placeholder="{{form.departure}}" type="text" required>
@@ -30,7 +28,7 @@
         <div class="copaair-booking-bottom  copaair-widget-layout">
             <div class="copaair-widget-layout__item">
                 <label class="copaair-booking-cabin" for="flight-class-economic">
-                    <input name="cabinClass"
+                    <input class="cabinClass"
                            value="Economy"
                            id="flight-class-economic"
                            type="radio"
@@ -39,7 +37,7 @@
                     {{form.economic}}
                 </label
                 ><label class="copaair-booking-cabin" for="flight-class-business">
-                    <input name="cabinClass"
+                    <input class="cabinClass"
                            value="Business"
                            id="flight-class-business"
                            type="radio"
@@ -54,8 +52,7 @@
                         {{form.adults}}<br class="copaair-hidden-palm"> (12+)
                     </label
                     ><div class="copaair-widget-layout__item">
-                        <select class="copaair-booking-select  copaair-form-control  js-selectmenu"
-                                name="guestTypes[0].amount"
+                        <select class="copaair-booking-select  copaair-form-control  js-selectmenu js-adults-amount"
                                 id="booking-passengers-adults">
                             <option value="1" selected>1</option>
                             <option value="2">2</option>
@@ -74,8 +71,7 @@
                         {{form.children}}<br class="copaair-hidden-palm"> (2-11)
                     </label
                     ><div class="copaair-widget-layout__item">
-                        <select class="copaair-booking-select  copaair-form-control  js-selectmenu"
-                                name="guestTypes[1].amount"
+                        <select class="copaair-booking-select  copaair-form-control  js-selectmenu js-children-amount"
                                 id="booking-passengers-children">
                             <option value="0" selected>0</option>
                             <option value="1">1</option>
@@ -95,8 +91,7 @@
                         {{form.infants}}<br class="copaair-hidden-palm"> (0-1)
                     </label
                     ><div class="copaair-widget-layout__item">
-                        <select class="copaair-booking-select  copaair-form-control  js-selectmenu"
-                                name="guestTypes[2].amount"
+                        <select class="copaair-booking-select  copaair-form-control  js-selectmenu js-infants-amount"
                                 id="booking-passengers-infants">
                             <option value="0" selected>0</option>
                             <option value="1">1</option>
@@ -110,25 +105,10 @@
                 </div>
             </div
             ><div class="copaair-widget-layout__item">
-                <input class="copaair-form-control" placeholder="Código promocional" type="text">
+                <input class="copaair-form-control js-promo-code" placeholder="Código promocional" type="text">
             </div>
         </div>
     </div>
-
-    <input name="tripType" value="RT" type="hidden">
-    <input name="flexibleSearch" value="true" type="hidden">
-    <input name="guestTypes[0].type" value="ADT" type="hidden">
-    <input name="guestTypes[1].type" value="CNN" type="hidden">
-    <input name="guestTypes[2].type" value="INF" type="hidden">
-    <input name="lang" value="{{language}}" type="hidden">
-    <input name="pos" value="CMGS" type="hidden">
-    <input name="d1" value="" type="hidden">
-    <input name="outboundOption.departureDay" value="" data-validate="true" type="hidden">
-    <input name="outboundOption.departureMonth" value=""  data-validate="true" type="hidden">
-    <input name="outboundOption.departureYear" value="" data-validate="true" type="hidden">
-    <input name="inboundOption.departureDay" value=""  data-validate="true" type="hidden">
-    <input name="inboundOption.departureMonth" value="" data-validate="true" type="hidden">
-    <input name="inboundOption.departureYear" value=""  data-validate="true" type="hidden">
 
     <div class="copaair-widget-wrapper  copaair-hidden-lap-and-up">
         <input class="copaair-widget-submit  copaair-form-control" value="{{form.submit}}" type="submit">

@@ -39,16 +39,21 @@ var $ = require('jquery'),
 ;
 
 /**
- * Book module
+ * FormHelper module
  */
-class Book {
+class FormHelper {
 
     constructor(options) {
 
         this.options = $.extend({}, defaults, options);
         this._defaults = defaults;
 
+        // set defautls values
         this.setDefaultBounds();
+        this.setDates(this.options.datepicker, {returns:true, departure:true});
+
+        // load events related with form helper and other modules
+        this.events();
     }
 
 
@@ -95,9 +100,52 @@ class Book {
 
     }
 
-    setDates() {
+    setDates(datepicker, bounds) {
+        // get current datepickers dates
+        var departureDate = $(datepicker.options.departureSelector).datepicker('getDate'),
+        returnDate = $(datepicker.options.returnSelector).datepicker('getDate');
 
+        if (bounds.returns) {
+            this.options.inputs["inboundOption.departureDay"] = returnDate.getUTCDate();
+            this.options.inputs["inboundOption.departureMonth"] = returnDate.getMonth() + 1;
+            this.options.inputs["inboundOption.departureYear"] = returnDate.getFullYear();
+        }
+
+        if(bounds.departure) {
+            this.options.inputs["outboundOption.departureDay"] = departureDate.getUTCDate();
+            this.options.inputs["outboundOption.departureMonth"] = departureDate.getMonth() + 1;
+            this.options.inputs["outboundOption.departureYear"] = departureDate.getFullYear();
+        }
     }
+
+    events() {
+
+        var datepicker = this.options.datepicker,
+            $departureField = $(datepicker.options.departureSelector),
+            $returnField = $(datepicker.options.returnSelector);
+
+        $departureField.datepicker('option', 'onSelect', (dateText, inst) =>{
+
+            var date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+
+            // this sets the inbound date picker to a week later of current selection
+            var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+            $returnField.datepicker('setDate', weeklater);
+            $returnField.datepicker('option', 'minDate', date);
+            this.setDates(datepicker, {returns:true, departure:true});
+        });
+
+
+        $returnField.datepicker('option', 'onSelect', (dateText, inst) =>{
+
+            var date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+
+            // this sets the inbound date picker to a week later of current selection
+            var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+            this.setDates(datepicker, {returns:true, departure:false});
+        });
+    }
+
 }
 
-module.exports = Book;
+module.exports = FormHelper;
