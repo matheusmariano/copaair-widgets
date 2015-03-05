@@ -28,19 +28,21 @@
         <div class="copaair-booking-bottom  copaair-widget-layout">
             <div class="copaair-widget-layout__item">
                 <label class="copaair-booking-cabin" for="flight-class-economic">
-                    <input class="cabinClass"
+                    <input class="cabinClass js-cabin-class"
                            value="Economy"
                            id="flight-class-economic"
                            type="radio"
                            checked="checked"
+                           name="cabinClass"
                            required>
                     {{form.economic}}
                 </label
                 ><label class="copaair-booking-cabin" for="flight-class-business">
-                    <input class="cabinClass"
+                    <input class="cabinClass js-cabin-class"
                            value="Business"
                            id="flight-class-business"
                            type="radio"
+                           name="cabinClass"
                            required>
                     {{form.business}}
                 </label>

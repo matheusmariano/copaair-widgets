@@ -118,6 +118,25 @@ class FormHelper {
         }
     }
 
+    setCabinClass(target) {
+        this.options.inputs["cabinClass"] = $(target).val();
+    }
+
+    setPassengersAmount(type, value) {
+        switch (type) {
+            case 'adult':
+                this.options.inputs["guestTypes[0].amount"] = value;
+            break;
+            case 'child':
+                this.options.inputs["guestTypes[1].amount"] = value;
+            break;
+            case 'infant':
+                this.options.inputs["guestTypes[2].amount"] = value;
+            break;
+        }
+    }
+
+
     events() {
 
         var datepicker = this.options.datepicker,
@@ -143,6 +162,28 @@ class FormHelper {
             // this sets the inbound date picker to a week later of current selection
             var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
             this.setDates(datepicker, {returns:true, departure:false});
+        });
+
+        $('.js-cabin-class').on('click', (e) => {
+            this.setCabinClass(e.target);
+        });
+
+        $('.js-adults-amount').selectmenu({
+            change: (e, ui) => {
+                this.setPassengersAmount('adult', ui.item.value);
+            }
+        });
+
+        $('.js-children-amount').selectmenu({
+            change: (e, ui) => {
+                this.setPassengersAmount('child', ui.item.value);
+            }
+        });
+
+        $('.js-infants-amount').selectmenu({
+            change: (e, ui) => {
+                this.setPassengersAmount('infant', ui.item.value);
+            }
         });
     }
 
