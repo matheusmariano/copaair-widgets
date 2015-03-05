@@ -60,17 +60,16 @@ class FormHelper {
 
     process() {
 
-        // form.on('submit', function(event) {
-        //     event.preventDefault();
-        //     var httpQuery = $(this).serialize();
-        //     var url = _this.options.formUrl;
+        var httpQuery = $.param(this.options.inputs);
+        // console.log(httpQuery);
+        var url = this.options.formUrl;
 
         //     if(_this.validationError(form)){
         //         console.log('error in the form');
         //     }
         //     else{
-        //         var searchWindow = window.open(url + httpQuery, '_blank');
-        //         searchWindow.focus();
+        var searchWindow = window.open(url + httpQuery, '_blank');
+        searchWindow.focus();
         //     }
         // });
     }
@@ -89,12 +88,12 @@ class FormHelper {
     setBounds(bound, location) {
 
         if (bound === 'origin') {
-            this.options.inputs["outboundOption.destinationLocationCode"] = location;
+            this.options.inputs["outboundOption.originLocationCode"] = location;
             this.options.inputs["inboundOption.destinationLocationCode"] = location;
         }
 
         if (bound === 'destination') {
-            this.options.inputs["outboundOption.originLocationCode"] = location;
+            this.options.inputs["outboundOption.destinationLocationCode"] = location;
             this.options.inputs["inboundOption.originLocationCode"] = location;
         }
 
@@ -184,6 +183,11 @@ class FormHelper {
             change: (e, ui) => {
                 this.setPassengersAmount('infant', ui.item.value);
             }
+        });
+
+        $('.js-submit').on('click', (e) => {
+            e.preventDefault();
+            this.process();
         });
     }
 
