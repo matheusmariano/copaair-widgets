@@ -60,19 +60,20 @@ class FormHelper {
 
 
     process() {
-
         var httpQuery = $.param(this.options.inputs);
         // console.log(httpQuery);
         var url = this.options.formUrl;
 
-        //     if(_this.validationError(form)){
-        //         console.log('error in the form');
-        //     }
-        //     else{
-        var searchWindow = window.open(url + httpQuery, '_blank');
-        searchWindow.focus();
-        //     }
-        // });
+        var validation = this.validationError();
+
+        if (validation.error) {
+            // handle validation error messages
+            console.log(validation.bag);
+        } else {
+            // no errors, forward form values to copa
+            var searchWindow = window.open(url + httpQuery, '_blank');
+            searchWindow.focus();
+        }
     }
 
     setDefaultBounds() {
@@ -138,15 +139,22 @@ class FormHelper {
 
 
     validationError() {
-        errors = null;
-
-        for (input in this.options.inputs) {
-            if(!input) {
-
+        var errors  = {
+            error: false,
+            bag:[]
+        };
+        var currentError;
+        for (var input in this.options.inputs) {
+            if(!this.options.inputs[input] && this.options.inputs[input] !== 0) {
+                currentError = {};
+                currentError.field = input;
+                currentError.message = `The input ${input} must have some value`;
+                errors.bag.push(currentError);
+                errors.error = true;
             }
         }
 
-        return error;
+        return errors;
     };
 
     events() {
