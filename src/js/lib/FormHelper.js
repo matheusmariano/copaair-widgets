@@ -137,6 +137,13 @@ class FormHelper {
         }
     }
 
+    setCoupon(coupon) {
+        this.options.inputs.coupon = coupon;
+    }
+
+    setD1(d1Value) {
+        this.options.inputs.d1 = d1Value;
+    }
 
     validationError() {
         var errors  = {

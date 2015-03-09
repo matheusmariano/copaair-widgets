@@ -9,6 +9,8 @@ var $ = require('jquery'),
         lang: 'es',
         origin: 'all',
         destination: 'all',
+        d1: null,
+        coupon: null,
         templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
         languagePath: 'bower_components/copaair-widgets/lang/'
     },
@@ -52,6 +54,16 @@ class Booking {
                     destination: this.options.destination
                 });
 
+                // set custom values d1 & coupon
+
+                if(this.options.d1) {
+                    formHelper.setD1(this.options.d1);
+                }
+
+                if(this.options.coupon) {
+                    formHelper.setCoupon(this.options.coupon);
+                }
+
                 // Autocomplete widgets
                 this.initAutocomplete(formHelper);
 
@@ -59,12 +71,7 @@ class Booking {
                 // Bind events
                 this.bookingEvents();
 
-                //set form defualt values afected
-                //by datepicker
 
-                //datepicker events that modify
-                //form values
-                // this.datepickerFormEvents(datepicker);
 
             }
         });
