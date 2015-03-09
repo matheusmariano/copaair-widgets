@@ -93,6 +93,8 @@ class Booking {
             lang: this.options.lang,
             select: function (e, ui) {
                 e.preventDefault();
+                e.stopPropagation();
+
                 // set display value to the input
                 $(this).val(ui.item.display);
                 //set actual value at the booking object
