@@ -49,11 +49,7 @@ $copaair-booking-datepicker-icon-position: 93% 50% !default;
     }
 
     .copaair-booking-bottom {
-
-        .copaair-form-control {
-            margin-bottom: 0;
-        }
-
+        margin-top: $copaair-widget-column-gutter;
     }
 
     .copaair-booking-passengers {
