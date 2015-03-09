@@ -102,7 +102,8 @@ class Booking {
             position: {
                 my: 'left bottom',
                 at: 'left top'
-            }
+            },
+            appendTo: this.$booking
         });
 
         // Build
