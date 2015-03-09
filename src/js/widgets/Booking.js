@@ -1,22 +1,26 @@
-// Create the defaults
+/**
+ * Modules
+ */
 var $ = require('jquery'),
     Template = require('../lib/Template'),
     FlightControl = require('../lib/FlightControl'),
     Datepicker = require('../lib/Datepicker'),
     Autocomplete = require('../lib/Autocomplete'),
-    FormHelper = require('../lib/FormHelper'),
-    defaults = {
+    FormHelper = require('../lib/FormHelper')
+;
+
+/**
+ * Options
+ * @type {Object}
+ */
+var defaults = {
         lang: 'es',
-        origin: 'all',
-        destination: 'all',
         d1: null,
         coupon: null,
+        origin: null,
+        destination: null,
         templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
         languagePath: 'bower_components/copaair-widgets/lang/'
-    },
-    copaApiUrls = {
-        allDestinations: 'https://copaapi.nbxapps.com/destinations/',
-        countryDestinations: 'https://copaapi.nbxapps.com/destinations/?country='
     }
 ;
 
