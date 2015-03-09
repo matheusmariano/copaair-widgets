@@ -85,7 +85,7 @@ class FlightControl {
      * @param  {Object} data
      */
     sortNames(data) {
-        data.sort((a, b)=>{
+        data.sort((a, b) => {
             if (a.name[this.options.lang] > b.name[this.options.lang]) return 1;
             if (a.name[this.options.lang] < b.name[this.options.lang]) return -1;
 
