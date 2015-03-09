@@ -46,13 +46,26 @@ class Booking {
                 datepicker.render();
 
 
-                var formHelper = new FormHelper({datepicker:datepicker});
+                var formHelper = new FormHelper({
+                    datepicker: datepicker,
+                    origin: this.options.origin,
+                    destination: this.options.destination
+                });
 
                 // Autocomplete widgets
                 this.initAutocomplete(formHelper);
 
+
                 // Bind events
                 this.bookingEvents();
+
+                //set form defualt values afected
+                //by datepicker
+
+                //datepicker events that modify
+                //form values
+                // this.datepickerFormEvents(datepicker);
+
             }
         });
     }
@@ -118,106 +131,6 @@ class Booking {
             e.stopPropagation();
         });
 
-        // Load form submition events
-        this.submitForm($form);
-    }
-
-    /**
-     * Since some defaults values are set on the datepickers
-     * the form have some hidden inputs that use this values
-     */
-    setFormValues(datepicker) {
-
-        var $form = this.$booking,
-
-        // get current datepickers dates
-        departureDate = $(datepicker.options.departureSelector).datepicker('getDate'),
-        returnDate = $(datepicker.options.returnSelector).datepicker('getDate');
-
-        // Lest migrate date pickers date to the hidden
-        // date form fields. This fields are required by
-        // Copa Booking
-
-        $form.find('input[name="inboundOption.departureDay"]')
-            .attr('value', returnDate.getUTCDate());
-        $form.find('input[name="inboundOption.departureMonth"]')
-            .attr('value', returnDate.getMonth() + 1);
-        $form.find('input[name="inboundOption.departureYear"]')
-            .attr('value', returnDate.getFullYear());
-
-        // set outboundOption departure dates
-        $form.find('input[name="outboundOption.departureDay"]')
-            .attr('value', departureDate.getUTCDate());
-        $form.find('input[name="outboundOption.departureMonth"]')
-            .attr('value', departureDate.getMonth() + 1);
-        $form.find('input[name="outboundOption.departureYear"]')
-            .attr('value', departureDate.getFullYear());
-    }
-
-
-    datepickerFormEvents(datepicker) {
-
-        var $departureField = $(datepicker.options.departureSelector),
-            $returnField = $(datepicker.options.returnSelector),
-            $form = this.$booking;
-
-        var onSelectOutbound = function(dateText, inst) {
-            var date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
-
-            //this sets the inbound date picker to a week later of current selection
-            var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
-            $returnField.datepicker('setDate', weeklater);
-
-            $form.find('input[name="inboundOption.departureDay"]')
-                .attr('value', weeklater.getUTCDate());
-            $form.find('input[name="inboundOption.departureMonth"]')
-                .attr('value', weeklater.getMonth() + 1);
-            $form.find('input[name="inboundOption.departureYear"]')
-                .attr('value', weeklater.getFullYear());
-
-            //this helps that the user doesnt travel back in time
-            $returnField.datepicker('option', 'minDate', date);
-            $form.find('input[name="outboundOption.departureDay"]')
-                .attr('value', inst.selectedDay);
-            $form.find('input[name="outboundOption.departureMonth"]')
-                .attr('value', inst.selectedMonth + 1);
-            $form.find('input[name="outboundOption.departureYear"]')
-                .attr('value', inst.selectedYear);
-        };
-
-        var onSelectInbound = function(dateText, inst) {
-            $form.find('input[name="inboundOption.departureDay"]')
-                .attr('value', inst.selectedDay);
-            $form.find('input[name="inboundOption.departureMonth"]')
-                .attr('value', inst.selectedMonth + 1);
-            $form.find('input[name="inboundOption.departureYear"]')
-                .attr('value', inst.selectedYear);
-        };
-
-        $departureField.datepicker('option', 'onSelect', onSelectOutbound);
-        $returnField.datepicker('option', 'onSelect', onSelectInbound);
-    }
-
-    /**
-     * submitForm
-     * captures form submit event and process it
-     */
-    submitForm(form) {
-        var _this = this;
-
-        form.on('submit', function(event) {
-            event.preventDefault();
-            var httpQuery = $(this).serialize();
-            var url = _this.options.formUrl;
-
-            if(_this.validationError(form)){
-                console.log('error in the form');
-            }
-            else{
-                var searchWindow = window.open(url + httpQuery, '_blank');
-                searchWindow.focus();
-            }
-        });
     }
 }
 

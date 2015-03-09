@@ -1,8 +1,8 @@
 var $ = require('jquery'),
     defaults = {
         lang: 'es',
-        origin: false,
-        destination: false,
+        origin: 'all',
+        destination: 'all',
         // required field to submit form
         // to copa
         inputs: {
@@ -21,7 +21,7 @@ var $ = require('jquery'),
             "inboundOption.departureDay": null,
             "inboundOption.departureMonth": null,
             "inboundOption.departureYear": null,
-            "coupon": null,
+            // "coupon": null,
             // origin
             "outboundOption.originLocationCode": null,
             "inboundOption.destinationLocationCode": null,
@@ -30,7 +30,7 @@ var $ = require('jquery'),
             "inboundOption.originLocationCode": null,
             // // cabin class Business|Economy
             "cabinClass": "Economy",
-            d1: null,
+            // d1: null,
             lang: 'es'
         },
         formUrl: 'https://bookings.copaair.com/CMGS/' +
@@ -54,6 +54,7 @@ class FormHelper {
 
         // load events related with form helper and other modules
         this.events();
+        console.log(this.options.inputs);
     }
 
 
@@ -76,11 +77,11 @@ class FormHelper {
 
     setDefaultBounds() {
 
-        if (this.options.origin) {
+        if (this.options.origin !== 'all') {
             this.setBounds('origin', this.options.origin);
         }
 
-        if (this.options.destination) {
+        if (this.options.destination !=='all') {
             this.setBounds('destination', this.options.destination)
         }
     }
@@ -135,6 +136,18 @@ class FormHelper {
         }
     }
 
+
+    validationError() {
+        errors = null;
+
+        for (input in this.options.inputs) {
+            if(!input) {
+
+            }
+        }
+
+        return error;
+    };
 
     events() {
 
