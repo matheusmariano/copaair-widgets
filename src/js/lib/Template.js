@@ -20,6 +20,7 @@ class Template
             $.ajax({
                 url: `${this.options.src}/${widget}.hbs`,
                 success: (tpl) => {
+                    this.options.data = $.extend({}, this.options, i18n[widget][this.options.lang]);
                     var html = this.compile(widget, tpl);
                     this.options.callback(html);
                 }
@@ -31,7 +32,7 @@ class Template
 
     compile(widget, tpl) {
         var template = Handlebars.compile(tpl);
-        var html = template(i18n[widget][this.options.lang]);
+        var html = template(this.options.data);
         return html;
     }
 }
