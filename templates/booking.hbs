@@ -1,18 +1,26 @@
 <form class="copaair-booking  copaair-widget  copaair-theme-horizontal">
     <div class="copaair-booking-top  copaair-widget-layout">
         <div class="copaair-widget-layout__item">
-            <input class="copaair-form-control  js-booking-autocomplete"
-                   type="text"
-                   placeholder="{{ form.origin }}"
-                   data-input-field="origin"
-                   data-value="">
+            {{#if origin }}
+                {{ form.origin }} <span class="js-copaair-trans">{{ origin }}</span>
+            {{ else }}
+                <input class="copaair-form-control  js-booking-autocomplete"
+                       type="text"
+                       placeholder="{{ form.origin }}"
+                       data-input-field="origin"
+                       data-value="">
+            {{/if}}
         </div
         ><div class="copaair-widget-layout__item">
+            {{#if destination }}
+                {{ form.destination }} <span class="js-copaair-trans">{{ destination }}</span>
+            {{ else }}
             <input class="copaair-form-control  js-booking-autocomplete"
                    type="text"
                    placeholder="{{ form.destination }}"
                    data-input-field="destination"
                    data-value="">
+            {{/if}}
         </div
         ><div class="copaair-widget-layout__item">
             <input class="copaair-form-control  copaair-widget-datepicker  copaair-booking-datepicker-departure" placeholder="{{form.departure}}" type="text" required>

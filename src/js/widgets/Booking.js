@@ -37,6 +37,8 @@ class Booking {
 
         new Template('booking', {
             'lang': this.options.lang,
+            'origin': this.options.origin,
+            'destination': this.options.destination,
             callback: (html) => {
                 this.$booking.html(html);
 
