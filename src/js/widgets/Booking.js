@@ -51,14 +51,8 @@ class Booking {
                 // Autocomplete widgets
                 this.initAutocomplete(formHelper);
 
-                //set form defualt values afected
-                //by datepicker
-
-                //datepicker events that modify
-                //form values
-                // this.datepickerFormEvents(datepicker);
-
-
+                // Bind events
+                this.bookingEvents();
             }
         });
     }
@@ -106,6 +100,24 @@ class Booking {
      */
     bookingEvents() {
         var $form = $('.copaair-booking');
+        var $toggle = $('.js-copaair-toggle');
+
+        // Show bottom row when any input gets focus
+        this.$booking.on('focus.copaair', 'input', function(e) {
+            $toggle.removeClass('copaair-hidden');
+        });
+
+        // Clicking anywhere in the document hides bottom row
+        $(document).on('click.copaair', function(e) {
+            $toggle.addClass('copaair-hidden');
+        });
+
+        // Stop propagation of clicks inside the form to prevent
+        // triggering top event.
+        this.$booking.on('click.copaair', function(e) {
+            e.stopPropagation();
+        });
+
         // Load form submition events
         this.submitForm($form);
     }
