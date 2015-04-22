@@ -6,16 +6,16 @@ var $ = require('jquery'),
     },
     defaults = {
         lang: 'es',
-        src: 'bower_components/copaair-widgets/templates',
+        src: window.location.origin + '/bower_components/copaair-widgets/templates',
         callback: function() {}
     }
 ;
 
 class Template
 {
+
     constructor(widget, options) {
         this.options = $.extend({}, defaults, options);
-
         if (typeof Handlebars !== 'undefined' && Handlebars !== null) {
             $.ajax({
                 url: `${this.options.src}/${widget}.hbs`,
