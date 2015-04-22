@@ -2,3 +2,45 @@
     #HORIZONTAL
 \*------------------------------------*/
 
+.copaair-booking.copaair-theme-horizontal {
+
+    @media #{$copaair-widget-lap-and-up} {
+
+        .copaair-widget-layout__item {
+            width: 20%;
+        }
+
+        .copaair-booking-cabin {
+            display: block;
+            width: 100%;
+        }
+
+    }
+
+    .copaair-booking-bottom {
+        margin-top: $copaair-widget-column-gutter;
+    }
+
+    .copaair-booking-passengers {
+
+        @media #{$copaair-widget-palm} {
+            width: 33.33333%;
+
+            .copaair-widget-layout__item {
+                margin-bottom: $copaair-widget-column-gutter;
+            }
+
+        }
+
+        @media #{$copaair-widget-lap-and-up} {
+
+            .copaair-widget-layout__item {
+                width: 50%;
+                text-align: right;
+            }
+
+        }
+
+    }
+
+}

@@ -10,6 +10,8 @@ $copaair-widget-input-bg-color: #eef2f2 !default;
 $copaair-widget-input-border: 0 !default;
 $copaair-widget-input-color: #0062ad !default;
 $copaair-widget-input-font-size: 12px !default;
+$copaair-widget-input-font-weight: 500 !default;
+$copaair-widget-input-text-transform: none !default;
 $copaair-widget-input-radius: 3px !default;
 $copaair-widget-input-padding: 7px !default;
 $copaair-widget-input-height: $copaair-widget-column-gutter * 3 !default;
@@ -53,7 +55,7 @@ $copaair-widget-datepicker-icon-position: 93% 50% !default;
 
 }
 
-.copaair-booking-datepicker {
+.copaair-widget-datepicker {
     background-image: $copaair-widget-datepicker-icon;
     background-position: $copaair-widget-datepicker-icon-position;
     background-repeat: no-repeat;
@@ -68,7 +70,7 @@ $copaair-widget-datepicker-icon-position: 93% 50% !default;
 
     &:hover,
     &:focus {
-        background-image: $copaair-widget-submit-bg-hover;
+        background: $copaair-widget-submit-bg-hover;
         outline: 0;
     }
 
