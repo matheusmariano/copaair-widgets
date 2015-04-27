@@ -110,9 +110,7 @@ class Booking {
 
         // Build
         autocomplete.start(function() {
-            $('.js-booking-autocomplete').each(function() {
-                autocomplete.render(this);
-            });
+            autocomplete.render(this);
         });
     }
 
