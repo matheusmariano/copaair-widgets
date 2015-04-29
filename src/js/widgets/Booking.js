@@ -109,8 +109,8 @@ class Booking {
         });
 
         // Build
-        autocomplete.start(function() {
-            autocomplete.render(this);
+        autocomplete.start(() => {
+            autocomplete.render(this.$booking.find('.js-booking-autocomplete'));
         });
     }
 
