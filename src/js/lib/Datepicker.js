@@ -7,7 +7,16 @@ var $ = require('jquery'),
             today: new Date(),
             weekLater: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
         },
-        lang: 'es'
+        lang: 'es',
+        beforeShow: function(input, isnt) {
+            setTimeout(function() {
+                isnt.dpDiv.position({
+                    my: 'left bottom',
+                    at: 'left top',
+                    of: input
+                });
+            }, 0);
+        }
     }
 ;
 
@@ -17,7 +26,6 @@ var $ = require('jquery'),
 class Datepicker {
 
     constructor(options) {
-
         this.options = $.extend({}, defaults, options);
         this._defaults = defaults;
     }
@@ -38,19 +46,14 @@ class Datepicker {
      * and one week later for return
      */
     setDefaultDates() {
-
         var dateRules = this.options.dateRules,
             $departureField = $(this.options.departureSelector),
             $returnField = $(this.options.returnSelector);
 
+        this.options.minDate = new Date();
 
-        $departureField.datepicker({
-            minDate: new Date()
-        });
-
-        $returnField.datepicker({
-            minDate: new Date()
-        });
+        $departureField.datepicker(this.options);
+        $returnField.datepicker(this.options);
 
         $departureField.datepicker("setDate", dateRules.today);
         $returnField.datepicker("setDate", dateRules.weekLater);
@@ -63,7 +66,6 @@ class Datepicker {
         // $departureField.datepicker('option', 'onSelect', this.onSelectOutbound);
     }
 
-
     onSelectOutbound(dateText, inst) {
             var $returnField = $(this.options.returnSelector),
                 date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
@@ -72,6 +74,7 @@ class Datepicker {
             var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
             $returnField.datepicker('setDate', weeklater);
     }
+
     /**
      * Configure datepicker depending on the
      * localization

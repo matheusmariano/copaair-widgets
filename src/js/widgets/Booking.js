@@ -19,6 +19,7 @@ var defaults = {
         coupon: null,
         origin: null,
         destination: null,
+        widgetPosition: { my: 'left bottom', at: 'left top' },
         templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
         languagePath: 'bower_components/copaair-widgets/lang/'
     }
@@ -51,7 +52,7 @@ class Booking {
 
                 // setup datepicker
                 var datepicker = new Datepicker({
-                    'lang': this.options.lang
+                    lang: this.options.lang,
                 });
                 datepicker.render();
 
@@ -100,11 +101,7 @@ class Booking {
                 //set actual value at the booking object
                 formHelper.setBounds($(this).data('input-field'), ui.item.value);
             },
-            // @todo Make this dynamic
-            position: {
-                my: 'left bottom',
-                at: 'left top'
-            },
+            position: this.options.widgetPosition,
             appendTo: this.$booking
         });
 
@@ -118,7 +115,10 @@ class Booking {
      * Replaces select menus with custom UI widgets
      */
     setupSelectMenus() {
-        $('.js-selectmenu').selectmenu();
+        $('.js-selectmenu').selectmenu({
+            position: this.options.widgetPosition
+        });
+
         return this;
     }
 
