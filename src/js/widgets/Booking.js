@@ -60,7 +60,8 @@ class Booking {
                 var formHelper = new FormHelper({
                     datepicker: datepicker,
                     origin: this.options.origin,
-                    destination: this.options.destination
+                    destination: this.options.destination,
+                    booking: this.$booking
                 });
 
                 // set custom values d1 & coupon

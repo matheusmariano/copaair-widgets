@@ -54,7 +54,7 @@ class FormHelper {
 
         // load events related with form helper and other modules
         this.events();
-        console.log(this.options.inputs);
+        // console.log(this.options.inputs);
     }
 
 
@@ -71,6 +71,7 @@ class FormHelper {
             console.log(validation.bag);
         } else {
             // no errors, forward form values to copa
+            // console.log(httpQuery);
             var searchWindow = window.open(url + httpQuery, '_blank');
             searchWindow.focus();
         }
@@ -191,29 +192,29 @@ class FormHelper {
             this.setDates(datepicker, {returns:true, departure:false});
         });
 
-        $('.js-cabin-class').on('click', (e) => {
+        this.options.booking.find('.js-cabin-class').on('click', (e) => {
             this.setCabinClass(e.target);
         });
 
-        $('.js-adults-amount').selectmenu({
+        this.options.booking.find('.js-adults-amount').selectmenu({
             change: (e, ui) => {
                 this.setPassengersAmount('adult', ui.item.value);
             }
         });
 
-        $('.js-children-amount').selectmenu({
+        this.options.booking.find('.js-children-amount').selectmenu({
             change: (e, ui) => {
                 this.setPassengersAmount('child', ui.item.value);
             }
         });
 
-        $('.js-infants-amount').selectmenu({
+        this.options.booking.find('.js-infants-amount').selectmenu({
             change: (e, ui) => {
                 this.setPassengersAmount('infant', ui.item.value);
             }
         });
 
-        $('.js-submit').on('click', (e) => {
+        this.options.booking.find('.js-submit').on('click', (e) => {
             e.preventDefault();
             this.process();
         });
