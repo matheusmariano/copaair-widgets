@@ -29,11 +29,14 @@ $copaair-booking-datepicker-icon-position: 93% 50% !default;
 $booking-booking-autocomplete-icon: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDE0IDc5LjE1Njc5NywgMjAxNC8wOC8yMC0wOTo1MzowMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QzAyOUQ2Nzk4MzA1MTFFNDlDQ0NCQkI4RTJGOUI1MUQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QzAyOUQ2N0E4MzA1MTFFNDlDQ0NCQkI4RTJGOUI1MUQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpDMDI5RDY3NzgzMDUxMUU0OUNDQ0JCQjhFMkY5QjUxRCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpDMDI5RDY3ODgzMDUxMUU0OUNDQ0JCQjhFMkY5QjUxRCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PmeNXx4AAADJSURBVHjaYvz//z8DIcCYvC4BSMVDuQv/zw1aABbHpxmoyQFI7cch7cgEVRRAwHKQTRegGMZmYAJqFADS84G0Ah7ND4H4AxTD2Awgm0G2ggyoZyARMCEFRAA5mmF+EiBVMwuUNoAGnAGaISC/TSBKMyjgkNgwkAjECvg0M6AZggxABioC8QYk19hj04wMDgDxQahikAEOSOKNIHFcmguhpttDNSO7CGSIADCJGmLTDEo9+gSizgCUdEGaF0KdBwMPkFIVPvAAIMAAHUg0bm3F5nkAAAAASUVORK5CYII=') !default;
 $booking-booking-autocomplete-icon-position: 93% 50% !default;
 
+$copaair-booking-selectmenu-arrow-color: $copaair-booking-input-color !default;
+
 
 
 
 
 .copaair-booking {
+    position: relative;
     color: $copaair-booking-font-color;
     font-family: $copaair-booking-font-family;
     font-size: $copaair-booking-font-size;
@@ -51,6 +54,17 @@ $booking-booking-autocomplete-icon-position: 93% 50% !default;
 
         &::placeholder {
             opacity: 1;
+        }
+
+    }
+
+    /* Select menu widgets */
+    .ui-selectmenu-button {
+        background-color: $copaair-booking-input-bg-color;
+        color: $copaair-booking-input-color;
+
+        .ui-icon {
+            border-top-color: $copaair-booking-selectmenu-arrow-color;
         }
 
     }

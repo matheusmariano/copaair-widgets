@@ -19,6 +19,8 @@ $copaair-widget-menu-item-font-size: 11px !default;
 $copaair-widget-menu-item-color: #777 !default;
 $copaair-widget-menu-item-hover-bg: #e5ecf2 !default;
 $copaair-widget-menu-item-hover-color: #777 !default;
+$copaair-widget-menu-item-highlight-color: #004982 !default;
+$copaair-widget-menu-item-highlight-hover-color: $copaair-widget-menu-item-highlight-color !default;
 
 
 
@@ -52,8 +54,19 @@ $copaair-widget-menu-item-hover-color: #777 !default;
         font-size: $copaair-widget-menu-item-font-size;
 
         b {
-            color: #004982;
+            color: $copaair-widget-menu-item-highlight-color;
             font-weight: bold;
+        }
+
+        &.ui-state-focus,
+        &.ui-state-active {
+            background-color: $copaair-widget-menu-item-hover-bg;
+            color: $copaair-widget-menu-item-hover-color;
+
+            b {
+                color: $copaair-widget-menu-item-highlight-hover-color;
+            }
+
         }
 
     }
@@ -64,12 +77,6 @@ $copaair-widget-menu-item-hover-color: #777 !default;
         font-size: 0;
         line-height: 0;
         border-width: 1px 0 0;
-    }
-
-    .ui-state-focus,
-    .ui-state-active {
-        background-color: $copaair-widget-menu-item-hover-bg;
-        color: $copaair-widget-menu-item-hover-color;
     }
 
     /* left-aligned */
