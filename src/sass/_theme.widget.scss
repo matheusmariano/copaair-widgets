@@ -75,3 +75,12 @@ $copaair-widget-datepicker-icon-position: 93% 50% !default;
     }
 
 }
+
+.copaair-widget-close {
+    display: none;
+
+    .copaair-widget-open & {
+        display: block;
+    }
+
+}

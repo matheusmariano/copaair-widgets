@@ -126,23 +126,20 @@ class Booking {
      * Bind events related to booking interaction
      */
     bookingEvents() {
-        var $form = $('.copaair-booking');
-        var $toggle = $('.js-copaair-toggle');
+        var $booking = this.$booking;
+        var $toggle = this.$booking.find('.js-copaair-toggle');
 
         // Show bottom row when any input gets focus
-        this.$booking.on('focus.copaair', 'input', function(e) {
+        $booking.on('focus.copaair', 'input', function(e) {
+            $booking.addClass('copaair-widget-open');
             $toggle.removeClass('copaair-hidden');
         });
 
         // Clicking anywhere in the document hides bottom row
-        $(document).on('click.copaair', function(e) {
+        $booking.on('click.copaair', '.js-copaair-close', function(e) {
+            e.preventDefault();
+            $booking.removeClass('copaair-widget-open');
             $toggle.addClass('copaair-hidden');
-        });
-
-        // Stop propagation of clicks inside the form to prevent
-        // triggering top event.
-        this.$booking.on('click.copaair', function(e) {
-            e.stopPropagation();
         });
 
     }
