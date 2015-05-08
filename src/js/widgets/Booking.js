@@ -19,6 +19,7 @@ var defaults = {
         coupon: null,
         origin: null,
         destination: null,
+        destinationName: null,
         widgetPosition: { my: 'left bottom', at: 'left top' },
         templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
         languagePath: 'bower_components/copaair-widgets/lang/'
@@ -44,6 +45,7 @@ class Booking {
             'lang': this.options.lang,
             'origin': this.options.origin,
             'destination': this.options.destination,
+            'destinationName': this.options.destinationName, // temporary fix for static destination
             callback: (html) => {
                 this.$booking.html(html);
 
