@@ -6,15 +6,24 @@ var $ = require('jquery'),
     },
     defaults = {
         lang: 'es',
-        src: window.location.origin + '/bower_components/copaair-widgets/templates',
+        //src: window.location.origin + '/bower_components/copaair-widgets/templates',
         callback: function() {}
     }
 ;
+
+
 
 class Template
 {
 
     constructor(widget, options) {
+
+        if (!window.location.origin) {
+            window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+        }
+
+        defaults.src = window.location.origin + '/bower_components/copaair-widgets/templates';
+
         this.options = $.extend({}, defaults, options);
         if (typeof Handlebars !== 'undefined' && Handlebars !== null) {
             $.ajax({
