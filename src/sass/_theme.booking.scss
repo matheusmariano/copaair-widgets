@@ -6,6 +6,9 @@ $copaair-booking-font-color: $copaair-widget-font-color !default;
 $copaair-booking-font-size: $copaair-widget-font-size !default;
 $copaair-booking-font-family: $copaair-widget-font-family !default;
 
+$copaair-booking-preset-label: $copaair-booking-font-color !default;
+$copaair-booking-preset-label-destination: $copaair-booking-font-color !default;
+
 $copaair-booking-input-bg-color: $copaair-widget-input-bg-color !default;
 $copaair-booking-input-border: $copaair-widget-input-border !default;
 $copaair-booking-input-color: $copaair-widget-input-color !default;
@@ -86,6 +89,16 @@ $copaair-booking-selectmenu-arrow-color: $copaair-booking-input-color !default;
 
 }
 
+/**
+ * Origin/departure preset label
+ */
+.copaair-booking-preset-label {
+    color: $copaair-booking-preset-label;
+}
+
+.copaair-booking-preset-label-destination {
+    color: $copaair-booking-preset-label-destination;
+}
 
 
 /**

@@ -13,13 +13,18 @@
         </div
         ><div class="copaair-widget-layout__item">
             {{#if destination }}
-                {{ form.destination }} <span class="js-copaair-trans">{{ destinationName }}</span>
+                <div class="copaair-booking-preset-label">
+                    {{ form.destination }}
+                    <b class="copaair-booking-preset-label-destination  js-copaair-trans">
+                        {{ destinationName }}
+                    </b>
+                </div>
             {{ else }}
-            <input class="copaair-booking-autocomplete  copaair-form-control  js-booking-autocomplete"
-                   type="text"
-                   placeholder="{{ form.destination }}"
-                   data-input-field="destination"
-                   data-value="">
+                <input class="copaair-booking-autocomplete  copaair-form-control  js-booking-autocomplete"
+                       type="text"
+                       placeholder="{{ form.destination }}"
+                       data-input-field="destination"
+                       data-value="">
             {{/if}}
         </div
         ><div class="copaair-widget-layout__item">
