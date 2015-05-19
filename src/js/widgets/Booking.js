@@ -58,19 +58,15 @@ class Booking {
                 });
                 datepicker.render();
 
-
                 var formHelper = new FormHelper({
                     datepicker: datepicker,
                     origin: this.options.origin,
                     destination: this.options.destination,
-                    booking: this.$booking
+                    booking: this.$booking,
+                    d1: this.options.d1,
+                    lang: this.options.lang,
                 });
 
-                // set custom values d1 & coupon
-
-                if(this.options.d1) {
-                    formHelper.setD1(this.options.d1);
-                }
 
                 if(this.options.coupon) {
                     formHelper.setCoupon(this.options.coupon);

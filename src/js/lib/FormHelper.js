@@ -3,6 +3,7 @@ var $ = require('jquery'),
         lang: 'es',
         origin: 'all',
         destination: 'all',
+        d1: null,
         // required field to submit form
         // to copa
         inputs: {
@@ -30,7 +31,6 @@ var $ = require('jquery'),
             "inboundOption.originLocationCode": null,
             // // cabin class Business|Economy
             "cabinClass": "Economy",
-            // d1: null,
             lang: 'es'
         },
         formUrl: 'https://bookings.copaair.com/CMGS/' +
@@ -51,20 +51,19 @@ class FormHelper {
         // set defautls values
         this.setDefaultBounds();
         this.setDates(this.options.datepicker, {returns:true, departure:true});
-
+        this.options.inputs.lang = this.options.lang;
         // load events related with form helper and other modules
         this.events();
-        // console.log(this.options.inputs);
     }
 
 
 
     process() {
-        var httpQuery = $.param(this.options.inputs);
-        // console.log(httpQuery);
-        var url = this.options.formUrl;
 
+        var url = this.options.formUrl;
         var validation = this.validationError();
+        var httpQuery = $.param(this.options.inputs);
+        httpQuery += '&' + $.param({d1: this.options.d1});
 
         if (validation.error) {
             // handle validation error messages
@@ -142,8 +141,8 @@ class FormHelper {
         this.options.inputs.coupon = coupon;
     }
 
-    setD1(d1Value) {
-        this.options.inputs.d1 = d1Value;
+    setD1() {
+        this.options.inputs.d1 = this.options.d1;
     }
 
     validationError() {
@@ -153,6 +152,7 @@ class FormHelper {
         };
         var currentError;
         for (var input in this.options.inputs) {
+            console.log(this.options.inputs[input]);
             if(!this.options.inputs[input] && this.options.inputs[input] !== 0) {
                 currentError = {};
                 currentError.field = input;
