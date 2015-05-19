@@ -7,7 +7,8 @@
             "country": "País",
             "city": "Ciudad",
             "phone": "Móvil",
-            "subscribe": "Suscribir"
+            "subscribe": "Suscribir",
+            "birthday": "Fecha de nacimiento"
         }
     },
     "en": {
@@ -18,7 +19,8 @@
             "country": "Country",
             "city": "City",
             "phone": "Mobile",
-            "subscribe": "Subscribe"
+            "subscribe": "Subscribe",
+            "birthday": "Date of birth"
         }
     },
     "pt": {
@@ -29,7 +31,8 @@
             "country": "País",
             "city": "Cidade",
             "phone": "Celular",
-            "subscribe": "Inscrever-se"
+            "subscribe": "Inscrever-se",
+            "birthday": "Data de nascimento"
         }
     }
 }

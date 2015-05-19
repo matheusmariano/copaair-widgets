@@ -32,19 +32,21 @@
         <div class="copaair-widget-layout__item">
              <select class="copaair-signup-select  copaair-form-control  js-selectmenu js-country-selector"
                     id="signup-country-select"
-                    data-content="countries"
+                    data-content="countries" required
                     >
+                    <option>{{ form.country }}</option>
             </select>
         </div
         ><div class="copaair-widget-layout__item">
              <select class="copaair-signup-select  copaair-form-control  js-selectmenu js-city-selector"
                     id="signup-city-select"
-                    data-content="destinations"
+                    data-content="destinations" required
                     >
+                    <option>{{ form.city }}</option>
             </select>
         </div
         ><div class="copaair-widget-layout__item">
-            <input class="copaair-form-control  copaair-widget-datepicker  copaair-signup-datepicker-bday js-signup-date" placeholder="{{form.bday}}" type="text" required name="dob">
+            <input class="copaair-form-control  copaair-widget-datepicker  copaair-signup-datepicker-bday js-signup-date" placeholder="{{ form.birthday }}" type="text" required name="dob">
         </div
         ><div class="copaair-widget-layout__item">
         </div>
