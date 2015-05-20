@@ -67,9 +67,9 @@ class FormHelper {
         var httpQuery = $.param(this.options.inputs);
         httpQuery += '&' + $.param({d1: this.options.d1});
 
-        if (validation.error && typeof(_gaq) !== 'undefined') {
+        if (validation.error) {
             // handle validation error messages
-            if(this.options.analytics) {
+            if(this.options.analytics && && typeof(_gaq) !== 'undefined') {
                 ga("send", "event", this.options.bookingPage, "error", "User left required fields blank");
             }
         } else {
