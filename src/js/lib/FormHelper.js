@@ -159,7 +159,6 @@ class FormHelper {
         };
         var currentError;
         for (var input in this.options.inputs) {
-            console.log(this.options.inputs[input]);
             if(!this.options.inputs[input] && this.options.inputs[input] !== 0) {
                 currentError = {};
                 currentError.field = input;
