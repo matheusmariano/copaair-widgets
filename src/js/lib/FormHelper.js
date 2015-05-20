@@ -4,6 +4,7 @@ var $ = require('jquery'),
         origin: 'all',
         destination: 'all',
         d1: null,
+        bookingPage: 'Booking Engine',
         // required field to submit form
         // to copa
         inputs: {
@@ -65,12 +66,18 @@ class FormHelper {
         var httpQuery = $.param(this.options.inputs);
         httpQuery += '&' + $.param({d1: this.options.d1});
 
+
         if (validation.error) {
             // handle validation error messages
-            console.log(validation.bag);
+            if(ga) {
+                ga("send", "event", this.options.bookingPage, "error", "User left required fields blank");
+            }
         } else {
             // no errors, forward form values to copa
             // console.log(httpQuery);
+            if(ga){
+                ga("send", "event", this.options.bookingPage, "click", "Search flights");
+            }
             var searchWindow = window.open(url + httpQuery, '_blank');
             searchWindow.focus();
         }

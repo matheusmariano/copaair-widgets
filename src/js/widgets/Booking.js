@@ -65,6 +65,7 @@ class Booking {
                     booking: this.$booking,
                     d1: this.options.d1,
                     lang: this.options.lang,
+                    bookingPage: this.options.bookingPage
                 });
 
 
