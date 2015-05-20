@@ -64,8 +64,9 @@ class FlightControl {
            return cb(resourceValue);
         }
 
-        $.getJSON(this.options.api[resourceName], (data) => {
+        if (IE9Data) {
 
+            var data = IE9Data[resourceName];
             this.sortNames(data);
 
             if(this.options.storage) {
@@ -76,8 +77,27 @@ class FlightControl {
             resourceValue.count = data.length;
 
             cb(resourceValue);
-        });
+
+        } else {
+
+
+            $.getJSON(this.options.api[resourceName], (data) => {
+                this.sortNames(data);
+
+                if(this.options.storage) {
+                    storeWidthExpiration.set(resourceName, data, this.options.storageExpiration);
+                    storeWidthExpiration.set(resourceName + '.count', data.length, this.options.storageExpiration);
+                }
+                resourceValue.list = data;
+                resourceValue.count = data.length;
+
+                cb(resourceValue);
+            });
+        }
+
     }
+
+
 
     /**
      * Helper function to sort data

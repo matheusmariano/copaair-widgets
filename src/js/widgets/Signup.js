@@ -3,16 +3,16 @@ var Template = require('../lib/Template'),
     i18n = require('../../../lang/datepicker.json')
 ;
 
+var defaults = {
+    lang: 'es',
+    widgetPosition: { my: 'left bottom', at: 'left top' },
+
+};
+
 class Signup {
 
     constructor(element, options) {
         this.$form = $(element);
-
-        var defaults = {
-            lang: 'es',
-            widgetPosition: { my: 'left bottom', at: 'left top' },
-
-        };
 
         this.options = $.extend({}, defaults, options);
 
@@ -22,10 +22,12 @@ class Signup {
             callback: (html) => {
                 this.$form.html(html);
                 this.signupEvents();
+                var lang = this.options.lang;
 
-                this.$form.find('.js-selectmenu').each( function() {
+                this.$form.find('.js-selectmenu').each( function (){
+
                     var dataMenu = new DataMenu({
-                        lang: this.options.lang,
+                        lang: lang,
                         contentType: $(this).data('content'),
                         selector: $(this)
                     });

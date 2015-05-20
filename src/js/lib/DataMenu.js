@@ -17,19 +17,18 @@ class DataMenu
      * @param  {Object} options Custom options for this widget instance.
      */
     constructor(options) {
-        var defaults = {
-            lang: 'es',
-        };
 
         this.options = $.extend({}, defaults, options);
+        this._defaults = defaults;
 
         this.setup();
     }
 
     setup() {
+
         var flightControl = new FlightControl({ lang: this.options.lang });
 
-        flightControl.fetch(this.options.contentType, (data) => {
+        flightControl.fetch(this.options.contentType, (data, lang) => {
             // Format raw destinations to autocomplete structure
             this.options.source = this.format(data.list);
             this.render();
@@ -54,7 +53,6 @@ class DataMenu
      */
     format(list) {
         var result = [];
-
         $.each(list, (i, item) => {
             let option =
                 `<option value="${ item.id }">${ item.name[this.options.lang] }</option>`;
