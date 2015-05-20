@@ -16,10 +16,12 @@ var $ = require('jquery'),
 var defaults = {
         lang: 'es',
         d1: null,
+        bookingPage:null,
         coupon: null,
         origin: null,
         destination: null,
         destinationName: null,
+        analytics: false,
         widgetPosition: { my: 'left bottom', at: 'left top' },
         templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
         languagePath: 'bower_components/copaair-widgets/lang/'
@@ -38,9 +40,7 @@ class Booking {
         this.$booking = $(element);
 
         this.options = $.extend({}, defaults, options);
-
         this._defaults = defaults;
-
         new Template('booking', {
             'lang': this.options.lang,
             'origin': this.options.origin,
@@ -57,7 +57,6 @@ class Booking {
                     lang: this.options.lang,
                 });
                 datepicker.render();
-
                 var formHelper = new FormHelper({
                     datepicker: datepicker,
                     origin: this.options.origin,
@@ -65,6 +64,7 @@ class Booking {
                     booking: this.$booking,
                     d1: this.options.d1,
                     lang: this.options.lang,
+                    analytics: this.options.analytics,
                     bookingPage: this.options.bookingPage
                 });
 
