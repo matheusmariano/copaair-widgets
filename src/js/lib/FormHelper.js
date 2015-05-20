@@ -69,13 +69,13 @@ class FormHelper {
 
         if (validation.error) {
             // handle validation error messages
-            if(this.options.analytics && && typeof(_gaq) !== 'undefined') {
+            if(this.options.analytics && typeof(ga) !== 'undefined') {
                 ga("send", "event", this.options.bookingPage, "error", "User left required fields blank");
             }
         } else {
             // no errors, forward form values to copa
             // console.log(httpQuery);
-            if(this.options.analytics && typeof(_gaq) !== 'undefined'){
+            if(this.options.analytics && typeof(ga) !== 'undefined'){
                 ga("send", "event", this.options.bookingPage, "click", "Search flights");
             }
             var searchWindow = window.open(url + httpQuery, '_blank');

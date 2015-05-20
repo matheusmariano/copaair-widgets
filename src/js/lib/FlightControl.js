@@ -64,7 +64,7 @@ class FlightControl {
            return cb(resourceValue);
         }
 
-        if (IE9Data) {
+        if (typeof(IE9Data) !== 'undefined') {
 
             var data = IE9Data[resourceName];
             this.sortNames(data);
