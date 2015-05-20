@@ -12,6 +12,7 @@ $copaair-booking-preset-label-destination: $copaair-booking-font-color !default;
 $copaair-booking-input-bg-color: $copaair-widget-input-bg-color !default;
 $copaair-booking-input-border: $copaair-widget-input-border !default;
 $copaair-booking-input-color: $copaair-widget-input-color !default;
+$copaair-booking-input-placeholder-color: $copaair-booking-input-color !default;
 $copaair-booking-input-font-size: $copaair-widget-input-font-size !default;
 $copaair-booking-input-font-weight: $copaair-widget-input-font-weight !default;
 $copaair-booking-input-text-transform: $copaair-widget-input-text-transform !default;
@@ -56,6 +57,7 @@ $copaair-booking-selectmenu-arrow-color: $copaair-booking-input-color !default;
         text-transform: $copaair-booking-input-text-transform;
 
         &::placeholder {
+            color: $copaair-booking-input-color;
             opacity: 1;
         }
 
