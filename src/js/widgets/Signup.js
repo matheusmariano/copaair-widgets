@@ -114,6 +114,9 @@ class Signup {
             data: data
         }).done(function(res) {
             container.fadeOut();
+            if(typeof(ga) !== 'undefined') {
+                ga("send", "event", "Subscription Form", "subscribed", "User was subscribed");
+            }
         });
     }
 
