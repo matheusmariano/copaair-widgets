@@ -55,8 +55,7 @@ gulp.task('browserify', function() {
 
     var bundler = browserify({
         entries: ['./' + path.srcJs + '/index.js'],
-        transform: [babelify],
-        debug: true
+        transform: [babelify]
     });
 
     var bundle = function() {
