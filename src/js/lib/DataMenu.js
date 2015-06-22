@@ -3,6 +3,7 @@ var $ = require('jquery'),
 
     defaults = {
         lang: 'es',
+        data: null,
         contentType: 'countries',
         callback: function() {}
     }
@@ -26,23 +27,30 @@ class DataMenu
 
     setup() {
 
-        var flightControl = new FlightControl({ lang: this.options.lang });
+        if (!this.options.data) {
+            var flightControl = new FlightControl({ lang: this.options.lang });
 
-        flightControl.fetch(this.options.contentType, (data, lang) => {
-            // Format raw destinations to autocomplete structure
-            this.options.source = this.format(data.list);
-            this.render();
-            if (typeof cb === 'function') {
-                cb();
-            }
-        });
+            flightControl.fetch(this.options.contentType, (data, lang) => {
+                // Format raw destinations to autocomplete structure
+                this.options.source = this.format(data.list);
+                this.render();
+                if (typeof cb === 'function') {
+                    cb();
+                }
+            });
+        } else {
+            this.options.source = this.format(this.options.data);
+            this.render(true);
+        }
     }
 
-    render() {
+    render(newInput) {
+        if(newInput) {
+            $(this.options.selector).find('option').slice(1).remove();
+        }
         $.each(this.options.source, (i, item) => {
             $(this.options.selector).append(item.display);
         });
-
     }
 
     /**

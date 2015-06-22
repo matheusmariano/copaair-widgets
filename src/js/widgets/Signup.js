@@ -1,3 +1,4 @@
+require('store-js');
 var Template = require('../lib/Template'),
     DataMenu = require('../lib/DataMenu'),
     i18n = require('../../../lang/datepicker.json')
@@ -31,6 +32,7 @@ class Signup {
                         contentType: $(this).data('content'),
                         selector: $(this)
                     });
+
                 });
 
                 this.setupSelectMenus();
@@ -85,6 +87,22 @@ class Signup {
         $('.js-country-selector').selectmenu({
             change: (e, ui) => {
                 this.options.country = ui.item.value;
+
+                var destinations = store.get('destinations');
+                var selected = [];
+
+                for (var d in destinations.val)
+                {
+                    if (destinations.val[d].country == this.options.country) {
+                        selected.push(destinations.val[d]);
+                    }
+                }
+                var dataMenu = new DataMenu({
+                    lang: this.options.lang,
+                    data: selected,
+                    selector: $('.js-city-selector')
+                });
+                $('.js-city-selector').selectmenu("refresh");
             }
         });
 
