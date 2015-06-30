@@ -859,6 +859,12 @@ var FormHelper = (function () {
 
             var url = this.options.formUrl;
             var validation = this.validationError();
+            var coupon = this.options.booking.data('coupon');
+
+            if (coupon) {
+                this.setCoupon(coupon);
+            }
+
             var httpQuery = $.param(this.options.inputs);
             httpQuery += '&' + $.param({ d1: this.options.d1 });
 
