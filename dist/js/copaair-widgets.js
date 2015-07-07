@@ -1144,7 +1144,8 @@ var defaults = {
     analytics: false,
     widgetPosition: { my: 'left bottom', at: 'left top' },
     templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
-    languagePath: 'bower_components/copaair-widgets/lang/'
+    languagePath: 'bower_components/copaair-widgets/lang/',
+    onload: function onload() {}
 };
 
 var Booking = (function () {
@@ -1200,6 +1201,8 @@ var Booking = (function () {
 
                 // Bind events
                 _this.bookingEvents();
+
+                _this.options.onload();
             }
         });
     }
