@@ -10,9 +10,25 @@
             width: 20%;
         }
 
-        .copaair-booking-cabin {
-            display: block;
-            width: 100%;
+        .copaair-booking-promo-code-item {
+            display: none;
+        }
+
+        // Layout changes when form has promo code field
+        &.has-promo-code {
+
+            .copaair-booking-promo-code-item {
+                display: inline-block;
+            }
+
+            .copaair-widget-layout__item {
+                width: 16.66667%;
+            }
+
+            .copaair-booking-cabin {
+                width: 33.33333%;
+            }
+
         }
 
         .copaair-widget-close {

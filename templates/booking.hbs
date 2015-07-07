@@ -1,10 +1,10 @@
-<form class="copaair-booking  copaair-widget  copaair-theme-horizontal">
+<form class="copaair-booking  copaair-widget  copaair-theme-horizontal  has-promo-code">
     <div class="copaair-booking-top  copaair-widget-layout">
         <div class="copaair-widget-layout__item">
             {{#if origin }}
                 {{ form.origin }} <span class="js-copaair-trans">{{ origin }}</span>
             {{ else }}
-                <input class="copaair-form-control  js-booking-autocomplete"
+                <input class="copaair-form-control  copaair-booking-autocomplete  js-booking-autocomplete"
                        type="text"
                        placeholder="{{ form.origin }}"
                        data-input-field="origin"
@@ -33,30 +33,32 @@
         ><div class="copaair-widget-layout__item">
             <input class="copaair-form-control  copaair-widget-datepicker  copaair-booking-datepicker-return" placeholder="{{form.return}}" type="text" required>
         </div
+        ><div class="copaair-widget-layout__item  copaair-booking-promo-code-item">
+            <input class="copaair-form-control  copaair-booking-promo-code" placeholder="{{form.promo}}" type="text" value="AFFBFAN">
+        </div
         ><div class="copaair-widget-layout__item  copaair-hidden-palm">
             <input class="copaair-widget-submit  copaair-form-control js-submit" value="{{form.submit}}" type="submit">
         </div>
     </div>
     <div class="copaair-hidden  js-copaair-toggle">
         <div class="copaair-booking-bottom  copaair-widget-layout">
-            <div class="copaair-widget-layout__item">
-                <label class="copaair-booking-cabin" for="flight-class-economic">
+            <div class="copaair-booking-cabin  copaair-widget-layout__item">
+                <label>
                     <input class="cabinClass js-cabin-class"
                            value="Economy"
-                           id="flight-class-economic"
                            type="radio"
                            checked="checked"
                            name="cabinClass"
-                           required>
+                           required>&nbsp;
                     {{form.economic}}
-                </label
-                ><label class="copaair-booking-cabin" for="flight-class-business">
+                </label><br>
+
+                <label>
                     <input class="cabinClass js-cabin-class"
                            value="Business"
-                           id="flight-class-business"
                            type="radio"
                            name="cabinClass"
-                           required>
+                           required>&nbsp;
                     {{form.business}}
                 </label>
             </div
