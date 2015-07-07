@@ -165,6 +165,7 @@ module.exports={
             "return": "Regreso",
             "economic": "Clase Económica",
             "business": "Clase Ejecutiva",
+            "promo": "Código promocional",
             "submit": "Ver Vuelos",
             "adults": "Adultos",
             "children": "Niños",
@@ -183,6 +184,7 @@ module.exports={
             "return": "Return",
             "economic": "Economy Class",
             "business": "Business Class",
+            "promo": "Promotional code",
             "submit": "Find flights",
             "adults": "Adults",
             "children": "Children",
@@ -201,6 +203,7 @@ module.exports={
             "return": "Regresso",
             "economic": "Classe econômica",
             "business": "Classe Executiva",
+            "promo": "Código promocional",
             "submit": "Buscar voos",
             "adults": "Adultos",
             "children": "Crianças",
@@ -861,7 +864,7 @@ var FormHelper = (function () {
             var validation = this.validationError();
             var coupon = this.options.booking.data('coupon');
 
-            if (coupon) {
+            if (coupon && !this.options.inputs.coupon) {
                 this.setCoupon(coupon);
             }
 
@@ -1027,6 +1030,10 @@ var FormHelper = (function () {
                 change: function change(e, ui) {
                     _this.setPassengersAmount('infant', ui.item.value);
                 }
+            });
+
+            this.options.booking.find('.js-coupon-code-input').on('change', function (e) {
+                _this.setCoupon(e.target.value);
             });
 
             this.options.booking.find('.js-submit').on('click', function (e) {

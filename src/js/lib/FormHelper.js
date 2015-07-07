@@ -66,7 +66,7 @@ class FormHelper {
         var validation = this.validationError();
         var coupon = this.options.booking.data('coupon');
 
-        if(coupon) {
+        if(coupon && !this.options.inputs.coupon) {
             this.setCoupon(coupon);
         }
 
@@ -224,6 +224,10 @@ class FormHelper {
             change: (e, ui) => {
                 this.setPassengersAmount('infant', ui.item.value);
             }
+        });
+
+        this.options.booking.find('.js-coupon-code-input').on('change', (e) => {
+            this.setCoupon(e.target.value);
         });
 
         this.options.booking.find('.js-submit').on('click', (e) => {
