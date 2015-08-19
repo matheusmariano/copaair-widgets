@@ -1141,6 +1141,7 @@ var defaults = {
     origin: null,
     destination: null,
     destinationName: null,
+    originName: null,
     analytics: false,
     widgetPosition: { my: 'left bottom', at: 'left top' },
     templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
@@ -1170,6 +1171,7 @@ var Booking = (function () {
             'origin': this.options.origin,
             'destination': this.options.destination,
             'destinationName': this.options.destinationName, // temporary fix for static destination
+            'originName': this.options.originName, // temporary fix for static destination
             callback: function callback(html) {
                 _this.$booking.html(html);
 
