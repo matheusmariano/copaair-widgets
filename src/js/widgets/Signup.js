@@ -41,6 +41,7 @@ class Signup {
                     changeMonth: true,
                     changeYear: true,
                     format: 'dd/mm/yy',
+                    yearRange: '-100:+0',
                     beforeShow: function(input, isnt) {
                         setTimeout(function() {
                             isnt.dpDiv.position({

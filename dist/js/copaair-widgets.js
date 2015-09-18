@@ -1335,6 +1335,7 @@ var Signup = (function () {
                     changeMonth: true,
                     changeYear: true,
                     format: 'dd/mm/yy',
+                    yearRange: '-100:+0',
                     beforeShow: function beforeShow(input, isnt) {
                         setTimeout(function () {
                             isnt.dpDiv.position({
