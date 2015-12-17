@@ -10,7 +10,7 @@
         define(['jquery'], factory);
     } else if (typeof exports !== 'undefined') {
         // Node/CommonJS
-        factory((typeof window !== "undefined" ? window.jQuery : typeof global !== "undefined" ? global.jQuery : null));
+        factory((typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null));
     } else {
         // Browser globals
         factory(jQuery);
@@ -63,7 +63,7 @@
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./widgets/Booking":12,"./widgets/Signup":13}],2:[function(require,module,exports){
 (function (global){
-;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
+; var __browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /* Copyright (c) 2010-2013 Marcus Westin */
 "use strict";
 
@@ -99,9 +99,9 @@
   }, t.clear = function () {
     s.clear();
   }, t.getAll = function () {
-    var e = {};return (t.forEach(function (t, n) {
+    var e = {};return t.forEach(function (t, n) {
       e[t] = n;
-    }), e);
+    }), e;
   }, t.forEach = function (e) {
     for (var n = 0; n < s.length; n++) {
       var r = s.key(n);e(r, t.get(r));
@@ -116,19 +116,19 @@
       };
 
       try {
-        a = new ActiveXObject("htmlfile"), a.open(), a.write("<" + i + ">document.w=window</" + i + "><iframe src=\"/favicon.ico\"></iframe>"), a.close(), u = a.w.frames[0].document, s = u.createElement("div");
+        a = new ActiveXObject("htmlfile"), a.open(), a.write("<" + i + ">document.w=window</" + i + '><iframe src="/favicon.ico"></iframe>'), a.close(), u = a.w.frames[0].document, s = u.createElement("div");
       } catch (f) {
         s = n.createElement("div"), u = n.body;
       }
       l = function l(e) {
         return function () {
-          var n = Array.prototype.slice.call(arguments, 0);n.unshift(s), u.appendChild(s), s.addBehavior("#default#userData"), s.load(r);var i = e.apply(t, n);return (u.removeChild(s), i);
+          var n = Array.prototype.slice.call(arguments, 0);n.unshift(s), u.appendChild(s), s.addBehavior("#default#userData"), s.load(r);var i = e.apply(t, n);return u.removeChild(s), i;
         };
       };
 
       c = new RegExp("[!\"#$%&'()*+,/\\\\:;<=>?@[\\]^`{|}~]", "g");
       t.set = l(function (e, n, i) {
-        return (n = h(n), i === undefined ? t.remove(n) : (e.setAttribute(n, t.serialize(i)), e.save(r), i));
+        return n = h(n), i === undefined ? t.remove(n) : (e.setAttribute(n, t.serialize(i)), e.save(r), i);
       }), t.get = l(function (e, n, r) {
         n = h(n);var i = t.deserialize(e.getAttribute(n));return i === undefined ? r : i;
       }), t.remove = l(function (e, t) {
@@ -136,9 +136,9 @@
       }), t.clear = l(function (e) {
         var t = e.XMLDocument.documentElement.attributes;e.load(r);for (var n = 0, i; i = t[n]; n++) e.removeAttribute(i.name);e.save(r);
       }), t.getAll = function (e) {
-        var n = {};return (t.forEach(function (e, t) {
+        var n = {};return t.forEach(function (e, t) {
           n[e] = t;
-        }), n);
+        }), n;
       }, t.forEach = l(function (e, n) {
         var r = e.XMLDocument.documentElement.attributes;for (var i = 0, s; s = r[i]; ++i) n(s.name, t.deserialize(e.getAttribute(s.name)));
       });
@@ -297,7 +297,7 @@ module.exports={
             "country": "País",
             "city": "Cidade",
             "phone": "Celular",
-            "subscribe": "Inscrever-se",
+            "subscribe": "Cadastre-se",
             "birthday": "Data de nascimento"
         }
     }
@@ -311,7 +311,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var $ = (typeof window !== "undefined" ? window.jQuery : typeof global !== "undefined" ? global.jQuery : null),
+var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null),
     FlightControl = require('./FlightControl');
 
 /**
@@ -338,15 +338,20 @@ var Autocomplete = (function () {
         this.options = $.extend({}, defaults, options);
     }
 
+    /**
+     * Export
+     * @exports Autocomplete
+     */
+
+    /**
+     * Get destinations from Flight Control API
+     * @param  {Function} cb Callback when API call finishes
+     *                       and destinations are fetched
+     * @return {void}
+     */
+
     _createClass(Autocomplete, [{
         key: 'start',
-
-        /**
-         * Get destinations from Flight Control API
-         * @param  {Function} cb Callback when API call finishes
-         *                       and destinations are fetched
-         * @return {void}
-         */
         value: function start(cb) {
             var _this = this;
 
@@ -361,13 +366,13 @@ var Autocomplete = (function () {
                 }
             });
         }
-    }, {
-        key: 'render',
 
         /**
          * Render autocomplete widget
          * @param  {Object} element DOM element to attach widget to
          */
+    }, {
+        key: 'render',
         value: function render(element) {
             var $this = $(element).hide(),
                 sourceClasses = $this.attr('class'),
@@ -407,8 +412,6 @@ var Autocomplete = (function () {
 
             return this;
         }
-    }, {
-        key: 'format',
 
         /**
          * Formats destinations into the needed structure to be displayed
@@ -416,6 +419,8 @@ var Autocomplete = (function () {
          * @param  {Array} destinations Raw data returned from Flight Control
          * @return {Array}              Formatted destinations
          */
+    }, {
+        key: 'format',
         value: function format(destinations) {
             var _this2 = this;
 
@@ -439,10 +444,6 @@ var Autocomplete = (function () {
     return Autocomplete;
 })();
 
-/**
- * Export
- * @exports Autocomplete
- */
 module.exports = Autocomplete;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
@@ -454,7 +455,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var $ = (typeof window !== "undefined" ? window.jQuery : typeof global !== "undefined" ? global.jQuery : null),
+var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null),
     FlightControl = require('./FlightControl'),
     defaults = {
     lang: 'es',
@@ -511,8 +512,6 @@ var DataMenu = (function () {
                 $(_this2.options.selector).append(item.display);
             });
         }
-    }, {
-        key: 'format',
 
         /**
          * Formats data into the needed structure to be displayed
@@ -520,6 +519,8 @@ var DataMenu = (function () {
          * @param  {Array} destinations Raw data returned from Flight Control
          * @return {Array}              Formatted destinations
          */
+    }, {
+        key: 'format',
         value: function format(list) {
             var _this3 = this;
 
@@ -549,7 +550,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var $ = (typeof window !== "undefined" ? window.jQuery : typeof global !== "undefined" ? global.jQuery : null),
+var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null),
     i18n = require('../../../lang/datepicker.json'),
     defaults = {
     departureSelector: '.copaair-booking-datepicker-departure',
@@ -582,26 +583,26 @@ var Datepicker = (function () {
         this._defaults = defaults;
     }
 
+    /**
+     * Render date picker inside the booking form
+     * setups the defaults dates and language
+     */
+
     _createClass(Datepicker, [{
         key: 'render',
-
-        /**
-         * Render date picker inside the booking form
-         * setups the defaults dates and language
-         */
         value: function render() {
             this.setLocale();
             this.setDefaultDates();
             this.events();
         }
-    }, {
-        key: 'setDefaultDates',
 
         /**
          * Set defaults dates
          * this consist in set current date for departure
          * and one week later for return
          */
+    }, {
+        key: 'setDefaultDates',
         value: function setDefaultDates() {
             var dateRules = this.options.dateRules,
                 $departureField = $(this.options.departureSelector),
@@ -612,8 +613,8 @@ var Datepicker = (function () {
             $departureField.datepicker(this.options);
             $returnField.datepicker(this.options);
 
-            $departureField.datepicker('setDate', dateRules.today);
-            $returnField.datepicker('setDate', dateRules.weekLater);
+            $departureField.datepicker("setDate", dateRules.today);
+            $returnField.datepicker("setDate", dateRules.weekLater);
         }
     }, {
         key: 'events',
@@ -633,13 +634,13 @@ var Datepicker = (function () {
             var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
             $returnField.datepicker('setDate', weeklater);
         }
-    }, {
-        key: 'setLocale',
 
         /**
          * Configure datepicker depending on the
          * localization
          */
+    }, {
+        key: 'setLocale',
         value: function setLocale() {
             var regional = i18n[this.options.lang].regional;
             $.datepicker.setDefaults(regional);
@@ -660,15 +661,15 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var $ = (typeof window !== "undefined" ? window.jQuery : typeof global !== "undefined" ? global.jQuery : null);
+var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null);
 require('store-js');
 
 var defaults = {
     lang: 'es',
     api: {
-        destinations: 'https://flightcontrol.io/api/routes/destinations',
-        countries: 'https://flightcontrol.io/api/routes/countries',
-        regions: 'https://flightcontrol.io/api/routes/regions'
+        destinations: "https://flightcontrol.io/api/routes/destinations",
+        countries: "https://flightcontrol.io/api/routes/countries",
+        regions: "https://flightcontrol.io/api/routes/regions"
     },
     storageExpiration: 86400000,
     storage: true
@@ -712,16 +713,16 @@ var FlightControl = (function () {
         }
     }
 
+    /**
+     * Fetch data from flight controller
+     * based on the resource name
+     * @param  {string}   resourceName: destinations|countries|regions
+     * @param  {Function} cb  callback
+     * @return {Function} callback
+     */
+
     _createClass(FlightControl, [{
         key: 'fetch',
-
-        /**
-         * Fetch data from flight controller
-         * based on the resource name
-         * @param  {string}   resourceName: destinations|countries|regions
-         * @param  {Function} cb  callback
-         * @return {Function} callback
-         */
         value: function fetch(resourceName, cb) {
             var _this = this;
 
@@ -763,14 +764,14 @@ var FlightControl = (function () {
                 });
             }
         }
-    }, {
-        key: 'sortNames',
 
         /**
          * Helper function to sort data
          * based on language
          * @param  {Object} data
          */
+    }, {
+        key: 'sortNames',
         value: function sortNames(data) {
             var _this2 = this;
 
@@ -797,7 +798,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var $ = (typeof window !== "undefined" ? window.jQuery : typeof global !== "undefined" ? global.jQuery : null),
+var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null),
     defaults = {
     lang: 'es',
     origin: 'all',
@@ -808,30 +809,30 @@ var $ = (typeof window !== "undefined" ? window.jQuery : typeof global !== "unde
     // required field to submit form
     // to copa
     inputs: {
-        tripType: 'RT',
-        flexibleSearch: 'true',
-        pos: 'CMGS',
-        'guestTypes[0].type': 'ADT',
-        'guestTypes[1].type': 'CNN',
-        'guestTypes[2].type': 'INF',
-        'guestTypes[0].amount': 1,
-        'guestTypes[1].amount': 0,
-        'guestTypes[2].amount': 0,
-        'outboundOption.departureDay': null,
-        'outboundOption.departureMonth': null,
-        'outboundOption.departureYear': null,
-        'inboundOption.departureDay': null,
-        'inboundOption.departureMonth': null,
-        'inboundOption.departureYear': null,
+        tripType: "RT",
+        flexibleSearch: "true",
+        pos: "CMGS",
+        "guestTypes[0].type": "ADT",
+        "guestTypes[1].type": "CNN",
+        "guestTypes[2].type": "INF",
+        "guestTypes[0].amount": 1,
+        "guestTypes[1].amount": 0,
+        "guestTypes[2].amount": 0,
+        "outboundOption.departureDay": null,
+        "outboundOption.departureMonth": null,
+        "outboundOption.departureYear": null,
+        "inboundOption.departureDay": null,
+        "inboundOption.departureMonth": null,
+        "inboundOption.departureYear": null,
         // "coupon": null,
         // origin
-        'outboundOption.originLocationCode': null,
-        'inboundOption.destinationLocationCode': null,
+        "outboundOption.originLocationCode": null,
+        "inboundOption.destinationLocationCode": null,
         // destination
-        'outboundOption.destinationLocationCode': null,
-        'inboundOption.originLocationCode': null,
+        "outboundOption.destinationLocationCode": null,
+        "inboundOption.originLocationCode": null,
         // // cabin class Business|Economy
-        'cabinClass': 'Economy',
+        "cabinClass": "Economy",
         lang: 'es'
     },
     formUrl: 'https://bookings.copaair.com/CMGS/' + 'AirLowFareSearchExternal.do?'
@@ -874,13 +875,13 @@ var FormHelper = (function () {
             if (validation.error) {
                 // handle validation error messages
                 if (this.options.analytics && typeof ga !== 'undefined') {
-                    ga('send', 'event', this.options.bookingPage, 'error', 'User left required fields blank');
+                    ga("send", "event", this.options.bookingPage, "error", "User left required fields blank");
                 }
             } else {
                 // no errors, forward form values to copa
                 // console.log(httpQuery);
                 if (this.options.analytics && typeof ga !== 'undefined') {
-                    ga('send', 'event', this.options.bookingPage, 'click', 'Search flights');
+                    ga("send", "event", this.options.bookingPage, "click", "Search flights");
                 }
                 var searchWindow = window.open(url + httpQuery, '_blank');
                 searchWindow.focus();
@@ -903,13 +904,13 @@ var FormHelper = (function () {
         value: function setBounds(bound, location) {
 
             if (bound === 'origin') {
-                this.options.inputs['outboundOption.originLocationCode'] = location;
-                this.options.inputs['inboundOption.destinationLocationCode'] = location;
+                this.options.inputs["outboundOption.originLocationCode"] = location;
+                this.options.inputs["inboundOption.destinationLocationCode"] = location;
             }
 
             if (bound === 'destination') {
-                this.options.inputs['outboundOption.destinationLocationCode'] = location;
-                this.options.inputs['inboundOption.originLocationCode'] = location;
+                this.options.inputs["outboundOption.destinationLocationCode"] = location;
+                this.options.inputs["inboundOption.originLocationCode"] = location;
             }
         }
     }, {
@@ -920,34 +921,34 @@ var FormHelper = (function () {
                 returnDate = $(datepicker.options.returnSelector).datepicker('getDate');
 
             if (bounds.returns) {
-                this.options.inputs['inboundOption.departureDay'] = returnDate.getUTCDate();
-                this.options.inputs['inboundOption.departureMonth'] = returnDate.getMonth() + 1;
-                this.options.inputs['inboundOption.departureYear'] = returnDate.getFullYear();
+                this.options.inputs["inboundOption.departureDay"] = returnDate.getUTCDate();
+                this.options.inputs["inboundOption.departureMonth"] = returnDate.getMonth() + 1;
+                this.options.inputs["inboundOption.departureYear"] = returnDate.getFullYear();
             }
 
             if (bounds.departure) {
-                this.options.inputs['outboundOption.departureDay'] = departureDate.getUTCDate();
-                this.options.inputs['outboundOption.departureMonth'] = departureDate.getMonth() + 1;
-                this.options.inputs['outboundOption.departureYear'] = departureDate.getFullYear();
+                this.options.inputs["outboundOption.departureDay"] = departureDate.getUTCDate();
+                this.options.inputs["outboundOption.departureMonth"] = departureDate.getMonth() + 1;
+                this.options.inputs["outboundOption.departureYear"] = departureDate.getFullYear();
             }
         }
     }, {
         key: 'setCabinClass',
         value: function setCabinClass(target) {
-            this.options.inputs['cabinClass'] = $(target).val();
+            this.options.inputs["cabinClass"] = $(target).val();
         }
     }, {
         key: 'setPassengersAmount',
         value: function setPassengersAmount(type, value) {
             switch (type) {
                 case 'adult':
-                    this.options.inputs['guestTypes[0].amount'] = value;
+                    this.options.inputs["guestTypes[0].amount"] = value;
                     break;
                 case 'child':
-                    this.options.inputs['guestTypes[1].amount'] = value;
+                    this.options.inputs["guestTypes[1].amount"] = value;
                     break;
                 case 'infant':
-                    this.options.inputs['guestTypes[2].amount'] = value;
+                    this.options.inputs["guestTypes[2].amount"] = value;
                     break;
             }
         }
@@ -1057,8 +1058,8 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var $ = (typeof window !== "undefined" ? window.jQuery : typeof global !== "undefined" ? global.jQuery : null),
-    Handlebars = (typeof window !== "undefined" ? window.Handlebars : typeof global !== "undefined" ? global.Handlebars : null),
+var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null),
+    Handlebars = (typeof window !== "undefined" ? window['Handlebars'] : typeof global !== "undefined" ? global['Handlebars'] : null),
     i18n = {
     booking: require('../../../lang/booking.json'),
     signup: require('../../../lang/signup.json')
@@ -1076,7 +1077,7 @@ var Template = (function () {
         _classCallCheck(this, Template);
 
         if (!window.location.origin) {
-            window.location.origin = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+            window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
         }
 
         defaults.src = window.location.origin + '/bower_components/copaair-widgets/templates';
@@ -1122,7 +1123,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var $ = (typeof window !== "undefined" ? window.jQuery : typeof global !== "undefined" ? global.jQuery : null),
+var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null),
     Template = require('../lib/Template'),
     FlightControl = require('../lib/FlightControl'),
     Datepicker = require('../lib/Datepicker'),
@@ -1209,13 +1210,13 @@ var Booking = (function () {
         });
     }
 
+    /**
+     * Setup autocomplete destination widgets
+     * @see module:Autocomplete
+     */
+
     _createClass(Booking, [{
         key: 'initAutocomplete',
-
-        /**
-         * Setup autocomplete destination widgets
-         * @see module:Autocomplete
-         */
         value: function initAutocomplete(formHelper) {
             var _this2 = this;
 
@@ -1240,12 +1241,12 @@ var Booking = (function () {
                 autocomplete.render(_this2.$booking.find('.js-booking-autocomplete'));
             });
         }
-    }, {
-        key: 'setupSelectMenus',
 
         /**
          * Replaces select menus with custom UI widgets
          */
+    }, {
+        key: 'setupSelectMenus',
         value: function setupSelectMenus() {
             $('.js-selectmenu').selectmenu({
                 position: this.options.widgetPosition
@@ -1253,12 +1254,12 @@ var Booking = (function () {
 
             return this;
         }
-    }, {
-        key: 'bookingEvents',
 
         /**
          * Bind events related to booking interaction
          */
+    }, {
+        key: 'bookingEvents',
         value: function bookingEvents() {
             var $booking = this.$booking;
             var $toggle = this.$booking.find('.js-copaair-toggle');
@@ -1353,12 +1354,12 @@ var Signup = (function () {
         });
     }
 
+    /**
+     * Replaces select menus with custom UI widgets
+     */
+
     _createClass(Signup, [{
         key: 'setupSelectMenus',
-
-        /**
-         * Replaces select menus with custom UI widgets
-         */
         value: function setupSelectMenus() {
             $('.js-selectmenu').selectmenu({
                 position: this.options.widgetPosition
@@ -1402,7 +1403,7 @@ var Signup = (function () {
                         data: selected,
                         selector: $('.js-city-selector')
                     });
-                    $('.js-city-selector').selectmenu('refresh');
+                    $('.js-city-selector').selectmenu("refresh");
                 }
             });
 
@@ -1433,7 +1434,7 @@ var Signup = (function () {
             }).done(function (res) {
                 container.fadeOut();
                 if (typeof ga !== 'undefined') {
-                    ga('send', 'event', 'Subscription Form', 'subscribed', 'User was subscribed');
+                    ga("send", "event", "Subscription Form", "subscribed", "User was subscribed");
                 }
             });
         }
