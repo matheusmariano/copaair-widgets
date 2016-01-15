@@ -23,6 +23,7 @@ var defaults = {
         destinationName: null,
         originName:null,
         analytics: false,
+        collapsable: true,
         widgetPosition: { my: 'left bottom', at: 'left top' },
         templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
         languagePath: 'bower_components/copaair-widgets/lang/',
@@ -134,19 +135,22 @@ class Booking {
         var $booking = this.$booking;
         var $toggle = this.$booking.find('.js-copaair-toggle');
 
-        // Show bottom row when any input gets focus
-        $booking.on('focus.copaair', 'input', function(e) {
-            $booking.addClass('copaair-widget-open');
+        if (this.options.collapsable) {
+            // Show bottom row when any input gets focus
+            $booking.on('focus.copaair', 'input', function(e) {
+                $booking.addClass('copaair-widget-open');
+                $toggle.removeClass('copaair-hidden');
+            });
+
+            // Clicking anywhere in the document hides bottom row
+            $booking.on('click.copaair', '.js-copaair-close', function(e) {
+                e.preventDefault();
+                $booking.removeClass('copaair-widget-open');
+                $toggle.addClass('copaair-hidden');
+            });
+        } else {
             $toggle.removeClass('copaair-hidden');
-        });
-
-        // Clicking anywhere in the document hides bottom row
-        $booking.on('click.copaair', '.js-copaair-close', function(e) {
-            e.preventDefault();
-            $booking.removeClass('copaair-widget-open');
-            $toggle.addClass('copaair-hidden');
-        });
-
+        }
     }
 }
 

@@ -65,90 +65,82 @@
 (function (global){
 ; var __browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /* Copyright (c) 2010-2013 Marcus Westin */
-"use strict";
-
-(function (e) {
+"use strict";(function (e, t) {
+  typeof define == "function" && define.amd ? define([], t) : typeof exports == "object" ? module.exports = t() : e.store = t();
+})(undefined, function () {
   function o() {
     try {
-      return r in e && e[r];
-    } catch (t) {
+      return r in t && t[r];
+    } catch (e) {
       return !1;
     }
-  }var t = {},
-      n = e.document,
+  }var e = {},
+      t = typeof window != "undefined" ? window : global,
+      n = t.document,
       r = "localStorage",
       i = "script",
-      s;t.disabled = !1, t.version = "1.3.17", t.set = function (e, t) {}, t.get = function (e, t) {}, t.has = function (e) {
-    return t.get(e) !== undefined;
-  }, t.remove = function (e) {}, t.clear = function () {}, t.transact = function (e, n, r) {
-    r == null && (r = n, n = null), n == null && (n = {});var i = t.get(e, n);r(i), t.set(e, i);
-  }, t.getAll = function () {}, t.forEach = function () {}, t.serialize = function (e) {
+      s;e.disabled = !1, e.version = "1.3.20", e.set = function (e, t) {}, e.get = function (e, t) {}, e.has = function (t) {
+    return e.get(t) !== undefined;
+  }, e.remove = function (e) {}, e.clear = function () {}, e.transact = function (t, n, r) {
+    r == null && (r = n, n = null), n == null && (n = {});var i = e.get(t, n);r(i), e.set(t, i);
+  }, e.getAll = function () {}, e.forEach = function () {}, e.serialize = function (e) {
     return JSON.stringify(e);
-  }, t.deserialize = function (e) {
+  }, e.deserialize = function (e) {
     if (typeof e != "string") return undefined;try {
       return JSON.parse(e);
     } catch (t) {
       return e || undefined;
     }
-  };if (o()) s = e[r], t.set = function (e, n) {
-    return n === undefined ? t.remove(e) : (s.setItem(e, t.serialize(n)), n);
-  }, t.get = function (e, n) {
-    var r = t.deserialize(s.getItem(e));return r === undefined ? n : r;
-  }, t.remove = function (e) {
+  };if (o()) s = t[r], e.set = function (t, n) {
+    return n === undefined ? e.remove(t) : (s.setItem(t, e.serialize(n)), n);
+  }, e.get = function (t, n) {
+    var r = e.deserialize(s.getItem(t));return r === undefined ? n : r;
+  }, e.remove = function (e) {
     s.removeItem(e);
-  }, t.clear = function () {
+  }, e.clear = function () {
     s.clear();
-  }, t.getAll = function () {
-    var e = {};return t.forEach(function (t, n) {
-      e[t] = n;
-    }), e;
-  }, t.forEach = function (e) {
+  }, e.getAll = function () {
+    var t = {};return e.forEach(function (e, n) {
+      t[e] = n;
+    }), t;
+  }, e.forEach = function (t) {
     for (var n = 0; n < s.length; n++) {
-      var r = s.key(n);e(r, t.get(r));
+      var r = s.key(n);t(r, e.get(r));
     }
-  };else if (n.documentElement.addBehavior) {
-    var u, a;
-    var l, c;
-
-    (function () {
-      var h = function h(e) {
-        return e.replace(/^d/, "___$&").replace(c, "___");
+  };else if (n && n.documentElement.addBehavior) {
+    var u, a;try {
+      a = new ActiveXObject("htmlfile"), a.open(), a.write("<" + i + ">document.w=window</" + i + '><iframe src="/favicon.ico"></iframe>'), a.close(), u = a.w.frames[0].document, s = u.createElement("div");
+    } catch (f) {
+      s = n.createElement("div"), u = n.body;
+    }var l = function l(t) {
+      return function () {
+        var n = Array.prototype.slice.call(arguments, 0);n.unshift(s), u.appendChild(s), s.addBehavior("#default#userData"), s.load(r);var i = t.apply(e, n);return u.removeChild(s), i;
       };
-
-      try {
-        a = new ActiveXObject("htmlfile"), a.open(), a.write("<" + i + ">document.w=window</" + i + '><iframe src="/favicon.ico"></iframe>'), a.close(), u = a.w.frames[0].document, s = u.createElement("div");
-      } catch (f) {
-        s = n.createElement("div"), u = n.body;
-      }
-      l = function l(e) {
-        return function () {
-          var n = Array.prototype.slice.call(arguments, 0);n.unshift(s), u.appendChild(s), s.addBehavior("#default#userData"), s.load(r);var i = e.apply(t, n);return u.removeChild(s), i;
-        };
-      };
-
-      c = new RegExp("[!\"#$%&'()*+,/\\\\:;<=>?@[\\]^`{|}~]", "g");
-      t.set = l(function (e, n, i) {
-        return n = h(n), i === undefined ? t.remove(n) : (e.setAttribute(n, t.serialize(i)), e.save(r), i);
-      }), t.get = l(function (e, n, r) {
-        n = h(n);var i = t.deserialize(e.getAttribute(n));return i === undefined ? r : i;
-      }), t.remove = l(function (e, t) {
-        t = h(t), e.removeAttribute(t), e.save(r);
-      }), t.clear = l(function (e) {
-        var t = e.XMLDocument.documentElement.attributes;e.load(r);for (var n = 0, i; i = t[n]; n++) e.removeAttribute(i.name);e.save(r);
-      }), t.getAll = function (e) {
-        var n = {};return t.forEach(function (e, t) {
-          n[e] = t;
-        }), n;
-      }, t.forEach = l(function (e, n) {
-        var r = e.XMLDocument.documentElement.attributes;for (var i = 0, s; s = r[i]; ++i) n(s.name, t.deserialize(e.getAttribute(s.name)));
-      });
-    })();
+    },
+        c = new RegExp("[!\"#$%&'()*+,/\\\\:;<=>?@[\\]^`{|}~]", "g"),
+        h = function h(e) {
+      return e.replace(/^d/, "___$&").replace(c, "___");
+    };e.set = l(function (t, n, i) {
+      return n = h(n), i === undefined ? e.remove(n) : (t.setAttribute(n, e.serialize(i)), t.save(r), i);
+    }), e.get = l(function (t, n, r) {
+      n = h(n);var i = e.deserialize(t.getAttribute(n));return i === undefined ? r : i;
+    }), e.remove = l(function (e, t) {
+      t = h(t), e.removeAttribute(t), e.save(r);
+    }), e.clear = l(function (e) {
+      var t = e.XMLDocument.documentElement.attributes;e.load(r);for (var n = t.length - 1; n >= 0; n--) e.removeAttribute(t[n].name);e.save(r);
+    }), e.getAll = function (t) {
+      var n = {};return e.forEach(function (e, t) {
+        n[e] = t;
+      }), n;
+    }, e.forEach = l(function (t, n) {
+      var r = t.XMLDocument.documentElement.attributes;for (var i = 0, s; s = r[i]; ++i) n(s.name, e.deserialize(t.getAttribute(s.name)));
+    });
   }try {
-    var p = "__storejs__";t.set(p, p), t.get(p) != p && (t.disabled = !0), t.remove(p);
+    var p = "__storejs__";e.set(p, p), e.get(p) != p && (e.disabled = !0), e.remove(p);
   } catch (f) {
-    t.disabled = !0;
-  }t.enabled = !t.disabled, typeof module != "undefined" && module.exports && this.module !== module ? module.exports = t : typeof define == "function" && define.amd ? define(t) : e.store = t;
-})(Function("return this")());
+    e.disabled = !0;
+  }return e.enabled = !e.disabled, e;
+});
 
 ; browserify_shim__define__module__export__(typeof store != "undefined" ? store : window.store);
 
@@ -1144,6 +1136,7 @@ var defaults = {
     destinationName: null,
     originName: null,
     analytics: false,
+    collapsable: true,
     widgetPosition: { my: 'left bottom', at: 'left top' },
     templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
     languagePath: 'bower_components/copaair-widgets/lang/',
@@ -1264,18 +1257,22 @@ var Booking = (function () {
             var $booking = this.$booking;
             var $toggle = this.$booking.find('.js-copaair-toggle');
 
-            // Show bottom row when any input gets focus
-            $booking.on('focus.copaair', 'input', function (e) {
-                $booking.addClass('copaair-widget-open');
-                $toggle.removeClass('copaair-hidden');
-            });
+            if (this.options.collapsable) {
+                // Show bottom row when any input gets focus
+                $booking.on('focus.copaair', 'input', function (e) {
+                    $booking.addClass('copaair-widget-open');
+                    $toggle.removeClass('copaair-hidden');
+                });
 
-            // Clicking anywhere in the document hides bottom row
-            $booking.on('click.copaair', '.js-copaair-close', function (e) {
-                e.preventDefault();
-                $booking.removeClass('copaair-widget-open');
-                $toggle.addClass('copaair-hidden');
-            });
+                // Clicking anywhere in the document hides bottom row
+                $booking.on('click.copaair', '.js-copaair-close', function (e) {
+                    e.preventDefault();
+                    $booking.removeClass('copaair-widget-open');
+                    $toggle.addClass('copaair-hidden');
+                });
+            } else {
+                $toggle.removeClass('copaair-hidden');
+            }
         }
     }]);
 
