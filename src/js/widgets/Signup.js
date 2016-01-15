@@ -6,8 +6,8 @@ var Template = require('../lib/Template'),
 
 var defaults = {
     lang: 'es',
+    nativeSelect: false,
     widgetPosition: { my: 'left bottom', at: 'left top' },
-
 };
 
 class Signup {
@@ -63,9 +63,11 @@ class Signup {
      * Replaces select menus with custom UI widgets
      */
     setupSelectMenus() {
-        $('.js-selectmenu').selectmenu({
-            position: this.options.widgetPosition
-        });
+        if (! this.options.nativeSelect) {
+            this.$form.find('.js-selectmenu').selectmenu({
+                position: this.options.widgetPosition
+            });
+        }
 
         return this;
     }

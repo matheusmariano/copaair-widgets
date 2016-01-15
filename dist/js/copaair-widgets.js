@@ -1251,7 +1251,7 @@ var Booking = (function () {
         key: 'setupSelectMenus',
         value: function setupSelectMenus() {
             if (!this.options.nativeSelect) {
-                $('.js-selectmenu').selectmenu({
+                this.$booking.find('.js-selectmenu').selectmenu({
                     position: this.options.widgetPosition
                 });
             }
@@ -1307,8 +1307,8 @@ var Template = require('../lib/Template'),
 
 var defaults = {
     lang: 'es',
+    nativeSelect: false,
     widgetPosition: { my: 'left bottom', at: 'left top' }
-
 };
 
 var Signup = (function () {
@@ -1369,9 +1369,11 @@ var Signup = (function () {
     _createClass(Signup, [{
         key: 'setupSelectMenus',
         value: function setupSelectMenus() {
-            $('.js-selectmenu').selectmenu({
-                position: this.options.widgetPosition
-            });
+            if (!this.options.nativeSelect) {
+                this.$form.find('.js-selectmenu').selectmenu({
+                    position: this.options.widgetPosition
+                });
+            }
 
             return this;
         }
