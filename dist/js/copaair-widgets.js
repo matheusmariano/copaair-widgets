@@ -1145,6 +1145,7 @@ var defaults = {
     originName: null,
     analytics: false,
     collapsable: true,
+    nativeSelect: false,
     widgetPosition: { my: 'left bottom', at: 'left top' },
     templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
     languagePath: 'bower_components/copaair-widgets/lang/',
@@ -1249,9 +1250,11 @@ var Booking = (function () {
     }, {
         key: 'setupSelectMenus',
         value: function setupSelectMenus() {
-            $('.js-selectmenu').selectmenu({
-                position: this.options.widgetPosition
-            });
+            if (!this.options.nativeSelect) {
+                $('.js-selectmenu').selectmenu({
+                    position: this.options.widgetPosition
+                });
+            }
 
             return this;
         }
