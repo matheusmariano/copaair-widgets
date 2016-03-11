@@ -114,10 +114,8 @@ class Booking {
 
         // Build
         autocomplete.start(() => {
-            const bookingAutocomplete = this.$booking.find('.js-booking-autocomplete');
-
-            $.each(bookingAutocomplete, (i, bookingfield) => {
-                autocomplete.render(bookingfield);
+            this.$booking.find('.js-booking-autocomplete').each(function() {
+                autocomplete.render(this);
             });
         });
     }
