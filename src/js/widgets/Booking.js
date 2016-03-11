@@ -118,7 +118,7 @@ class Booking {
 
             $.each(bookingAutocomplete, (i, bookingfield) => {
                 autocomplete.render(bookingfield);
-            }
+            });
         });
     }
 

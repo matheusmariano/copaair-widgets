@@ -1240,7 +1240,11 @@ var Booking = (function () {
 
             // Build
             autocomplete.start(function () {
-                autocomplete.render(_this2.$booking.find('.js-booking-autocomplete'));
+                var bookingAutocomplete = _this2.$booking.find('.js-booking-autocomplete');
+
+                $.each(bookingAutocomplete, function (i, bookingfield) {
+                    autocomplete.render(bookingfield);
+                });
             });
         }
 
