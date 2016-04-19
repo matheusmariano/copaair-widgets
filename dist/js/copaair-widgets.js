@@ -413,13 +413,13 @@ var Autocomplete = (function () {
             };
 
             if (this.options.destinationSelected && dataInput === 'destination') {
-                $input.autocomplete('search', this.options.destinationSelected).click();
+                $input.autocomplete('search', this.options.destinationSelected);
                 var $selected = $input.autocomplete('widget');
                 $($selected[0].children[0]).click();
             }
 
             if (this.options.originSelected && dataInput === 'origin') {
-                $input.autocomplete('search', this.options.originSelected).click();
+                $input.autocomplete('search', this.options.originSelected);
                 var $selected = $input.autocomplete('widget');
                 $($selected[0].children[0]).click();
             }
