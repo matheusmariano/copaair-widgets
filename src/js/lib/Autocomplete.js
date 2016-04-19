@@ -18,6 +18,8 @@ class Autocomplete
             delay: 0,
             lang: 'es',
             minLength: 0,
+            originSelected:false,
+            destinationSelected: false,
         };
 
         this.options = $.extend({}, defaults, options);
@@ -86,13 +88,25 @@ class Autocomplete
                 .appendTo(ul);
         };
 
-        // Custom filtering function
+                // Custom filtering function
         $.ui.autocomplete.filter = function autoCompleteFilter(array, term) {
             var matcher = new RegExp('\\b' + $.ui.autocomplete.escapeRegex(term), 'i');
             return $.grep(array, function (value) {
                 return matcher.test(value.label || value.value || value);
             });
         };
+
+        if (this.options.destinationSelected && dataInput === 'destination') {
+            $input.autocomplete('search', this.options.destinationSelected).click();
+            const $selected = $input.autocomplete('widget');
+            $($selected[0].children[0]).click();
+        }
+
+        if (this.options.originSelected && dataInput === 'origin') {
+            $input.autocomplete('search', this.options.originSelected).click();
+            const $selected = $input.autocomplete('widget');
+            $($selected[0].children[0]).click();
+        }
 
         return this;
     }

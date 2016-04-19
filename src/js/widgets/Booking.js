@@ -28,6 +28,8 @@ var defaults = {
         widgetPosition: { my: 'left bottom', at: 'left top' },
         templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
         languagePath: 'bower_components/copaair-widgets/lang/',
+        originSelected:false,
+        destinationSelected: false,
         onload: function(){}
     }
 ;
@@ -99,6 +101,8 @@ class Booking {
         // Init class with options
         var autocomplete = new Autocomplete({
             lang: this.options.lang,
+            originSelected: this.options.originSelected,
+            destinationSelected: this.options.destinationSelected,
             select: function (e, ui) {
                 e.preventDefault();
                 e.stopPropagation();

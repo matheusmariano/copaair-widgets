@@ -332,7 +332,9 @@ var Autocomplete = (function () {
         var defaults = {
             delay: 0,
             lang: 'es',
-            minLength: 0
+            minLength: 0,
+            originSelected: false,
+            destinationSelected: false
         };
 
         this.options = $.extend({}, defaults, options);
@@ -409,6 +411,18 @@ var Autocomplete = (function () {
                     return matcher.test(value.label || value.value || value);
                 });
             };
+
+            if (this.options.destinationSelected && dataInput === 'destination') {
+                $input.autocomplete('search', this.options.destinationSelected).click();
+                var $selected = $input.autocomplete('widget');
+                $($selected[0].children[0]).click();
+            }
+
+            if (this.options.originSelected && dataInput === 'origin') {
+                $input.autocomplete('search', this.options.originSelected).click();
+                var $selected = $input.autocomplete('widget');
+                $($selected[0].children[0]).click();
+            }
 
             return this;
         }
@@ -1149,6 +1163,8 @@ var defaults = {
     widgetPosition: { my: 'left bottom', at: 'left top' },
     templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
     languagePath: 'bower_components/copaair-widgets/lang/',
+    originSelected: false,
+    destinationSelected: false,
     onload: function onload() {}
 };
 
@@ -1225,6 +1241,8 @@ var Booking = (function () {
             // Init class with options
             var autocomplete = new Autocomplete({
                 lang: this.options.lang,
+                originSelected: this.options.originSelected,
+                destinationSelected: this.options.destinationSelected,
                 select: function select(e, ui) {
                     e.preventDefault();
                     e.stopPropagation();
