@@ -1,146 +1,142 @@
-require('store-js');
-var Template = require('../lib/Template'),
-    DataMenu = require('../lib/DataMenu'),
-    i18n = require('../../../lang/datepicker.json')
-;
+import $ from 'jquery';
+import Template from '../lib/Template';
+import DataMenu from '../lib/DataMenu';
+import 'store-js';
 
-var defaults = {
-    lang: 'es',
-    nativeSelect: false,
-    widgetPosition: { my: 'left bottom', at: 'left top' },
+const ga = window.ga;
+const defaults = {
+  lang: 'es',
+  nativeSelect: false,
+  widgetPosition: {
+    my: 'left bottom',
+    at: 'left top',
+  },
 };
 
 class Signup {
 
-    constructor(element, options) {
-        this.$form = $(element);
+  constructor(element, options) {
+    this.$form = $(element);
+    this.options = $.extend({}, defaults, options);
 
-        this.options = $.extend({}, defaults, options);
+    // Load template
+    return new Template('signup', {
+      lang: this.options.lang,
+      callback: (html) => {
+        this.$form.html(html);
+        this.signupEvents();
+        const lang = this.options.lang;
 
-        // Load template
-        new Template('signup', {
-            'lang': this.options.lang,
-            callback: (html) => {
-                this.$form.html(html);
-                this.signupEvents();
-                var lang = this.options.lang;
-
-                this.$form.find('.js-selectmenu').each( function (){
-
-                    var dataMenu = new DataMenu({
-                        lang: lang,
-                        contentType: $(this).data('content'),
-                        selector: $(this)
-                    });
-
-                });
-
-                this.setupSelectMenus();
-
-                $('.js-signup-date').datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    format: 'dd/mm/yy',
-                    yearRange: '-100:+0',
-                    beforeShow: function(input, isnt) {
-                        setTimeout(function() {
-                            isnt.dpDiv.position({
-                                my: 'left bottom',
-                                at: 'left top',
-                                of: input
-                            });
-                        }, 0);
-                    }
-                });
-
-                var regional = i18n[this.options.lang].regional;
-                $.datepicker.regional;
-            }
+        this.$form.find('.js-selectmenu').each(function signupDataMenu() {
+          return new DataMenu({
+            lang,
+            contentType: $(this).data('content'),
+            selector: $(this),
+          });
         });
+
+        this.setupSelectMenus();
+
+        $('.js-signup-date').datepicker({
+          changeMonth: true,
+          changeYear: true,
+          format: 'dd/mm/yy',
+          yearRange: '-100:+0',
+          beforeShow(input, isnt) {
+            setTimeout(() => {
+              isnt.dpDiv.position({
+                my: 'left bottom',
+                at: 'left top',
+                of: input,
+              });
+            }, 0);
+          },
+        });
+      },
+    });
+  }
+
+  /**
+   * Replaces select menus with custom UI widgets
+   */
+  setupSelectMenus() {
+    if (! this.options.nativeSelect) {
+      this.$form.find('.js-selectmenu').selectmenu({
+        position: this.options.widgetPosition,
+      });
     }
 
-    /**
-     * Replaces select menus with custom UI widgets
-     */
-    setupSelectMenus() {
-        if (! this.options.nativeSelect) {
-            this.$form.find('.js-selectmenu').selectmenu({
-                position: this.options.widgetPosition
-            });
+    return this;
+  }
+
+  signupEvents() {
+    const $form = this.$form;
+    const $toggle = this.$form.find('.js-copaair-toggle');
+
+    // Show bottom row when any input gets focus
+    $form.on('focus.copaair', 'input', () => {
+      $form.addClass('copaair-widget-open');
+      $toggle.removeClass('copaair-hidden');
+    });
+
+    $form.on('submit', (e) => {
+      e.preventDefault();
+      this.submitForm(e.target);
+    });
+
+    $('.js-country-selector').selectmenu({
+      change(e, ui) {
+        this.options.country = ui.item.value;
+
+        const destinations = store.get('destinations');
+        const selected = [];
+
+        for (const d in destinations.val) {
+          if (destinations.val[d].country === this.options.country) {
+            selected.push(destinations.val[d]);
+          }
         }
 
-        return this;
-    }
+        $('.js-city-selector').selectmenu('refresh');
 
-    signupEvents() {
-        var $form = this.$form;
-        var $toggle = this.$form.find('.js-copaair-toggle');
-
-        // Show bottom row when any input gets focus
-        $form.on('focus.copaair', 'input', function(e) {
-            $form.addClass('copaair-widget-open');
-            $toggle.removeClass('copaair-hidden');
+        return new DataMenu({
+          lang: this.options.lang,
+          data: selected,
+          selector: $('.js-city-selector'),
         });
+      },
+    });
 
-        $form.on('submit', (e) => {
-            e.preventDefault();
-            this.submitForm(e.target);
-        })
+    $('.js-city-selector').selectmenu({
+      change(e, ui) {
+        this.options.city = ui.item.value;
+      },
+    });
+  }
 
-        $('.js-country-selector').selectmenu({
-            change: (e, ui) => {
-                this.options.country = ui.item.value;
+  submitForm(target) {
+    const $form = $(target);
 
-                var destinations = store.get('destinations');
-                var selected = [];
+    const data = $form.serializeObject();
+    data.fullname = `${data.first_name} ${data.last_name}`;
+    data.source = this.options.source;
+    data.language = this.options.lang.toUpperCase();
+    data.city = this.options.city;
+    data.country = this.options.country;
 
-                for (var d in destinations.val)
-                {
-                    if (destinations.val[d].country == this.options.country) {
-                        selected.push(destinations.val[d]);
-                    }
-                }
-                var dataMenu = new DataMenu({
-                    lang: this.options.lang,
-                    data: selected,
-                    selector: $('.js-city-selector')
-                });
-                $('.js-city-selector').selectmenu("refresh");
-            }
-        });
+    const container = this.options.container;
 
-        $('.js-city-selector').selectmenu({
-            change: (e, ui) => {
-                this.options.city = ui.item.value;
-            }
-        });
-
-    }
-
-    submitForm(target) {
-        var $form = $(target);
-
-        var data = $form.serializeObject();
-        data.fullname = data.first_name + ' ' + data.last_name;
-        data.source = this.options.source;
-        data.language = this.options.lang.toUpperCase();
-        data.city = this.options.city;
-        data.country = this.options.country;
-
-        var container = this.options.container;
-
-        $.ajax({
-            type: 'POST',
-            url: 'https://flightcontrol.io/api/signup/add',
-            data: data
-        }).done(function(res) {
-            container.fadeOut();
-            if(typeof(ga) !== 'undefined') {
-                ga("send", "event", "Subscription Form", "subscribed", "User was subscribed");
-            }
-        });
-    }
-
+    $.ajax({
+      data,
+      type: 'POST',
+      url: 'https://flightcontrol.io/api/signup/add',
+    }).done(() => {
+      container.fadeOut();
+      if (typeof(ga) !== 'undefined') {
+        ga('send', 'event', 'Subscription Form', 'subscribed', 'User was subscribed');
+      }
+    });
+  }
 }
 
-module.exports = Signup;
+export default Signup;

@@ -1,72 +1,9 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (global){
-'use strict';
-
-(function (factory) {
-    'use strict';
-
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['jquery'], factory);
-    } else if (typeof exports !== 'undefined') {
-        // Node/CommonJS
-        factory((typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null));
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
-})(function ($) {
-    'use strict';
-
-    var Booking = require('./widgets/Booking'),
-        Signup = require('./widgets/Signup');
-
-    /**
-     * Bind widgets to jQuery object prototype.
-     *
-     * @param  {Object} options Options passed to override defaults.
-     * @return {Object}         Current object instance
-     */
-    $.fn.copaairBooking = function copaairBooking(options) {
-        return this.each(function () {
-            if (!$.data(this, 'plugin_copaairBooking')) {
-                $.data(this, 'plugin_copaairBooking', new Booking(this, options));
-            }
-        });
-    };
-
-    $.fn.copaairSignup = function copaairSignup(options) {
-        return this.each(function () {
-            if (!$.data(this, 'plugin_copaairSignup')) {
-                $.data(this, 'plugin_copaairSignup', new Signup(this, options));
-            }
-        });
-    };
-
-    $.fn.serializeObject = function () {
-        var o = {};
-        var a = this.serializeArray();
-        $.each(a, function () {
-            if (o[this.name] !== undefined) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
-                }
-                o[this.name].push(this.value || '');
-            } else {
-                o[this.name] = this.value || '';
-            }
-        });
-        return o;
-    };
-});
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./widgets/Booking":12,"./widgets/Signup":13}],2:[function(require,module,exports){
-(function (global){
 ; var __browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
-/* Copyright (c) 2010-2013 Marcus Westin */
 "use strict";
 
+/* Copyright (c) 2010-2013 Marcus Westin */
 (function (e) {
   function o() {
     try {
@@ -134,13 +71,17 @@
       }), t.remove = l(function (e, t) {
         t = h(t), e.removeAttribute(t), e.save(r);
       }), t.clear = l(function (e) {
-        var t = e.XMLDocument.documentElement.attributes;e.load(r);for (var n = 0, i; i = t[n]; n++) e.removeAttribute(i.name);e.save(r);
+        var t = e.XMLDocument.documentElement.attributes;e.load(r);for (var n = 0, i; i = t[n]; n++) {
+          e.removeAttribute(i.name);
+        }e.save(r);
       }), t.getAll = function (e) {
         var n = {};return t.forEach(function (e, t) {
           n[e] = t;
         }), n;
       }, t.forEach = l(function (e, n) {
-        var r = e.XMLDocument.documentElement.attributes;for (var i = 0, s; s = r[i]; ++i) n(s.name, t.deserialize(e.getAttribute(s.name)));
+        var r = e.XMLDocument.documentElement.attributes;for (var i = 0, s; s = r[i]; ++i) {
+          n(s.name, t.deserialize(e.getAttribute(s.name)));
+        }
       });
     })();
   }try {
@@ -155,7 +96,7 @@
 }).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 module.exports={
     "es": {
         "form": {
@@ -216,7 +157,7 @@ module.exports={
     }
 }
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 module.exports={
     "es": {
         "regional": {
@@ -263,7 +204,7 @@ module.exports={
     }
 }
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 module.exports={
     "es": {
         "form": {
@@ -303,16 +244,100 @@ module.exports={
     }
 }
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 (function (global){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _Booking = require('./widgets/Booking');
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+var _Booking2 = _interopRequireDefault(_Booking);
 
-var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null),
-    FlightControl = require('./FlightControl');
+var _Signup = require('./widgets/Signup');
+
+var _Signup2 = _interopRequireDefault(_Signup);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(function (factory) {
+  'use strict';
+
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['jquery'], factory);
+  } else if (typeof exports !== 'undefined') {
+    // Node/CommonJS
+    factory((typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null));
+  } else {
+    // Browser globals
+    factory(jQuery);
+  }
+})(function ($) {
+  'use strict';
+
+  /**
+   * Bind widgets to jQuery object prototype.
+   *
+   * @param  {Object} options Options passed to override defaults.
+   * @return {Object}         Current object instance
+   */
+
+  $.fn.copaairBooking = function copaairBooking(options) {
+    return this.each(function () {
+      if (!$.data(this, 'plugin_copaairBooking')) {
+        $.data(this, 'plugin_copaairBooking', new _Booking2.default(this, options));
+      }
+    });
+  };
+
+  $.fn.copaairSignup = function copaairSignup(options) {
+    return this.each(function () {
+      if (!$.data(this, 'plugin_copaairSignup')) {
+        $.data(this, 'plugin_copaairSignup', new _Signup2.default(this, options));
+      }
+    });
+  };
+
+  $.fn.serializeObject = function () {
+    var o = {};
+    var a = this.serializeArray();
+
+    $.each(a, function () {
+      if (o[this.name] !== undefined) {
+        if (!o[this.name].push) {
+          o[this.name] = [o[this.name]];
+        }
+        o[this.name].push(this.value || '');
+      } else {
+        o[this.name] = this.value || '';
+      }
+    });
+
+    return o;
+  };
+});
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./widgets/Booking":12,"./widgets/Signup":13}],6:[function(require,module,exports){
+(function (global){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _FlightControl = require('./FlightControl');
+
+var _FlightControl2 = _interopRequireDefault(_FlightControl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
  * Autocomplete widget with list of Copa's destinations
@@ -320,373 +345,417 @@ var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "u
  * @class
  */
 
-var Autocomplete = (function () {
-    /**
-     * Constructor
-     * @param  {Object} options Custom options for this widget instance.
-     */
+var Autocomplete = function () {
+  /**
+   * Constructor
+   * @param  {Object} options Custom options for this widget instance.
+   */
 
-    function Autocomplete(options) {
-        _classCallCheck(this, Autocomplete);
+  function Autocomplete(options) {
+    _classCallCheck(this, Autocomplete);
 
-        var defaults = {
-            delay: 0,
-            lang: 'es',
-            minLength: 0,
-            originSelected: false,
-            destinationSelected: false
-        };
+    var defaults = {
+      delay: 0,
+      lang: 'es',
+      minLength: 0,
+      originSelected: false,
+      destinationSelected: false
+    };
 
-        this.options = $.extend({}, defaults, options);
+    this.options = _jquery2.default.extend({}, defaults, options);
+  }
+
+  /**
+   * Get destinations from Flight Control API
+   * @param  {Function} cb Callback when API call finishes
+   *                       and destinations are fetched
+   * @return {void}
+   */
+
+
+  _createClass(Autocomplete, [{
+    key: 'start',
+    value: function start(cb) {
+      var _this = this;
+
+      var flightControl = new _FlightControl2.default({ lang: this.options.lang });
+
+      flightControl.fetch('destinations', function (destinations) {
+        // Format raw destinations to autocomplete structure
+        _this.options.source = _this.format(destinations.list);
+
+        if (typeof cb === 'function') {
+          cb();
+        }
+      });
     }
 
     /**
-     * Export
-     * @exports Autocomplete
+     * Render autocomplete widget
+     * @param  {Object} element DOM element to attach widget to
      */
+
+  }, {
+    key: 'render',
+    value: function render(element) {
+      var $this = (0, _jquery2.default)(element).hide();
+      var sourceClasses = $this.attr('class');
+      var sourceValue = $this.val();
+      var sourcePlaceholder = $this.attr('placeholder');
+      var dataInput = $this.data('input-field');
+
+      var $input = (0, _jquery2.default)('<input />').val(sourceValue).attr('type', 'text').attr('placeholder', sourcePlaceholder).attr('data-input-field', dataInput);
+
+      // Add autocomplete functionality
+      $input.autocomplete(this.options);
+
+      // Open list on input focus
+      $input.on('focus', function () {
+        if ($input.val().length === 0) {
+          $input.autocomplete('search');
+        }
+      });
+
+      // Add styling
+      $input.addClass(sourceClasses).addClass('ui-widget  ui-widget-content  ui-state-default');
+
+      // Insert into DOM
+      $input.insertAfter($this);
+
+      // Overwrite autocomplete item rendering with custom markup
+      $input.autocomplete('instance')._renderItem = function autoCompleteRenderItem(ul, item) {
+        return (0, _jquery2.default)('<li>').append(item.label).appendTo(ul);
+      };
+
+      // Custom filtering function
+      _jquery2.default.ui.autocomplete.filter = function autoCompleteFilter(array, term) {
+        var matcher = new RegExp('\\b' + _jquery2.default.ui.autocomplete.escapeRegex(term), 'i');
+        return _jquery2.default.grep(array, function (value) {
+          return matcher.test(value.label || value.value || value);
+        });
+      };
+
+      if (this.options.destinationSelected && dataInput === 'destination') {
+        $input.autocomplete('search', this.options.destinationSelected);
+        var $selected = $input.autocomplete('widget');
+        (0, _jquery2.default)($selected[0].children[0]).click();
+      }
+
+      if (this.options.originSelected && dataInput === 'origin') {
+        $input.autocomplete('search', this.options.originSelected);
+        var _$selected = $input.autocomplete('widget');
+        (0, _jquery2.default)(_$selected[0].children[0]).click();
+      }
+
+      return this;
+    }
 
     /**
-     * Get destinations from Flight Control API
-     * @param  {Function} cb Callback when API call finishes
-     *                       and destinations are fetched
-     * @return {void}
+     * Formats destinations into the needed structure to be displayed
+     * on the autocomplete menu widget.
+     * @param  {Array} destinations Raw data returned from Flight Control
+     * @return {Array}              Formatted destinations
      */
 
-    _createClass(Autocomplete, [{
-        key: 'start',
-        value: function start(cb) {
-            var _this = this;
+  }, {
+    key: 'format',
+    value: function format(destinations) {
+      var _this2 = this;
 
-            var flightControl = new FlightControl({ lang: this.options.lang });
+      var result = [];
 
-            flightControl.fetch('destinations', function (destinations) {
-                // Format raw destinations to autocomplete structure
-                _this.options.source = _this.format(destinations.list);
+      _jquery2.default.each(destinations, function (i, dest) {
+        var tempLabel = '<b>' + dest.name[_this2.options.lang] + ', ' + dest.country + '</b>\n        <span class="code"> | ' + dest.id + '</span>';
+        var tempValue = dest.id;
+        var textValue = dest.name[_this2.options.lang] + ', ' + dest.id;
 
-                if (typeof cb === 'function') {
-                    cb();
-                }
-            });
-        }
+        result.push({
+          label: tempLabel,
+          value: tempValue,
+          display: textValue
+        });
+      });
 
-        /**
-         * Render autocomplete widget
-         * @param  {Object} element DOM element to attach widget to
-         */
-    }, {
-        key: 'render',
-        value: function render(element) {
-            var $this = $(element).hide(),
-                sourceClasses = $this.attr('class'),
-                sourceValue = $this.val(),
-                sourcePlaceholder = $this.attr('placeholder'),
-                dataInput = $this.data('input-field');
+      return result;
+    }
+  }]);
 
-            var $input = $('<input />').val(sourceValue).attr('type', 'text').attr('placeholder', sourcePlaceholder).attr('data-input-field', dataInput);
+  return Autocomplete;
+}();
 
-            // Add autocomplete functionality
-            $input.autocomplete(this.options);
+/**
+ * Export
+ * @exports Autocomplete
+ */
 
-            // Open list on input focus
-            $input.on('focus', function () {
-                var $this = $(this);
-                if ($this.val().length === 0) $this.autocomplete('search');
-            });
 
-            // Add styling
-            $input.addClass(sourceClasses).addClass('ui-widget  ui-widget-content  ui-state-default');
-
-            // Insert into DOM
-            $input.insertAfter($this);
-
-            // Overwrite autocomplete item rendering with custom markup
-            $input.autocomplete('instance')._renderItem = function (ul, item) {
-                return $('<li>').append(item.label).appendTo(ul);
-            };
-
-            // Custom filtering function
-            $.ui.autocomplete.filter = function autoCompleteFilter(array, term) {
-                var matcher = new RegExp('\\b' + $.ui.autocomplete.escapeRegex(term), 'i');
-                return $.grep(array, function (value) {
-                    return matcher.test(value.label || value.value || value);
-                });
-            };
-
-            if (this.options.destinationSelected && dataInput === 'destination') {
-                $input.autocomplete('search', this.options.destinationSelected);
-                var $selected = $input.autocomplete('widget');
-                $($selected[0].children[0]).click();
-            }
-
-            if (this.options.originSelected && dataInput === 'origin') {
-                $input.autocomplete('search', this.options.originSelected);
-                var $selected = $input.autocomplete('widget');
-                $($selected[0].children[0]).click();
-            }
-
-            return this;
-        }
-
-        /**
-         * Formats destinations into the needed structure to be displayed
-         * on the autocomplete menu widget.
-         * @param  {Array} destinations Raw data returned from Flight Control
-         * @return {Array}              Formatted destinations
-         */
-    }, {
-        key: 'format',
-        value: function format(destinations) {
-            var _this2 = this;
-
-            var result = [];
-
-            $.each(destinations, function (i, dest) {
-                var tempLabel = '<b>' + dest.name[_this2.options.lang] + ', ' + dest.country + '</b>\n                    <span class="code"> | ' + dest.id + '</span>',
-                    tempValue = dest.id,
-                    textValue = dest.name[_this2.options.lang] + ', ' + dest.id;
-                result.push({
-                    label: tempLabel,
-                    value: tempValue,
-                    display: textValue
-                });
-            });
-
-            return result;
-        }
-    }]);
-
-    return Autocomplete;
-})();
-
-module.exports = Autocomplete;
+exports.default = Autocomplete;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./FlightControl":9}],7:[function(require,module,exports){
 (function (global){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null),
-    FlightControl = require('./FlightControl'),
-    defaults = {
-    lang: 'es',
-    data: null,
-    contentType: 'countries',
-    callback: function callback() {}
+var _jquery = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _FlightControl = require('./FlightControl');
+
+var _FlightControl2 = _interopRequireDefault(_FlightControl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var defaults = {
+  lang: 'es',
+  data: null,
+  contentType: 'countries',
+  callback: function callback() {}
 };
 
-var DataMenu = (function () {
-    /**
-     * Constructor
-     * @param  {Object} options Custom options for this widget instance.
-     */
+var DataMenu = function () {
+  /**
+   * Constructor
+   * @param  {Object} options Custom options for this widget instance.
+   */
 
-    function DataMenu(options) {
-        _classCallCheck(this, DataMenu);
+  function DataMenu(options) {
+    _classCallCheck(this, DataMenu);
 
-        this.options = $.extend({}, defaults, options);
-        this._defaults = defaults;
+    this.options = _jquery2.default.extend({}, defaults, options);
+    this._defaults = defaults;
 
-        this.setup();
+    this.setup();
+  }
+
+  _createClass(DataMenu, [{
+    key: 'setup',
+    value: function setup(cb) {
+      var _this = this;
+
+      if (!this.options.data) {
+        var flightControl = new _FlightControl2.default({ lang: this.options.lang });
+
+        flightControl.fetch(this.options.contentType, function (data) {
+          // Format raw destinations to autocomplete structure
+          _this.options.source = _this.format(data.list);
+          _this.render();
+          if (typeof cb === 'function') {
+            cb();
+          }
+        });
+      } else {
+        this.options.source = this.format(this.options.data);
+        this.render(true);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render(newInput) {
+      var _this2 = this;
+
+      if (newInput) {
+        (0, _jquery2.default)(this.options.selector).find('option').slice(1).remove();
+      }
+      _jquery2.default.each(this.options.source, function (i, item) {
+        (0, _jquery2.default)(_this2.options.selector).append(item.display);
+      });
     }
 
-    _createClass(DataMenu, [{
-        key: 'setup',
-        value: function setup() {
-            var _this = this;
+    /**
+     * Formats data into the needed structure to be displayed
+     * on the autocomplete menu widget.
+     * @param  {Array} destinations Raw data returned from Flight Control
+     * @return {Array}              Formatted destinations
+     */
 
-            if (!this.options.data) {
-                var flightControl = new FlightControl({ lang: this.options.lang });
+  }, {
+    key: 'format',
+    value: function format(list) {
+      var _this3 = this;
 
-                flightControl.fetch(this.options.contentType, function (data, lang) {
-                    // Format raw destinations to autocomplete structure
-                    _this.options.source = _this.format(data.list);
-                    _this.render();
-                    if (typeof cb === 'function') {
-                        cb();
-                    }
-                });
-            } else {
-                this.options.source = this.format(this.options.data);
-                this.render(true);
-            }
-        }
-    }, {
-        key: 'render',
-        value: function render(newInput) {
-            var _this2 = this;
+      var result = [];
 
-            if (newInput) {
-                $(this.options.selector).find('option').slice(1).remove();
-            }
-            $.each(this.options.source, function (i, item) {
-                $(_this2.options.selector).append(item.display);
-            });
-        }
+      _jquery2.default.each(list, function (i, item) {
+        var option = '<option value="' + item.id + '">' + item.name[_this3.options.lang] + '</option>';
+        result.push({
+          display: option
+        });
+      });
 
-        /**
-         * Formats data into the needed structure to be displayed
-         * on the autocomplete menu widget.
-         * @param  {Array} destinations Raw data returned from Flight Control
-         * @return {Array}              Formatted destinations
-         */
-    }, {
-        key: 'format',
-        value: function format(list) {
-            var _this3 = this;
+      return result;
+    }
+  }]);
 
-            var result = [];
-            $.each(list, function (i, item) {
-                var option = '<option value="' + item.id + '">' + item.name[_this3.options.lang] + '</option>';
-                result.push({
-                    display: option
-                });
-            });
+  return DataMenu;
+}();
 
-            return result;
-        }
-    }]);
-
-    return DataMenu;
-})();
-
-module.exports = DataMenu;
+exports.default = DataMenu;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./FlightControl":9}],8:[function(require,module,exports){
 (function (global){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null),
-    i18n = require('../../../lang/datepicker.json'),
-    defaults = {
-    departureSelector: '.copaair-booking-datepicker-departure',
-    returnSelector: '.copaair-booking-datepicker-return',
-    dateRules: {
-        today: new Date(),
-        weekLater: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
-    },
-    lang: 'es',
-    beforeShow: function beforeShow(input, isnt) {
-        setTimeout(function () {
-            isnt.dpDiv.position({
-                my: 'left bottom',
-                at: 'left top',
-                of: input
-            });
-        }, 0);
-    }
+var _jquery = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _datepicker = require('../../../lang/datepicker.json');
+
+var _datepicker2 = _interopRequireDefault(_datepicker);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var defaults = {
+  departureSelector: '.copaair-booking-datepicker-departure',
+  returnSelector: '.copaair-booking-datepicker-return',
+  dateRules: {
+    today: new Date(),
+    weekLater: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
+  },
+  lang: 'es',
+  beforeShow: function beforeShow(input, isnt) {
+    setTimeout(function () {
+      isnt.dpDiv.position({
+        my: 'left bottom',
+        at: 'left top',
+        of: input
+      });
+    }, 0);
+  }
 };
 
 /**
  * Datepicker module
  */
 
-var Datepicker = (function () {
-    function Datepicker(options) {
-        _classCallCheck(this, Datepicker);
+var Datepicker = function () {
+  function Datepicker(options) {
+    _classCallCheck(this, Datepicker);
 
-        this.options = $.extend({}, defaults, options);
-        this._defaults = defaults;
+    this.options = _jquery2.default.extend({}, defaults, options);
+    this._defaults = defaults;
+  }
+
+  /**
+   * Render date picker inside the booking form
+   * setups the defaults dates and language
+   */
+
+
+  _createClass(Datepicker, [{
+    key: 'render',
+    value: function render() {
+      this.setLocale();
+      this.setDefaultDates();
+      this.events();
     }
 
     /**
-     * Render date picker inside the booking form
-     * setups the defaults dates and language
+     * Set defaults dates
+     * this consist in set current date for departure
+     * and one week later for return
      */
 
-    _createClass(Datepicker, [{
-        key: 'render',
-        value: function render() {
-            this.setLocale();
-            this.setDefaultDates();
-            this.events();
-        }
+  }, {
+    key: 'setDefaultDates',
+    value: function setDefaultDates() {
+      var dateRules = this.options.dateRules;
+      var $departureField = (0, _jquery2.default)(this.options.departureSelector);
+      var $returnField = (0, _jquery2.default)(this.options.returnSelector);
 
-        /**
-         * Set defaults dates
-         * this consist in set current date for departure
-         * and one week later for return
-         */
-    }, {
-        key: 'setDefaultDates',
-        value: function setDefaultDates() {
-            var dateRules = this.options.dateRules,
-                $departureField = $(this.options.departureSelector),
-                $returnField = $(this.options.returnSelector);
+      this.options.minDate = new Date();
 
-            this.options.minDate = new Date();
+      $departureField.datepicker(this.options);
+      $returnField.datepicker(this.options);
 
-            $departureField.datepicker(this.options);
-            $returnField.datepicker(this.options);
+      $departureField.datepicker('setDate', dateRules.today);
+      $returnField.datepicker('setDate', dateRules.weekLater);
+    }
+  }, {
+    key: 'events',
+    value: function events() {
+      // const $departureField = $(this.options.departureSelector);
+      // const $returnField = $(this.options.returnSelector);
 
-            $departureField.datepicker("setDate", dateRules.today);
-            $returnField.datepicker("setDate", dateRules.weekLater);
-        }
-    }, {
-        key: 'events',
-        value: function events() {
-            var $departureField = $(this.options.departureSelector),
-                $returnField = $(this.options.returnSelector);
+      // $departureField.datepicker('option', 'onSelect', this.onSelectOutbound);
+    }
+  }, {
+    key: 'onSelectOutbound',
+    value: function onSelectOutbound(dateText, inst) {
+      var $returnField = (0, _jquery2.default)(this.options.returnSelector);
+      var date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
 
-            // $departureField.datepicker('option', 'onSelect', this.onSelectOutbound);
-        }
-    }, {
-        key: 'onSelectOutbound',
-        value: function onSelectOutbound(dateText, inst) {
-            var $returnField = $(this.options.returnSelector),
-                date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+      // this sets the inbound date picker to a week later of current selection
+      var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+      $returnField.datepicker('setDate', weeklater);
+    }
 
-            //this sets the inbound date picker to a week later of current selection
-            var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
-            $returnField.datepicker('setDate', weeklater);
-        }
+    /**
+     * Configure datepicker depending on the
+     * localization
+     */
 
-        /**
-         * Configure datepicker depending on the
-         * localization
-         */
-    }, {
-        key: 'setLocale',
-        value: function setLocale() {
-            var regional = i18n[this.options.lang].regional;
-            $.datepicker.setDefaults(regional);
-        }
-    }]);
+  }, {
+    key: 'setLocale',
+    value: function setLocale() {
+      var regional = _datepicker2.default[this.options.lang].regional;
+      _jquery2.default.datepicker.setDefaults(regional);
+    }
+  }]);
 
-    return Datepicker;
-})();
+  return Datepicker;
+}();
 
-module.exports = Datepicker;
+exports.default = Datepicker;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../../../lang/datepicker.json":4}],9:[function(require,module,exports){
+},{"../../../lang/datepicker.json":3}],9:[function(require,module,exports){
 (function (global){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null);
+var _jquery = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 require('store-js');
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 var defaults = {
-    lang: 'es',
-    api: {
-        destinations: "https://flightcontrol.io/api/routes/destinations",
-        countries: "https://flightcontrol.io/api/routes/countries",
-        regions: "https://flightcontrol.io/api/routes/regions"
-    },
-    storageExpiration: 86400000,
-    storage: true
+  lang: 'es',
+  api: {
+    destinations: 'https://flightcontrol.io/api/routes/destinations',
+    countries: 'https://flightcontrol.io/api/routes/countries',
+    regions: 'https://flightcontrol.io/api/routes/regions'
+  },
+  storageExpiration: 86400000,
+  storage: true
 };
 
 /**
@@ -695,784 +764,875 @@ var defaults = {
  * @type {Object}
  */
 var storeWidthExpiration = {
-    set: function set(key, val, exp) {
-        store.set(key, { val: val, exp: exp, time: new Date().getTime() });
-    },
-    get: function get(key) {
-        var info = store.get(key);
-        if (!info) {
-            return null;
-        }
-        if (new Date().getTime() - info.time > info.exp) {
-            return null;
-        }
-        return info.val;
+  set: function set(key, val, exp) {
+    store.set(key, {
+      val: val,
+      exp: exp,
+      time: new Date().getTime()
+    });
+  },
+  get: function get(key) {
+    var info = store.get(key);
+
+    if (!info) {
+      return null;
     }
+
+    if (new Date().getTime() - info.time > info.exp) {
+      return null;
+    }
+
+    return info.val;
+  }
 };
 
 /**
  * Module FlightControl
  */
 
-var FlightControl = (function () {
-    function FlightControl(options) {
-        _classCallCheck(this, FlightControl);
+var FlightControl = function () {
+  function FlightControl(options) {
+    _classCallCheck(this, FlightControl);
 
-        this.options = $.extend({}, defaults, options);
-        this._defaults = defaults;
+    this.options = _jquery2.default.extend({}, defaults, options);
+    this._defaults = defaults;
 
-        if (!store.enabled) {
-            console.log('browser not supported or in private mode');
-            this.options.storage = false;
+    if (!store.enabled) {
+      console.log('browser not supported or in private mode');
+      this.options.storage = false;
+    }
+  }
+
+  /**
+   * Fetch data from flight controller
+   * based on the resource name
+   * @param  {string}   resourceName: destinations|countries|regions
+   * @param  {Function} cb  callback
+   * @return {Function} callback
+   */
+
+
+  _createClass(FlightControl, [{
+    key: 'fetch',
+    value: function fetch(resourceName, cb) {
+      var _this = this;
+
+      var resourceValue = {};
+
+      if (this.options.storage && storeWidthExpiration.get(resourceName) && storeWidthExpiration.get(resourceName + '.count')) {
+        resourceValue.list = storeWidthExpiration.get(resourceName);
+        resourceValue.count = storeWidthExpiration.get(resourceName + '.count');
+
+        return cb(resourceValue);
+      }
+
+      if (typeof IE9Data !== 'undefined') {
+        var data = IE9Data[resourceName];
+        this.sortNames(data);
+
+        if (this.options.storage) {
+          storeWidthExpiration.set(resourceName, data, this.options.storageExpiration);
+          storeWidthExpiration.set(resourceName + '.count', data.length, this.options.storageExpiration);
         }
+        resourceValue.list = data;
+        resourceValue.count = data.length;
+
+        cb(resourceValue);
+      } else {
+        _jquery2.default.getJSON(this.options.api[resourceName], function (data) {
+          _this.sortNames(data);
+
+          if (_this.options.storage) {
+            storeWidthExpiration.set(resourceName, data, _this.options.storageExpiration);
+            storeWidthExpiration.set(resourceName + '.count', data.length, _this.options.storageExpiration);
+          }
+          resourceValue.list = data;
+          resourceValue.count = data.length;
+
+          cb(resourceValue);
+        });
+      }
     }
 
     /**
-     * Fetch data from flight controller
-     * based on the resource name
-     * @param  {string}   resourceName: destinations|countries|regions
-     * @param  {Function} cb  callback
-     * @return {Function} callback
+     * Helper function to sort data
+     * based on language
+     * @param  {Object} data
      */
 
-    _createClass(FlightControl, [{
-        key: 'fetch',
-        value: function fetch(resourceName, cb) {
-            var _this = this;
+  }, {
+    key: 'sortNames',
+    value: function sortNames(data) {
+      var _this2 = this;
 
-            var resourceValue = {};
+      data.sort(function (a, b) {
+        if (a.name[_this2.options.lang] > b.name[_this2.options.lang]) return 1;
+        if (a.name[_this2.options.lang] < b.name[_this2.options.lang]) return -1;
 
-            if (this.options.storage && storeWidthExpiration.get(resourceName) && storeWidthExpiration.get(resourceName + '.count')) {
-                resourceValue.list = storeWidthExpiration.get(resourceName);
-                resourceValue.count = storeWidthExpiration.get(resourceName + '.count');
+        return 0;
+      });
+    }
+  }]);
 
-                return cb(resourceValue);
-            }
+  return FlightControl;
+}();
 
-            if (typeof IE9Data !== 'undefined') {
-
-                var data = IE9Data[resourceName];
-                this.sortNames(data);
-
-                if (this.options.storage) {
-                    storeWidthExpiration.set(resourceName, data, this.options.storageExpiration);
-                    storeWidthExpiration.set(resourceName + '.count', data.length, this.options.storageExpiration);
-                }
-                resourceValue.list = data;
-                resourceValue.count = data.length;
-
-                cb(resourceValue);
-            } else {
-
-                $.getJSON(this.options.api[resourceName], function (data) {
-                    _this.sortNames(data);
-
-                    if (_this.options.storage) {
-                        storeWidthExpiration.set(resourceName, data, _this.options.storageExpiration);
-                        storeWidthExpiration.set(resourceName + '.count', data.length, _this.options.storageExpiration);
-                    }
-                    resourceValue.list = data;
-                    resourceValue.count = data.length;
-
-                    cb(resourceValue);
-                });
-            }
-        }
-
-        /**
-         * Helper function to sort data
-         * based on language
-         * @param  {Object} data
-         */
-    }, {
-        key: 'sortNames',
-        value: function sortNames(data) {
-            var _this2 = this;
-
-            data.sort(function (a, b) {
-                if (a.name[_this2.options.lang] > b.name[_this2.options.lang]) return 1;
-                if (a.name[_this2.options.lang] < b.name[_this2.options.lang]) return -1;
-
-                return 0;
-            });
-        }
-    }]);
-
-    return FlightControl;
-})();
-
-module.exports = FlightControl;
+exports.default = FlightControl;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"store-js":2}],10:[function(require,module,exports){
+},{"store-js":1}],10:[function(require,module,exports){
 (function (global){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null),
-    defaults = {
-    lang: 'es',
-    origin: 'all',
-    destination: 'all',
-    d1: null,
-    bookingPage: 'Booking Engine',
-    analytics: false,
-    // required field to submit form
-    // to copa
-    inputs: {
-        tripType: "RT",
-        flexibleSearch: "true",
-        pos: "CMGS",
-        "guestTypes[0].type": "ADT",
-        "guestTypes[1].type": "CNN",
-        "guestTypes[2].type": "INF",
-        "guestTypes[0].amount": 1,
-        "guestTypes[1].amount": 0,
-        "guestTypes[2].amount": 0,
-        "outboundOption.departureDay": null,
-        "outboundOption.departureMonth": null,
-        "outboundOption.departureYear": null,
-        "inboundOption.departureDay": null,
-        "inboundOption.departureMonth": null,
-        "inboundOption.departureYear": null,
-        // "coupon": null,
-        // origin
-        "outboundOption.originLocationCode": null,
-        "inboundOption.destinationLocationCode": null,
-        // destination
-        "outboundOption.destinationLocationCode": null,
-        "inboundOption.originLocationCode": null,
-        // // cabin class Business|Economy
-        "cabinClass": "Economy",
-        lang: 'es'
-    },
-    formUrl: 'https://bookings.copaair.com/CMGS/' + 'AirLowFareSearchExternal.do?'
+var _jquery = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ga = window.ga;
+var defaults = {
+  lang: 'es',
+  origin: 'all',
+  destination: 'all',
+  d1: null,
+  bookingPage: 'Booking Engine',
+  analytics: false,
+  inputs: {
+    tripType: 'RT',
+    flexibleSearch: true,
+    pos: 'CMGS',
+    'guestTypes[0].type': 'ADT',
+    'guestTypes[1].type': 'CNN',
+    'guestTypes[2].type': 'INF',
+    'guestTypes[0].amount': 1,
+    'guestTypes[1].amount': 0,
+    'guestTypes[2].amount': 0,
+    'outboundOption.departureDay': null,
+    'outboundOption.departureMonth': null,
+    'outboundOption.departureYear': null,
+    'inboundOption.departureDay': null,
+    'inboundOption.departureMonth': null,
+    'inboundOption.departureYear': null,
+
+    // Origin
+    'outboundOption.originLocationCode': null,
+    'inboundOption.destinationLocationCode': null,
+
+    // Destination
+    'outboundOption.destinationLocationCode': null,
+    'inboundOption.originLocationCode': null,
+
+    // Cabin Class (Business|Economy)
+    cabinClass: 'Economy',
+    lang: 'es'
+  },
+  formUrl: 'https://bookings.copaair.com/CMGS/AirLowFareSearchExternal.do?'
 };
 
 /**
  * FormHelper module
  */
 
-var FormHelper = (function () {
-    function FormHelper(options) {
-        _classCallCheck(this, FormHelper);
+var FormHelper = function () {
+  function FormHelper(options) {
+    _classCallCheck(this, FormHelper);
 
-        this.options = $.extend({}, defaults, options);
-        this._defaults = defaults;
+    this.options = _jquery2.default.extend({}, defaults, options);
+    this._defaults = defaults;
 
-        // set defautls values
-        this.setDefaultBounds();
-        this.setDates(this.options.datepicker, { returns: true, departure: true });
-        this.options.inputs.lang = this.options.lang;
-        // load events related with form helper and other modules
-        this.events();
+    // set defautls values
+    this.setDefaultBounds();
+    this.setDates(this.options.datepicker, {
+      returns: true,
+      departure: true
+    });
+    this.options.inputs.lang = this.options.lang;
+
+    // load events related with form helper and other modules
+    this.events();
+  }
+
+  _createClass(FormHelper, [{
+    key: 'process',
+    value: function process() {
+      var url = this.options.formUrl;
+      var validation = this.validationError();
+      var coupon = this.options.booking.data('coupon');
+
+      if (coupon && !this.options.inputs.coupon) {
+        this.setCoupon(coupon);
+      }
+
+      var httpQuery = _jquery2.default.param(this.options.inputs);
+      httpQuery += '&' + _jquery2.default.param({ d1: this.options.d1 });
+
+      if (validation.error) {
+        // handle validation error messages
+        if (this.options.analytics && typeof ga !== 'undefined') {
+          ga('send', 'event', this.options.bookingPage, 'error', 'User left required fields blank');
+        }
+      } else {
+        // no errors, forward form values to copa
+        // console.log(httpQuery);
+        if (this.options.analytics && typeof ga !== 'undefined') {
+          ga('send', 'event', this.options.bookingPage, 'click', 'Search flights');
+        }
+
+        var searchWindow = window.open(url + httpQuery, '_blank');
+        searchWindow.focus();
+      }
     }
+  }, {
+    key: 'setDefaultBounds',
+    value: function setDefaultBounds() {
+      if (this.options.origin !== 'all') {
+        this.setBounds('origin', this.options.origin);
+      }
 
-    _createClass(FormHelper, [{
-        key: 'process',
-        value: function process() {
+      if (this.options.destination !== 'all') {
+        this.setBounds('destination', this.options.destination);
+      }
+    }
+  }, {
+    key: 'setBounds',
+    value: function setBounds(bound, location) {
+      if (bound === 'origin') {
+        this.options.inputs['outboundOption.originLocationCode'] = location;
+        this.options.inputs['inboundOption.destinationLocationCode'] = location;
+      }
 
-            var url = this.options.formUrl;
-            var validation = this.validationError();
-            var coupon = this.options.booking.data('coupon');
+      if (bound === 'destination') {
+        this.options.inputs['outboundOption.destinationLocationCode'] = location;
+        this.options.inputs['inboundOption.originLocationCode'] = location;
+      }
+    }
+  }, {
+    key: 'setDates',
+    value: function setDates(datepicker, bounds) {
+      // get current datepickers dates
+      var departureDate = (0, _jquery2.default)(datepicker.options.departureSelector).datepicker('getDate');
+      var returnDate = (0, _jquery2.default)(datepicker.options.returnSelector).datepicker('getDate');
 
-            if (coupon && !this.options.inputs.coupon) {
-                this.setCoupon(coupon);
-            }
+      if (bounds.returns) {
+        this.options.inputs['inboundOption.departureDay'] = returnDate.getUTCDate();
+        this.options.inputs['inboundOption.departureMonth'] = returnDate.getMonth() + 1;
+        this.options.inputs['inboundOption.departureYear'] = returnDate.getFullYear();
+      }
 
-            var httpQuery = $.param(this.options.inputs);
-            httpQuery += '&' + $.param({ d1: this.options.d1 });
+      if (bounds.departure) {
+        this.options.inputs['outboundOption.departureDay'] = departureDate.getUTCDate();
+        this.options.inputs['outboundOption.departureMonth'] = departureDate.getMonth() + 1;
+        this.options.inputs['outboundOption.departureYear'] = departureDate.getFullYear();
+      }
+    }
+  }, {
+    key: 'setCabinClass',
+    value: function setCabinClass(target) {
+      this.options.inputs.cabinClass = (0, _jquery2.default)(target).val();
+    }
+  }, {
+    key: 'setPassengersAmount',
+    value: function setPassengersAmount(type, value) {
+      switch (type) {
+        case 'child':
+          this.options.inputs['guestTypes[1].amount'] = value;
+          break;
+        case 'infant':
+          this.options.inputs['guestTypes[2].amount'] = value;
+          break;
+        default:
+          this.options.inputs['guestTypes[0].amount'] = value;
+      }
+    }
+  }, {
+    key: 'setCoupon',
+    value: function setCoupon(coupon) {
+      this.options.inputs.coupon = coupon;
+    }
+  }, {
+    key: 'setD1',
+    value: function setD1() {
+      this.options.inputs.d1 = this.options.d1;
+    }
+  }, {
+    key: 'validationError',
+    value: function validationError() {
+      var errors = {
+        error: false,
+        bag: []
+      };
 
-            if (validation.error) {
-                // handle validation error messages
-                if (this.options.analytics && typeof ga !== 'undefined') {
-                    ga("send", "event", this.options.bookingPage, "error", "User left required fields blank");
-                }
-            } else {
-                // no errors, forward form values to copa
-                // console.log(httpQuery);
-                if (this.options.analytics && typeof ga !== 'undefined') {
-                    ga("send", "event", this.options.bookingPage, "click", "Search flights");
-                }
-                var searchWindow = window.open(url + httpQuery, '_blank');
-                searchWindow.focus();
-            }
+      for (var input in this.options.inputs) {
+        if (!this.options.inputs[input] && this.options.inputs[input] !== 0) {
+          var currentError = {};
+          currentError.field = input;
+          currentError.message = 'The input ' + input + ' must have some value';
+          errors.bag.push(currentError);
+          errors.error = true;
         }
-    }, {
-        key: 'setDefaultBounds',
-        value: function setDefaultBounds() {
+      }
 
-            if (this.options.origin !== 'all') {
-                this.setBounds('origin', this.options.origin);
-            }
+      return errors;
+    }
+  }, {
+    key: 'events',
+    value: function events() {
+      var _this = this;
 
-            if (this.options.destination !== 'all') {
-                this.setBounds('destination', this.options.destination);
-            }
+      var datepicker = this.options.datepicker;
+      var $departureField = (0, _jquery2.default)(datepicker.options.departureSelector);
+      var $returnField = (0, _jquery2.default)(datepicker.options.returnSelector);
+
+      $departureField.datepicker('option', 'onSelect', function (dateText, inst) {
+        var date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+
+        // this sets the inbound date picker to a week later of current selection
+        var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+        $returnField.datepicker('setDate', weeklater);
+        $returnField.datepicker('option', 'minDate', date);
+
+        _this.setDates(datepicker, {
+          returns: true,
+          departure: true
+        });
+      });
+
+      $returnField.datepicker('option', 'onSelect', function (dateText, inst) {
+        var date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+
+        // this sets the inbound date picker to a week later of current selection
+        var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+        _this.setDates(datepicker, {
+          returns: true,
+          departure: false
+        });
+      });
+
+      this.options.booking.find('.js-cabin-class').on('click', function (e) {
+        _this.setCabinClass(e.target);
+      });
+
+      this.options.booking.find('.js-adults-amount').selectmenu({
+        change: function change(e, ui) {
+          _this.setPassengersAmount('adult', ui.item.value);
         }
-    }, {
-        key: 'setBounds',
-        value: function setBounds(bound, location) {
+      });
 
-            if (bound === 'origin') {
-                this.options.inputs["outboundOption.originLocationCode"] = location;
-                this.options.inputs["inboundOption.destinationLocationCode"] = location;
-            }
-
-            if (bound === 'destination') {
-                this.options.inputs["outboundOption.destinationLocationCode"] = location;
-                this.options.inputs["inboundOption.originLocationCode"] = location;
-            }
+      this.options.booking.find('.js-children-amount').selectmenu({
+        change: function change(e, ui) {
+          _this.setPassengersAmount('child', ui.item.value);
         }
-    }, {
-        key: 'setDates',
-        value: function setDates(datepicker, bounds) {
-            // get current datepickers dates
-            var departureDate = $(datepicker.options.departureSelector).datepicker('getDate'),
-                returnDate = $(datepicker.options.returnSelector).datepicker('getDate');
+      });
 
-            if (bounds.returns) {
-                this.options.inputs["inboundOption.departureDay"] = returnDate.getUTCDate();
-                this.options.inputs["inboundOption.departureMonth"] = returnDate.getMonth() + 1;
-                this.options.inputs["inboundOption.departureYear"] = returnDate.getFullYear();
-            }
-
-            if (bounds.departure) {
-                this.options.inputs["outboundOption.departureDay"] = departureDate.getUTCDate();
-                this.options.inputs["outboundOption.departureMonth"] = departureDate.getMonth() + 1;
-                this.options.inputs["outboundOption.departureYear"] = departureDate.getFullYear();
-            }
+      this.options.booking.find('.js-infants-amount').selectmenu({
+        change: function change(e, ui) {
+          _this.setPassengersAmount('infant', ui.item.value);
         }
-    }, {
-        key: 'setCabinClass',
-        value: function setCabinClass(target) {
-            this.options.inputs["cabinClass"] = $(target).val();
-        }
-    }, {
-        key: 'setPassengersAmount',
-        value: function setPassengersAmount(type, value) {
-            switch (type) {
-                case 'adult':
-                    this.options.inputs["guestTypes[0].amount"] = value;
-                    break;
-                case 'child':
-                    this.options.inputs["guestTypes[1].amount"] = value;
-                    break;
-                case 'infant':
-                    this.options.inputs["guestTypes[2].amount"] = value;
-                    break;
-            }
-        }
-    }, {
-        key: 'setCoupon',
-        value: function setCoupon(coupon) {
-            this.options.inputs.coupon = coupon;
-        }
-    }, {
-        key: 'setD1',
-        value: function setD1() {
-            this.options.inputs.d1 = this.options.d1;
-        }
-    }, {
-        key: 'validationError',
-        value: function validationError() {
-            var errors = {
-                error: false,
-                bag: []
-            };
-            var currentError;
-            for (var input in this.options.inputs) {
-                if (!this.options.inputs[input] && this.options.inputs[input] !== 0) {
-                    currentError = {};
-                    currentError.field = input;
-                    currentError.message = 'The input ' + input + ' must have some value';
-                    errors.bag.push(currentError);
-                    errors.error = true;
-                }
-            }
+      });
 
-            return errors;
-        }
-    }, {
-        key: 'events',
-        value: function events() {
-            var _this = this;
+      this.options.booking.find('.js-coupon-code-input').on('change', function (e) {
+        _this.setCoupon(e.target.value);
+      });
 
-            var datepicker = this.options.datepicker,
-                $departureField = $(datepicker.options.departureSelector),
-                $returnField = $(datepicker.options.returnSelector);
+      this.options.booking.find('.js-submit').on('click', function (e) {
+        e.preventDefault();
+        _this.process();
+      });
+    }
+  }]);
 
-            $departureField.datepicker('option', 'onSelect', function (dateText, inst) {
+  return FormHelper;
+}();
 
-                var date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
-
-                // this sets the inbound date picker to a week later of current selection
-                var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
-                $returnField.datepicker('setDate', weeklater);
-                $returnField.datepicker('option', 'minDate', date);
-                _this.setDates(datepicker, { returns: true, departure: true });
-            });
-
-            $returnField.datepicker('option', 'onSelect', function (dateText, inst) {
-
-                var date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
-
-                // this sets the inbound date picker to a week later of current selection
-                var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
-                _this.setDates(datepicker, { returns: true, departure: false });
-            });
-
-            this.options.booking.find('.js-cabin-class').on('click', function (e) {
-                _this.setCabinClass(e.target);
-            });
-
-            this.options.booking.find('.js-adults-amount').selectmenu({
-                change: function change(e, ui) {
-                    _this.setPassengersAmount('adult', ui.item.value);
-                }
-            });
-
-            this.options.booking.find('.js-children-amount').selectmenu({
-                change: function change(e, ui) {
-                    _this.setPassengersAmount('child', ui.item.value);
-                }
-            });
-
-            this.options.booking.find('.js-infants-amount').selectmenu({
-                change: function change(e, ui) {
-                    _this.setPassengersAmount('infant', ui.item.value);
-                }
-            });
-
-            this.options.booking.find('.js-coupon-code-input').on('change', function (e) {
-                _this.setCoupon(e.target.value);
-            });
-
-            this.options.booking.find('.js-submit').on('click', function (e) {
-                e.preventDefault();
-                _this.process();
-            });
-        }
-    }]);
-
-    return FormHelper;
-})();
-
-module.exports = FormHelper;
+exports.default = FormHelper;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],11:[function(require,module,exports){
 (function (global){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null),
-    Handlebars = (typeof window !== "undefined" ? window['Handlebars'] : typeof global !== "undefined" ? global['Handlebars'] : null),
-    i18n = {
-    booking: require('../../../lang/booking.json'),
-    signup: require('../../../lang/signup.json')
-},
-    defaults = {
-    lang: 'es',
-    //src: window.location.origin + '/bower_components/copaair-widgets/templates',
-    callback: function callback() {}
+var _jquery = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _handlebars = (typeof window !== "undefined" ? window['Handlebars'] : typeof global !== "undefined" ? global['Handlebars'] : null);
+
+var _handlebars2 = _interopRequireDefault(_handlebars);
+
+var _booking = require('../../../lang/booking.json');
+
+var _booking2 = _interopRequireDefault(_booking);
+
+var _signup = require('../../../lang/signup.json');
+
+var _signup2 = _interopRequireDefault(_signup);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var i18n = [];
+i18n.booking = _booking2.default;
+i18n.signup = _signup2.default;
+
+var defaults = {
+  lang: 'es',
+  src: '/bower_components/copaair-widgets/templates',
+  callback: function callback() {}
 };
 
-var Template = (function () {
-    function Template(widget, options) {
-        var _this = this;
+var Template = function () {
+  function Template(widget, options) {
+    var _this = this;
 
-        _classCallCheck(this, Template);
+    _classCallCheck(this, Template);
 
-        if (!window.location.origin) {
-            window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-        }
-
-        defaults.src = window.location.origin + '/bower_components/copaair-widgets/templates';
-
-        this.options = $.extend({}, defaults, options);
-        if (typeof Handlebars !== 'undefined' && Handlebars !== null) {
-            $.ajax({
-                url: this.options.src + '/' + widget + '.hbs',
-                success: function success(tpl) {
-                    _this.options.data = $.extend({}, _this.options, i18n[widget][_this.options.lang]);
-                    var html = _this.compile(widget, tpl);
-                    _this.options.callback(html);
-                }
-            });
-        } else {
-            console.error('This plugin requires Handlebars.js');
-        }
+    if (!window.location.origin) {
+      window.location.origin = window.location.protocol + '//' + window.location.hostname;
+      window.location.origin += window.location.port ? ':' + window.location.port : '';
     }
 
-    _createClass(Template, [{
-        key: 'compile',
-        value: function compile(widget, tpl) {
-            var template = Handlebars.compile(tpl);
-            var html = template(this.options.data);
-            return html;
+    // defaults.src = window.location.origin + '/bower_components/copaair-widgets/templates';
+
+    this.options = _jquery2.default.extend({}, defaults, options);
+    if (typeof _handlebars2.default !== 'undefined' && _handlebars2.default !== null) {
+      _jquery2.default.ajax({
+        url: this.options.src + '/' + widget + '.hbs',
+        success: function success(tpl) {
+          _this.options.data = _jquery2.default.extend({}, _this.options, i18n[widget][_this.options.lang]);
+          var html = _this.compile(widget, tpl);
+          _this.options.callback(html);
         }
-    }]);
+      });
+    } else {
+      console.error('This plugin requires Handlebars.js');
+    }
+  }
 
-    return Template;
-})();
+  _createClass(Template, [{
+    key: 'compile',
+    value: function compile(widget, tpl) {
+      var template = _handlebars2.default.compile(tpl);
+      var html = template(this.options.data);
+      return html;
+    }
+  }]);
 
-module.exports = Template;
+  return Template;
+}();
+
+exports.default = Template;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../../../lang/booking.json":3,"../../../lang/signup.json":5}],12:[function(require,module,exports){
+},{"../../../lang/booking.json":2,"../../../lang/signup.json":4}],12:[function(require,module,exports){
 (function (global){
-/**
- * Modules
- */
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Modules
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 
-var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null),
-    Template = require('../lib/Template'),
-    FlightControl = require('../lib/FlightControl'),
-    Datepicker = require('../lib/Datepicker'),
-    Autocomplete = require('../lib/Autocomplete'),
-    FormHelper = require('../lib/FormHelper');
+
+var _jquery = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _Template = require('../lib/Template');
+
+var _Template2 = _interopRequireDefault(_Template);
+
+var _Datepicker = require('../lib/Datepicker');
+
+var _Datepicker2 = _interopRequireDefault(_Datepicker);
+
+var _Autocomplete = require('../lib/Autocomplete');
+
+var _Autocomplete2 = _interopRequireDefault(_Autocomplete);
+
+var _FormHelper = require('../lib/FormHelper');
+
+var _FormHelper2 = _interopRequireDefault(_FormHelper);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
  * Options
  * @type {Object}
  */
 var defaults = {
-    lang: 'es',
-    d1: null,
-    bookingPage: null,
-    coupon: null,
-    origin: null,
-    destination: null,
-    destinationName: null,
-    originName: null,
-    analytics: false,
-    collapsable: true,
-    nativeSelect: false,
-    widgetPosition: { my: 'left bottom', at: 'left top' },
-    templatePath: 'bower_components/copaair-widgets/templates/booking.hbs',
-    languagePath: 'bower_components/copaair-widgets/lang/',
-    originSelected: false,
-    destinationSelected: false,
-    onload: function onload() {}
+  lang: 'es',
+  d1: null,
+  bookingPage: null,
+  coupon: null,
+  origin: null,
+  destination: null,
+  destinationName: null,
+  originName: null,
+  analytics: false,
+  collapsable: true,
+  nativeSelect: false,
+  widgetPosition: { my: 'left bottom', at: 'left top' },
+  templatePath: 'bower_components/copaair-widgets/templates',
+  languagePath: 'bower_components/copaair-widgets/lang/',
+  originSelected: false,
+  destinationSelected: false,
+  onload: function onload() {}
 };
 
-var Booking = (function () {
+var Booking = function () {
 
-    /**
-     * Widget constructor
-     * @param {Object} selector element DOM object
-     * @param {Object} options  Options passed on plugin instance
-     */
+  /**
+   * Widget constructor
+   * @param {Object} selector element DOM object
+   * @param {Object} options  Options passed on plugin instance
+   */
 
-    function Booking(element, options) {
-        var _this = this;
+  function Booking(element, options) {
+    var _this = this;
 
-        _classCallCheck(this, Booking);
+    _classCallCheck(this, Booking);
 
-        this.$booking = $(element);
+    this.$booking = (0, _jquery2.default)(element);
+    this.options = _jquery2.default.extend({}, defaults, options);
+    this._defaults = defaults;
 
-        this.options = $.extend({}, defaults, options);
-        this._defaults = defaults;
-        new Template('booking', {
-            'lang': this.options.lang,
-            'origin': this.options.origin,
-            'destination': this.options.destination,
-            'destinationName': this.options.destinationName, // temporary fix for static destination
-            'originName': this.options.originName, // temporary fix for static destination
-            callback: function callback(html) {
-                _this.$booking.html(html);
+    return new _Template2.default('booking', {
+      lang: this.options.lang,
+      origin: this.options.origin,
+      destination: this.options.destination,
+      destinationName: this.options.destinationName, // temporary fix for static destination
+      originName: this.options.originName, // temporary fix for static destination
+      src: this.options.templatePath,
+      callback: function callback(html) {
+        _this.$booking.html(html);
 
-                // When finished, build all the widgets
-                _this.setupSelectMenus();
+        // When finished, build all the widgets
+        _this.setupSelectMenus();
 
-                // setup datepicker
-                var datepicker = new Datepicker({
-                    lang: _this.options.lang
-                });
-                datepicker.render();
-                var formHelper = new FormHelper({
-                    datepicker: datepicker,
-                    origin: _this.options.origin,
-                    destination: _this.options.destination,
-                    booking: _this.$booking,
-                    d1: _this.options.d1,
-                    lang: _this.options.lang,
-                    analytics: _this.options.analytics,
-                    bookingPage: _this.options.bookingPage
-                });
-
-                if (_this.options.coupon) {
-                    formHelper.setCoupon(_this.options.coupon);
-                }
-
-                // Autocomplete widgets
-                _this.initAutocomplete(formHelper);
-
-                // Bind events
-                _this.bookingEvents();
-
-                _this.options.onload();
-            }
+        // setup datepicker
+        var datepicker = new _Datepicker2.default({
+          lang: _this.options.lang
         });
-    }
 
-    /**
-     * Setup autocomplete destination widgets
-     * @see module:Autocomplete
-     */
+        datepicker.render();
 
-    _createClass(Booking, [{
-        key: 'initAutocomplete',
-        value: function initAutocomplete(formHelper) {
-            var _this2 = this;
-
-            // Init class with options
-            var autocomplete = new Autocomplete({
-                lang: this.options.lang,
-                originSelected: this.options.originSelected,
-                destinationSelected: this.options.destinationSelected,
-                select: function select(e, ui) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    // set display value to the input
-                    $(this).val(ui.item.display);
-                    //set actual value at the booking object
-                    formHelper.setBounds($(this).data('input-field'), ui.item.value);
-                },
-                position: this.options.widgetPosition,
-                appendTo: this.$booking
-            });
-
-            // Build
-            autocomplete.start(function () {
-                _this2.$booking.find('.js-booking-autocomplete').each(function () {
-                    autocomplete.render(this);
-                });
-            });
-        }
-
-        /**
-         * Replaces select menus with custom UI widgets
-         */
-    }, {
-        key: 'setupSelectMenus',
-        value: function setupSelectMenus() {
-            if (!this.options.nativeSelect) {
-                this.$booking.find('.js-selectmenu').selectmenu({
-                    position: this.options.widgetPosition
-                });
-            }
-
-            return this;
-        }
-
-        /**
-         * Bind events related to booking interaction
-         */
-    }, {
-        key: 'bookingEvents',
-        value: function bookingEvents() {
-            var $booking = this.$booking;
-            var $toggle = this.$booking.find('.js-copaair-toggle');
-
-            if (this.options.collapsable) {
-                // Show bottom row when any input gets focus
-                $booking.on('focus.copaair', 'input', function (e) {
-                    $booking.addClass('copaair-widget-open');
-                    $toggle.removeClass('copaair-hidden');
-                });
-
-                // Clicking anywhere in the document hides bottom row
-                $booking.on('click.copaair', '.js-copaair-close', function (e) {
-                    e.preventDefault();
-                    $booking.removeClass('copaair-widget-open');
-                    $toggle.addClass('copaair-hidden');
-                });
-            } else {
-                $toggle.removeClass('copaair-hidden');
-            }
-        }
-    }]);
-
-    return Booking;
-})();
-
-module.exports = Booking;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../lib/Autocomplete":6,"../lib/Datepicker":8,"../lib/FlightControl":9,"../lib/FormHelper":10,"../lib/Template":11}],13:[function(require,module,exports){
-'use strict';
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-require('store-js');
-var Template = require('../lib/Template'),
-    DataMenu = require('../lib/DataMenu'),
-    i18n = require('../../../lang/datepicker.json');
-
-var defaults = {
-    lang: 'es',
-    nativeSelect: false,
-    widgetPosition: { my: 'left bottom', at: 'left top' }
-};
-
-var Signup = (function () {
-    function Signup(element, options) {
-        var _this = this;
-
-        _classCallCheck(this, Signup);
-
-        this.$form = $(element);
-
-        this.options = $.extend({}, defaults, options);
-
-        // Load template
-        new Template('signup', {
-            'lang': this.options.lang,
-            callback: function callback(html) {
-                _this.$form.html(html);
-                _this.signupEvents();
-                var lang = _this.options.lang;
-
-                _this.$form.find('.js-selectmenu').each(function () {
-
-                    var dataMenu = new DataMenu({
-                        lang: lang,
-                        contentType: $(this).data('content'),
-                        selector: $(this)
-                    });
-                });
-
-                _this.setupSelectMenus();
-
-                $('.js-signup-date').datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    format: 'dd/mm/yy',
-                    yearRange: '-100:+0',
-                    beforeShow: function beforeShow(input, isnt) {
-                        setTimeout(function () {
-                            isnt.dpDiv.position({
-                                my: 'left bottom',
-                                at: 'left top',
-                                of: input
-                            });
-                        }, 0);
-                    }
-                });
-
-                var regional = i18n[_this.options.lang].regional;
-                $.datepicker.regional;
-            }
+        var formHelper = new _FormHelper2.default({
+          datepicker: datepicker,
+          origin: _this.options.origin,
+          destination: _this.options.destination,
+          booking: _this.$booking,
+          d1: _this.options.d1,
+          lang: _this.options.lang,
+          analytics: _this.options.analytics,
+          bookingPage: _this.options.bookingPage
         });
+
+        if (_this.options.coupon) {
+          formHelper.setCoupon(_this.options.coupon);
+        }
+
+        // Autocomplete widgets
+        _this.initAutocomplete(formHelper);
+
+        // Bind events
+        _this.bookingEvents();
+
+        _this.options.onload();
+      }
+    });
+  }
+
+  /**
+   * Setup autocomplete destination widgets
+   * @see module:Autocomplete
+   */
+
+
+  _createClass(Booking, [{
+    key: 'initAutocomplete',
+    value: function initAutocomplete(formHelper) {
+      var _this2 = this;
+
+      // Init class with options
+      var autocomplete = new _Autocomplete2.default({
+        lang: this.options.lang,
+        originSelected: this.options.originSelected,
+        destinationSelected: this.options.destinationSelected,
+        select: function select(e, ui) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // set display value to the input
+          (0, _jquery2.default)(this).val(ui.item.display);
+          // set actual value at the booking object
+          formHelper.setBounds((0, _jquery2.default)(this).data('input-field'), ui.item.value);
+        },
+
+        position: this.options.widgetPosition,
+        appendTo: this.$booking
+      });
+
+      // Build
+      autocomplete.start(function () {
+        _this2.$booking.find('.js-booking-autocomplete').each(function bookingAutocomplete() {
+          autocomplete.render(this);
+        });
+      });
     }
 
     /**
      * Replaces select menus with custom UI widgets
      */
 
-    _createClass(Signup, [{
-        key: 'setupSelectMenus',
-        value: function setupSelectMenus() {
-            if (!this.options.nativeSelect) {
-                this.$form.find('.js-selectmenu').selectmenu({
-                    position: this.options.widgetPosition
-                });
+  }, {
+    key: 'setupSelectMenus',
+    value: function setupSelectMenus() {
+      if (!this.options.nativeSelect) {
+        this.$booking.find('.js-selectmenu').selectmenu({
+          position: this.options.widgetPosition
+        });
+      }
+
+      return this;
+    }
+
+    /**
+     * Bind events related to booking interaction
+     */
+
+  }, {
+    key: 'bookingEvents',
+    value: function bookingEvents() {
+      var $booking = this.$booking;
+      var $toggle = this.$booking.find('.js-copaair-toggle');
+
+      if (this.options.collapsable) {
+        // Show bottom row when any input gets focus
+        $booking.on('focus.copaair', 'input', function () {
+          $booking.addClass('copaair-widget-open');
+          $toggle.removeClass('copaair-hidden');
+        });
+
+        // Clicking anywhere in the document hides bottom row
+        $booking.on('click.copaair', '.js-copaair-close', function (e) {
+          e.preventDefault();
+          $booking.removeClass('copaair-widget-open');
+          $toggle.addClass('copaair-hidden');
+        });
+      } else {
+        $toggle.removeClass('copaair-hidden');
+      }
+    }
+  }]);
+
+  return Booking;
+}();
+
+exports.default = Booking;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"../lib/Autocomplete":6,"../lib/Datepicker":8,"../lib/FormHelper":10,"../lib/Template":11}],13:[function(require,module,exports){
+(function (global){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _Template = require('../lib/Template');
+
+var _Template2 = _interopRequireDefault(_Template);
+
+var _DataMenu = require('../lib/DataMenu');
+
+var _DataMenu2 = _interopRequireDefault(_DataMenu);
+
+require('store-js');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ga = window.ga;
+var defaults = {
+  lang: 'es',
+  nativeSelect: false,
+  widgetPosition: {
+    my: 'left bottom',
+    at: 'left top'
+  }
+};
+
+var Signup = function () {
+  function Signup(element, options) {
+    var _this = this;
+
+    _classCallCheck(this, Signup);
+
+    this.$form = (0, _jquery2.default)(element);
+    this.options = _jquery2.default.extend({}, defaults, options);
+
+    // Load template
+    return new _Template2.default('signup', {
+      lang: this.options.lang,
+      callback: function callback(html) {
+        _this.$form.html(html);
+        _this.signupEvents();
+        var lang = _this.options.lang;
+
+        _this.$form.find('.js-selectmenu').each(function signupDataMenu() {
+          return new _DataMenu2.default({
+            lang: lang,
+            contentType: (0, _jquery2.default)(this).data('content'),
+            selector: (0, _jquery2.default)(this)
+          });
+        });
+
+        _this.setupSelectMenus();
+
+        (0, _jquery2.default)('.js-signup-date').datepicker({
+          changeMonth: true,
+          changeYear: true,
+          format: 'dd/mm/yy',
+          yearRange: '-100:+0',
+          beforeShow: function beforeShow(input, isnt) {
+            setTimeout(function () {
+              isnt.dpDiv.position({
+                my: 'left bottom',
+                at: 'left top',
+                of: input
+              });
+            }, 0);
+          }
+        });
+      }
+    });
+  }
+
+  /**
+   * Replaces select menus with custom UI widgets
+   */
+
+
+  _createClass(Signup, [{
+    key: 'setupSelectMenus',
+    value: function setupSelectMenus() {
+      if (!this.options.nativeSelect) {
+        this.$form.find('.js-selectmenu').selectmenu({
+          position: this.options.widgetPosition
+        });
+      }
+
+      return this;
+    }
+  }, {
+    key: 'signupEvents',
+    value: function signupEvents() {
+      var _this2 = this;
+
+      var $form = this.$form;
+      var $toggle = this.$form.find('.js-copaair-toggle');
+
+      // Show bottom row when any input gets focus
+      $form.on('focus.copaair', 'input', function () {
+        $form.addClass('copaair-widget-open');
+        $toggle.removeClass('copaair-hidden');
+      });
+
+      $form.on('submit', function (e) {
+        e.preventDefault();
+        _this2.submitForm(e.target);
+      });
+
+      (0, _jquery2.default)('.js-country-selector').selectmenu({
+        change: function change(e, ui) {
+          this.options.country = ui.item.value;
+
+          var destinations = store.get('destinations');
+          var selected = [];
+
+          for (var d in destinations.val) {
+            if (destinations.val[d].country === this.options.country) {
+              selected.push(destinations.val[d]);
             }
+          }
 
-            return this;
+          (0, _jquery2.default)('.js-city-selector').selectmenu('refresh');
+
+          return new _DataMenu2.default({
+            lang: this.options.lang,
+            data: selected,
+            selector: (0, _jquery2.default)('.js-city-selector')
+          });
         }
-    }, {
-        key: 'signupEvents',
-        value: function signupEvents() {
-            var _this2 = this;
+      });
 
-            var $form = this.$form;
-            var $toggle = this.$form.find('.js-copaair-toggle');
-
-            // Show bottom row when any input gets focus
-            $form.on('focus.copaair', 'input', function (e) {
-                $form.addClass('copaair-widget-open');
-                $toggle.removeClass('copaair-hidden');
-            });
-
-            $form.on('submit', function (e) {
-                e.preventDefault();
-                _this2.submitForm(e.target);
-            });
-
-            $('.js-country-selector').selectmenu({
-                change: function change(e, ui) {
-                    _this2.options.country = ui.item.value;
-
-                    var destinations = store.get('destinations');
-                    var selected = [];
-
-                    for (var d in destinations.val) {
-                        if (destinations.val[d].country == _this2.options.country) {
-                            selected.push(destinations.val[d]);
-                        }
-                    }
-                    var dataMenu = new DataMenu({
-                        lang: _this2.options.lang,
-                        data: selected,
-                        selector: $('.js-city-selector')
-                    });
-                    $('.js-city-selector').selectmenu("refresh");
-                }
-            });
-
-            $('.js-city-selector').selectmenu({
-                change: function change(e, ui) {
-                    _this2.options.city = ui.item.value;
-                }
-            });
+      (0, _jquery2.default)('.js-city-selector').selectmenu({
+        change: function change(e, ui) {
+          this.options.city = ui.item.value;
         }
-    }, {
-        key: 'submitForm',
-        value: function submitForm(target) {
-            var $form = $(target);
+      });
+    }
+  }, {
+    key: 'submitForm',
+    value: function submitForm(target) {
+      var $form = (0, _jquery2.default)(target);
 
-            var data = $form.serializeObject();
-            data.fullname = data.first_name + ' ' + data.last_name;
-            data.source = this.options.source;
-            data.language = this.options.lang.toUpperCase();
-            data.city = this.options.city;
-            data.country = this.options.country;
+      var data = $form.serializeObject();
+      data.fullname = data.first_name + ' ' + data.last_name;
+      data.source = this.options.source;
+      data.language = this.options.lang.toUpperCase();
+      data.city = this.options.city;
+      data.country = this.options.country;
 
-            var container = this.options.container;
+      var container = this.options.container;
 
-            $.ajax({
-                type: 'POST',
-                url: 'https://flightcontrol.io/api/signup/add',
-                data: data
-            }).done(function (res) {
-                container.fadeOut();
-                if (typeof ga !== 'undefined') {
-                    ga("send", "event", "Subscription Form", "subscribed", "User was subscribed");
-                }
-            });
+      _jquery2.default.ajax({
+        data: data,
+        type: 'POST',
+        url: 'https://flightcontrol.io/api/signup/add'
+      }).done(function () {
+        container.fadeOut();
+        if (typeof ga !== 'undefined') {
+          ga('send', 'event', 'Subscription Form', 'subscribed', 'User was subscribed');
         }
-    }]);
+      });
+    }
+  }]);
 
-    return Signup;
-})();
+  return Signup;
+}();
 
-module.exports = Signup;
+exports.default = Signup;
 
-},{"../../../lang/datepicker.json":4,"../lib/DataMenu":7,"../lib/Template":11,"store-js":2}]},{},[1]);
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"../lib/DataMenu":7,"../lib/Template":11,"store-js":1}]},{},[5]);
