@@ -1209,14 +1209,8 @@ var Template = function () {
 
     _classCallCheck(this, Template);
 
-    if (!window.location.origin) {
-      window.location.origin = window.location.protocol + '//' + window.location.hostname;
-      window.location.origin += window.location.port ? ':' + window.location.port : '';
-    }
-
-    // defaults.src = window.location.origin + '/bower_components/copaair-widgets/templates';
-
     this.options = _jquery2.default.extend({}, defaults, options);
+
     if (typeof _handlebars2.default !== 'undefined' && _handlebars2.default !== null) {
       _jquery2.default.ajax({
         url: this.options.src + '/' + widget + '.hbs',
@@ -1300,8 +1294,8 @@ var defaults = {
   collapsable: true,
   nativeSelect: false,
   widgetPosition: { my: 'left bottom', at: 'left top' },
-  templatePath: 'bower_components/copaair-widgets/templates',
-  languagePath: 'bower_components/copaair-widgets/lang/',
+  templatePath: '/bower_components/copaair-widgets/templates',
+  languagePath: '/bower_components/copaair-widgets/lang/',
   originSelected: false,
   destinationSelected: false,
   onload: function onload() {}

@@ -22,14 +22,8 @@ const defaults = {
 class Template
 {
   constructor(widget, options) {
-    if (! window.location.origin) {
-      window.location.origin = `${window.location.protocol}//${window.location.hostname}`;
-      window.location.origin += (window.location.port ? `:${window.location.port}` : '');
-    }
-
-    // defaults.src = window.location.origin + '/bower_components/copaair-widgets/templates';
-
     this.options = $.extend({}, defaults, options);
+
     if (typeof Handlebars !== 'undefined' && Handlebars !== null) {
       $.ajax({
         url: `${this.options.src}/${widget}.hbs`,
