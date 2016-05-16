@@ -1192,9 +1192,14 @@ var i18n = [];
 i18n.booking = _booking2.default;
 i18n.signup = _signup2.default;
 
+if (!window.location.origin) {
+  window.location.origin = window.location.protocol + '//' + window.location.hostname;
+  window.location.origin += window.location.port ? ':' + window.location.port : '';
+}
+
 var defaults = {
   lang: 'es',
-  src: '/bower_components/copaair-widgets/templates',
+  src: window.location.origin + '/bower_components/copaair-widgets/templates',
   callback: function callback() {}
 };
 

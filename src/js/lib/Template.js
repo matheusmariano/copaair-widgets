@@ -8,12 +8,16 @@ const i18n = [];
 i18n.booking = bookingLang;
 i18n.signup = signupLang;
 
+if (! window.location.origin) {
+  window.location.origin = `${window.location.protocol}//${window.location.hostname}`;
+  window.location.origin += (window.location.port ? `:${window.location.port}` : '');
+}
+
 const defaults = {
   lang: 'es',
-  src: '/bower_components/copaair-widgets/templates',
+  src: `${window.location.origin}/bower_components/copaair-widgets/templates`,
   callback() {},
 };
-
 
 class Template
 {
