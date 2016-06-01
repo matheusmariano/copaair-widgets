@@ -631,14 +631,9 @@ var defaults = {
     weekLater: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
   },
   lang: 'es',
-  beforeShow: function beforeShow(input, isnt) {
-    setTimeout(function () {
-      isnt.dpDiv.position({
-        my: 'left bottom',
-        at: 'left top',
-        of: input
-      });
-    }, 0);
+  position: {
+    my: 'left bottom',
+    at: 'left top'
   }
 };
 
@@ -648,10 +643,19 @@ var defaults = {
 
 var Datepicker = function () {
   function Datepicker(options) {
+    var _this = this;
+
     _classCallCheck(this, Datepicker);
 
     this.options = _jquery2.default.extend({}, defaults, options);
-    this._defaults = defaults;
+    this.defaults = defaults;
+
+    this.options.beforeShow = function (input, isnt) {
+      setTimeout(function () {
+        var dpPosition = _jquery2.default.extend({}, { of: input }, _this.options.position);
+        isnt.dpDiv.position(dpPosition);
+      }, 0);
+    };
   }
 
   /**
@@ -1333,7 +1337,8 @@ var Booking = function () {
 
         // setup datepicker
         var datepicker = new _Datepicker2.default({
-          lang: _this.options.lang
+          lang: _this.options.lang,
+          position: _this.options.widgetPosition
         });
 
         datepicker.render();

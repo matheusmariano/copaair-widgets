@@ -26,7 +26,7 @@ const defaults = {
   widgetPosition: { my: 'left bottom', at: 'left top' },
   templatePath: '/bower_components/copaair-widgets/templates',
   languagePath: '/bower_components/copaair-widgets/lang/',
-  originSelected:false,
+  originSelected: false,
   destinationSelected: false,
   onload() {},
 };
@@ -61,6 +61,7 @@ class Booking {
         // setup datepicker
         const datepicker = new Datepicker({
           lang: this.options.lang,
+          position: this.options.widgetPosition,
         });
 
         datepicker.render();

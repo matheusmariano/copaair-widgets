@@ -9,14 +9,9 @@ const defaults = {
     weekLater: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
   },
   lang: 'es',
-  beforeShow(input, isnt) {
-    setTimeout(() => {
-      isnt.dpDiv.position({
-        my: 'left bottom',
-        at: 'left top',
-        of: input,
-      });
-    }, 0);
+  position: {
+    my: 'left bottom',
+    at: 'left top',
   },
 };
 
@@ -27,7 +22,14 @@ class Datepicker {
 
   constructor(options) {
     this.options = $.extend({}, defaults, options);
-    this._defaults = defaults;
+    this.defaults = defaults;
+
+    this.options.beforeShow = (input, isnt) => {
+      setTimeout(() => {
+        const dpPosition = $.extend({}, { of: input }, this.options.position);
+        isnt.dpDiv.position(dpPosition);
+      }, 0);
+    };
   }
 
   /**
