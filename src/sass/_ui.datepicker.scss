@@ -29,6 +29,24 @@ $copaair-booking-datepicker-day-active-bg: #e5ecf2 !default;
 $copaair-booking-datepicker-day-active-color: #0062ad !default;
 
 
+.copaair-booking-datepicker-position {
+    position: relative;
+}
+
+.copaair-booking-datepicker {
+    position: absolute;
+    z-index: 200;
+}
+
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .copaair-booking-datepicker {
+        width: 100% !important;
+    }
+}
+
+
+
 /* Layout helpers
 ========================================================================== */
 
@@ -269,6 +287,10 @@ $copaair-booking-datepicker-day-active-color: #0062ad !default;
         color: $copaair-booking-datepicker-day-active-color;
     }
 
+    .dp-highlight {
+        background-color: $copaair-booking-datepicker-day-active-bg;
+    }
+
     .ui-datepicker-buttonpane {
         background-image: none;
         margin: .7em 0 0;
@@ -329,6 +351,11 @@ $copaair-booking-datepicker-day-active-color: #0062ad !default;
         width: 25%;
     }
 
+}
+
+
+.ui-datepicker .ui-datepicker-buttonpane .ui-datepicker-current {
+    display: none;
 }
 
 .ui-datepicker-row-break {

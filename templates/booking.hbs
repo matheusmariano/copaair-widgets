@@ -28,7 +28,10 @@
             {{/if}}
         </div
         ><div class="copaair-widget-layout__item">
-            <input class="copaair-form-control  copaair-widget-datepicker  copaair-booking-datepicker-departure" placeholder="{{form.departure}}" type="text" required>
+            <div class="copaair-booking-datepicker-position">
+                <input class="copaair-form-control  copaair-widget-datepicker  copaair-booking-datepicker-departure" placeholder="{{form.departure}}" type="text" required>
+                <div class="copaair-booking-datepicker js-copaair-booking-datepicker-container"></div>
+            </div>
         </div
         ><div class="copaair-widget-layout__item">
             <input class="copaair-form-control  copaair-widget-datepicker  copaair-booking-datepicker-return" placeholder="{{form.return}}" type="text" required>

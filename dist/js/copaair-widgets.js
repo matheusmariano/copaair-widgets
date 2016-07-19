@@ -621,20 +621,25 @@ var _datepicker2 = _interopRequireDefault(_datepicker);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var defaults = {
   departureSelector: '.copaair-booking-datepicker-departure',
   returnSelector: '.copaair-booking-datepicker-return',
+  datepickerSelector: '.js-copaair-booking-datepicker-container',
+  showButtonPanel: true,
+  numberOfMonths: 2,
+  selectMultiple: true,
+  numSelectable: 2,
   dateRules: {
     today: new Date(),
     weekLater: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
   },
   lang: 'es',
-  position: {
-    my: 'left bottom',
-    at: 'left top'
-  }
+  position: 'top',
+  isMobile: false
 };
 
 /**
@@ -643,19 +648,15 @@ var defaults = {
 
 var Datepicker = function () {
   function Datepicker(options) {
-    var _this = this;
-
     _classCallCheck(this, Datepicker);
 
+    this.current = null;
     this.options = _jquery2.default.extend({}, defaults, options);
     this.defaults = defaults;
 
-    this.options.beforeShow = function (input, isnt) {
-      setTimeout(function () {
-        var dpPosition = _jquery2.default.extend({}, { of: input }, _this.options.position);
-        isnt.dpDiv.position(dpPosition);
-      }, 0);
-    };
+    this.options.departureSelector = this.options.booking.find('.copaair-booking-datepicker-departure');
+    this.options.returnSelector = this.options.booking.find('.copaair-booking-datepicker-return');
+    this.options.datepickerSelector = this.options.booking.find('.js-copaair-booking-datepicker-container');
   }
 
   /**
@@ -668,48 +669,199 @@ var Datepicker = function () {
     key: 'render',
     value: function render() {
       this.setLocale();
-      this.setDefaultDates();
+      this.init();
+      this.setSize();
+      this.setPosition();
+      this.setBeforeShowDaySettings();
+      this.setDateRanges();
       this.events();
+    }
+  }, {
+    key: 'init',
+    value: function init() {
+
+      //
+      var $mainDatePicker = this.options.datepickerSelector;
+      $mainDatePicker.datepicker(this.options);
+
+      $mainDatePicker.datepicker('option', 'minDate', 0);
+
+      $mainDatePicker.hide();
+    }
+  }, {
+    key: 'setSize',
+    value: function setSize() {
+      var $mainDatePicker = this.options.datepickerSelector;
+      if (this.options.isMobile) {
+        $mainDatePicker.datepicker('option', 'numberOfMonths', 1);
+      }
+    }
+  }, {
+    key: 'setPosition',
+    value: function setPosition() {
+
+      var $mainDatePicker = (0, _jquery2.default)(this.options.datepickerSelector);
+      var $departureField = (0, _jquery2.default)(this.options.departureSelector);
+      var widget = $mainDatePicker.datepicker('widget');
+      var position = (0, _jquery2.default)('.copaair-booking-datepicker-position').height() + 10;
+
+      var mapPosition = {
+        top: 'bottom',
+        bottom: 'top'
+      };
+
+      $mainDatePicker.css(_defineProperty({}, mapPosition[this.options.position], position));
     }
 
     /**
-     * Set defaults dates
-     * this consist in set current date for departure
-     * and one week later for return
+     *
+     *
+     *
      */
 
   }, {
-    key: 'setDefaultDates',
-    value: function setDefaultDates() {
-      var dateRules = this.options.dateRules;
+    key: 'setBeforeShowDaySettings',
+    value: function setBeforeShowDaySettings() {
+
+      var $mainDatePicker = this.options.datepickerSelector;
+      var $departureField = this.options.departureSelector;
+      var $returnField = this.options.returnSelector;
+
+      // This will render the date range on the datepicker calendar
+      $mainDatePicker.datepicker('option', 'beforeShowDay', function (date) {
+        var date1 = _jquery2.default.datepicker.parseDate(_jquery2.default.datepicker._defaults.dateFormat, $departureField.val());
+        var date2 = _jquery2.default.datepicker.parseDate(_jquery2.default.datepicker._defaults.dateFormat, $returnField.val());
+        return [true, date1 && (date.getTime() == date1.getTime() || date2 && date >= date1 && date <= date2) ? "dp-highlight" : ""];
+      });
+
+      this.renderCloseButton();
+      this.renderResetButton();
+    }
+  }, {
+    key: 'setDateRanges',
+    value: function setDateRanges() {
+
+      var $mainDatePicker = (0, _jquery2.default)(this.options.datepickerSelector);
       var $departureField = (0, _jquery2.default)(this.options.departureSelector);
       var $returnField = (0, _jquery2.default)(this.options.returnSelector);
+      var _this = this;
 
-      this.options.minDate = new Date();
+      $mainDatePicker.datepicker('option', 'onSelect', function select(dateText, inst) {
 
-      $departureField.datepicker(this.options);
-      $returnField.datepicker(this.options);
+        (0, _jquery2.default)(_this.current).val(dateText);
 
-      $departureField.datepicker('setDate', dateRules.today);
-      $returnField.datepicker('setDate', dateRules.weekLater);
+        var date1 = _jquery2.default.datepicker.parseDate(_jquery2.default.datepicker._defaults.dateFormat, $departureField.val());
+        var date2 = _jquery2.default.datepicker.parseDate(_jquery2.default.datepicker._defaults.dateFormat, $returnField.val());
+
+        if ($returnField[0] !== _this.current && $returnField.val() === '') {
+          $returnField.click().focus();
+        } else if ($departureField[0] !== _this.current && $departureField.val() === '') {
+          $departureField.click().focus();
+        }
+
+        if (date1) {
+          _this.setDates(date1, true);
+        }
+
+        if (date2) {
+          _this.setDates(date2, false);
+        }
+
+        if (date2 && date2 < date1) {
+          $departureField.val(dateText);
+          $returnField.val('');
+        }
+
+        _this.renderCloseButton();
+        _this.renderResetButton();
+      });
+    }
+  }, {
+    key: 'setDates',
+    value: function setDates(date, bound) {
+      if (bound) {
+        this.options.formHelper.options.inputs['outboundOption.departureDay'] = date.getUTCDate();
+        this.options.formHelper.options.inputs['outboundOption.departureMonth'] = date.getMonth() + 1;
+        this.options.formHelper.options.inputs['outboundOption.departureYear'] = date.getFullYear();
+      } else {
+        this.options.formHelper.options.inputs['inboundOption.departureDay'] = date.getUTCDate();
+        this.options.formHelper.options.inputs['inboundOption.departureMonth'] = date.getMonth() + 1;
+        this.options.formHelper.options.inputs['inboundOption.departureYear'] = date.getFullYear();
+      }
     }
   }, {
     key: 'events',
     value: function events() {
-      // const $departureField = $(this.options.departureSelector);
-      // const $returnField = $(this.options.returnSelector);
+      var _this2 = this;
 
-      // $departureField.datepicker('option', 'onSelect', this.onSelectOutbound);
+      var $mainDatePicker = (0, _jquery2.default)(this.options.datepickerSelector);
+      var $departureField = (0, _jquery2.default)(this.options.departureSelector);
+      var $returnField = (0, _jquery2.default)(this.options.returnSelector);
+      var date1 = _jquery2.default.datepicker.parseDate(_jquery2.default.datepicker._defaults.dateFormat, $departureField.val());
+
+      $departureField.on('click', function (e) {
+        _this2.current = e.target;
+        $mainDatePicker.show();
+        if (_this2.options.isMobile) {
+          window.scroll(0, $mainDatePicker.width());
+        }
+      });
+
+      $returnField.on('click', function (e) {
+        _this2.current = e.target;
+        $mainDatePicker.show();
+      });
+
+      // Hide DatePicker on click outside the widget container.
+      // TODO: find an alterantive solution
+      (0, _jquery2.default)('.copaair-booking').on('click', function (e) {
+        e.stopPropagation();
+      });
+
+      (0, _jquery2.default)(document).on('click', function (e) {
+        $mainDatePicker.hide();
+      });
     }
   }, {
-    key: 'onSelectOutbound',
-    value: function onSelectOutbound(dateText, inst) {
+    key: 'renderResetButton',
+    value: function renderResetButton() {
+      var $mainDatePicker = (0, _jquery2.default)(this.options.datepickerSelector);
+      var $departureField = (0, _jquery2.default)(this.options.departureSelector);
       var $returnField = (0, _jquery2.default)(this.options.returnSelector);
-      var date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+      var _this = this;
+      setTimeout(function () {
+        var buttonPane = $mainDatePicker.find(".ui-datepicker-buttonpane");
+        (0, _jquery2.default)('<button>', {
+          type: 'button',
+          text: 'Reset',
+          click: function click() {
+            $departureField.val('');
+            $returnField.val('');
+            _this.reset($mainDatePicker);
+          }
+        }).appendTo(buttonPane).addClass("ui-datepicker-reset ui-state-default ui-priority-secondary ui-corner-all");
+      }, 1);
+    }
+  }, {
+    key: 'renderCloseButton',
+    value: function renderCloseButton() {
+      var $mainDatePicker = (0, _jquery2.default)(this.options.datepickerSelector);
 
-      // this sets the inbound date picker to a week later of current selection
-      var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
-      $returnField.datepicker('setDate', weeklater);
+      setTimeout(function () {
+        var buttonPane = $mainDatePicker.find(".ui-datepicker-buttonpane");
+        (0, _jquery2.default)('<button>', {
+          type: 'button',
+          text: 'Cerrar',
+          click: function click() {
+            $mainDatePicker.hide();
+          }
+        }).appendTo(buttonPane).addClass("ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all");
+      }, 1);
+    }
+  }, {
+    key: 'reset',
+    value: function reset(datepickerInst) {
+      datepickerInst.datepicker('setDate', null);
     }
 
     /**
@@ -955,10 +1107,7 @@ var FormHelper = function () {
 
     // set defautls values
     this.setDefaultBounds();
-    this.setDates(this.options.datepicker, {
-      returns: true,
-      departure: true
-    });
+
     this.options.inputs.lang = this.options.lang;
 
     // load events related with form helper and other modules
@@ -1020,25 +1169,6 @@ var FormHelper = function () {
       }
     }
   }, {
-    key: 'setDates',
-    value: function setDates(datepicker, bounds) {
-      // get current datepickers dates
-      var departureDate = (0, _jquery2.default)(datepicker.options.departureSelector).datepicker('getDate');
-      var returnDate = (0, _jquery2.default)(datepicker.options.returnSelector).datepicker('getDate');
-
-      if (bounds.returns) {
-        this.options.inputs['inboundOption.departureDay'] = returnDate.getUTCDate();
-        this.options.inputs['inboundOption.departureMonth'] = returnDate.getMonth() + 1;
-        this.options.inputs['inboundOption.departureYear'] = returnDate.getFullYear();
-      }
-
-      if (bounds.departure) {
-        this.options.inputs['outboundOption.departureDay'] = departureDate.getUTCDate();
-        this.options.inputs['outboundOption.departureMonth'] = departureDate.getMonth() + 1;
-        this.options.inputs['outboundOption.departureYear'] = departureDate.getFullYear();
-      }
-    }
-  }, {
     key: 'setCabinClass',
     value: function setCabinClass(target) {
       this.options.inputs.cabinClass = (0, _jquery2.default)(target).val();
@@ -1074,7 +1204,7 @@ var FormHelper = function () {
         error: false,
         bag: []
       };
-
+      console.log(this.options.inputs);
       for (var input in this.options.inputs) {
         if (!this.options.inputs[input] && this.options.inputs[input] !== 0) {
           var currentError = {};
@@ -1091,37 +1221,6 @@ var FormHelper = function () {
     key: 'events',
     value: function events() {
       var _this = this;
-
-      var datepicker = this.options.datepicker;
-      var $departureField = (0, _jquery2.default)(datepicker.options.departureSelector);
-      var $returnField = (0, _jquery2.default)(datepicker.options.returnSelector);
-
-      $departureField.datepicker('option', 'onSelect', function (dateText, inst) {
-        var date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
-
-        // this sets the inbound date picker to a week later of current selection
-        var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
-
-        $returnField.datepicker('setDate', weeklater);
-        $returnField.datepicker('option', 'minDate', date);
-
-        _this.setDates(datepicker, {
-          returns: true,
-          departure: true
-        });
-      });
-
-      $returnField.datepicker('option', 'onSelect', function (dateText, inst) {
-        var date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
-
-        // this sets the inbound date picker to a week later of current selection
-        var weeklater = new Date(date.getTime() + 7 * 24 * 60 * 60 * 1000);
-
-        _this.setDates(datepicker, {
-          returns: true,
-          departure: false
-        });
-      });
 
       this.options.booking.find('.js-cabin-class').on('click', function (e) {
         _this.setCabinClass(e.target);
@@ -1298,10 +1397,12 @@ var defaults = {
   collapsable: true,
   nativeSelect: false,
   widgetPosition: { my: 'left bottom', at: 'left top' },
+  datepickerPosition: 'top',
   templatePath: '/bower_components/copaair-widgets/templates',
   languagePath: '/bower_components/copaair-widgets/lang/',
   originSelected: false,
   destinationSelected: false,
+  isMobile: false,
   onload: function onload() {}
 };
 
@@ -1335,14 +1436,6 @@ var Booking = function () {
         // When finished, build all the widgets
         _this.setupSelectMenus();
 
-        // setup datepicker
-        var datepicker = new _Datepicker2.default({
-          lang: _this.options.lang,
-          position: _this.options.widgetPosition
-        });
-
-        datepicker.render();
-
         var formHelper = new _FormHelper2.default({
           datepicker: datepicker,
           origin: _this.options.origin,
@@ -1353,6 +1446,17 @@ var Booking = function () {
           analytics: _this.options.analytics,
           bookingPage: _this.options.bookingPage
         });
+
+        // setup datepicker
+        var datepicker = new _Datepicker2.default({
+          lang: _this.options.lang,
+          position: _this.options.datepickerPosition,
+          booking: _this.$booking,
+          formHelper: formHelper,
+          isMobile: _this.options.isMobile
+        });
+
+        datepicker.render();
 
         if (_this.options.coupon) {
           formHelper.setCoupon(_this.options.coupon);

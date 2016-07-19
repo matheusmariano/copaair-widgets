@@ -24,10 +24,12 @@ const defaults = {
   collapsable: true,
   nativeSelect: false,
   widgetPosition: { my: 'left bottom', at: 'left top' },
+  datepickerPosition: 'top',
   templatePath: '/bower_components/copaair-widgets/templates',
   languagePath: '/bower_components/copaair-widgets/lang/',
   originSelected: false,
   destinationSelected: false,
+  isMobile: false,
   onload() {},
 };
 
@@ -58,13 +60,6 @@ class Booking {
         // When finished, build all the widgets
         this.setupSelectMenus();
 
-        // setup datepicker
-        const datepicker = new Datepicker({
-          lang: this.options.lang,
-          position: this.options.widgetPosition,
-        });
-
-        datepicker.render();
 
         const formHelper = new FormHelper({
           datepicker,
@@ -76,6 +71,20 @@ class Booking {
           analytics: this.options.analytics,
           bookingPage: this.options.bookingPage,
         });
+
+        // setup datepicker
+        const datepicker = new Datepicker({
+          lang: this.options.lang,
+          position: this.options.datepickerPosition,
+          booking: this.$booking,
+          formHelper: formHelper,
+          isMobile: this.options.isMobile,
+        });
+
+
+        datepicker.render();
+
+
 
         if (this.options.coupon) {
           formHelper.setCoupon(this.options.coupon);
