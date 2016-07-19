@@ -824,13 +824,13 @@ var Datepicker = function () {
 
       // Hide DatePicker on click outside the widget container.
       // TODO: find an alterantive solution
-      (0, _jquery2.default)('.copaair-booking').on('click', function (e) {
-        e.stopPropagation();
-      });
+      // $('.copaair-booking').on('click', (e) => {
+      //   e.stopPropagation();
+      // });
 
-      (0, _jquery2.default)(document).on('click', function (e) {
-        $mainDatePicker.hide();
-      });
+      // $(document).on('click', (e) => {
+      //   $mainDatePicker.hide();
+      // });
     }
   }, {
     key: 'renderResetButton',

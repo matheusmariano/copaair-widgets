@@ -88,7 +88,7 @@ class Datepicker {
     };
 
     $mainDatePicker.css({
-        [mapPosition[this.options.position]] : position
+        [mapPosition[this.options.position]]: position
     });
   }
 
@@ -194,13 +194,13 @@ class Datepicker {
 
     // Hide DatePicker on click outside the widget container.
     // TODO: find an alterantive solution
-    $('.copaair-booking').on('click', (e) => {
-      e.stopPropagation();
-    });
+    // $('.copaair-booking').on('click', (e) => {
+    //   e.stopPropagation();
+    // });
 
-    $(document).on('click', (e) => {
-      $mainDatePicker.hide();
-    });
+    // $(document).on('click', (e) => {
+    //   $mainDatePicker.hide();
+    // });
   }
 
   renderResetButton() {
