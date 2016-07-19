@@ -207,12 +207,15 @@ class Datepicker {
     const $mainDatePicker = $(this.options.datepickerSelector);
     const $departureField = $(this.options.departureSelector);
     const $returnField = $(this.options.returnSelector);
+
+    const resetButtonCopy = i18n[this.options.lang].buttons.reset;
+
     const _this = this;
     setTimeout(function() {
       var buttonPane = $mainDatePicker.find( ".ui-datepicker-buttonpane");
       $('<button>', {
         type: 'button',
-        text: 'Reset',
+        text: resetButtonCopy,
         click: function ()  {
           $departureField.val('');
           $returnField.val('');
@@ -224,12 +227,13 @@ class Datepicker {
 
   renderCloseButton() {
     const $mainDatePicker = $(this.options.datepickerSelector);
+    const closeButtonCopy = i18n[this.options.lang].buttons.close;
 
     setTimeout(function() {
       var buttonPane = $mainDatePicker.find( ".ui-datepicker-buttonpane");
       $('<button>', {
         type: 'button',
-        text: 'Cerrar',
+        text: closeButtonCopy,
         click: function ()  {
           $mainDatePicker.hide();
         }

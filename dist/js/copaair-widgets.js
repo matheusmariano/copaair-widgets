@@ -177,11 +177,19 @@ module.exports={
             "isRTL": false,
             "showMonthAfterYear": false,
             "yearSuffix": ""
+        },
+        "buttons": {
+            "close": "Cerrar",
+            "reset": "Reiniciar"
         }
 
     },
     "en": {
-        "regional" : {}
+        "regional" : {},
+        "buttons": {
+            "close": "Close",
+            "reset": "Reset"
+        }
     },
     "pt": {
         "regional" : {
@@ -200,6 +208,10 @@ module.exports={
             "isRTL": false,
             "showMonthAfterYear": false,
             "yearSuffix": ""
+        },
+        "buttons": {
+            "close": "Fechar",
+            "reset": "Reiniciar"
         }
     }
 }
@@ -838,12 +850,15 @@ var Datepicker = function () {
       var $mainDatePicker = (0, _jquery2.default)(this.options.datepickerSelector);
       var $departureField = (0, _jquery2.default)(this.options.departureSelector);
       var $returnField = (0, _jquery2.default)(this.options.returnSelector);
+
+      var resetButtonCopy = _datepicker2.default[this.options.lang].buttons.reset;
+
       var _this = this;
       setTimeout(function () {
         var buttonPane = $mainDatePicker.find(".ui-datepicker-buttonpane");
         (0, _jquery2.default)('<button>', {
           type: 'button',
-          text: 'Reset',
+          text: resetButtonCopy,
           click: function click() {
             $departureField.val('');
             $returnField.val('');
@@ -856,12 +871,13 @@ var Datepicker = function () {
     key: 'renderCloseButton',
     value: function renderCloseButton() {
       var $mainDatePicker = (0, _jquery2.default)(this.options.datepickerSelector);
+      var closeButtonCopy = _datepicker2.default[this.options.lang].buttons.close;
 
       setTimeout(function () {
         var buttonPane = $mainDatePicker.find(".ui-datepicker-buttonpane");
         (0, _jquery2.default)('<button>', {
           type: 'button',
-          text: 'Cerrar',
+          text: closeButtonCopy,
           click: function click() {
             $mainDatePicker.hide();
           }

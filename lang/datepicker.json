@@ -17,11 +17,19 @@
             "isRTL": false,
             "showMonthAfterYear": false,
             "yearSuffix": ""
+        },
+        "buttons": {
+            "close": "Cerrar",
+            "reset": "Reiniciar"
         }
 
     },
     "en": {
-        "regional" : {}
+        "regional" : {},
+        "buttons": {
+            "close": "Close",
+            "reset": "Reset"
+        }
     },
     "pt": {
         "regional" : {
@@ -40,6 +48,10 @@
             "isRTL": false,
             "showMonthAfterYear": false,
             "yearSuffix": ""
+        },
+        "buttons": {
+            "close": "Fechar",
+            "reset": "Reiniciar"
         }
     }
 }
