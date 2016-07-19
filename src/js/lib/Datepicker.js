@@ -26,7 +26,6 @@ class Datepicker {
     this.current = null;
     this.options = $.extend({}, defaults, options);
     this.defaults = defaults;
-
     this.options.departureSelector = this.options.booking.find('.copaair-booking-datepicker-departure');
     this.options.returnSelector = this.options.booking.find('.copaair-booking-datepicker-return');
     this.options.datepickerSelector = this.options.booking.find('.js-copaair-booking-datepicker-container');
@@ -40,7 +39,7 @@ class Datepicker {
     this.setLocale();
     this.init();
 
-    this.setPosition();
+
     this.setBeforeShowDaySettings();
     this.setDateRanges();
 
@@ -51,6 +50,7 @@ class Datepicker {
     this.mqMobile.addListener(this.setSize);
 
     this.events();
+    this.setPosition();
   }
 
   init() {
@@ -80,7 +80,14 @@ class Datepicker {
     const $mainDatePicker = $(this.options.datepickerSelector);
     const $departureField = $(this.options.departureSelector);
     const widget = $mainDatePicker.datepicker('widget');
-    const position = $('.copaair-booking-datepicker-position').height() + 10;
+    let position = 0;
+
+    if (this.mqMobile.matches) {
+      position = $('.copaair-booking-datepicker-position').height()*2 + 10;
+    } else {
+      position = $('.copaair-booking-datepicker-position').height() + 15;
+    }
+
 
     const mapPosition = {
         top: 'bottom',
@@ -112,8 +119,8 @@ class Datepicker {
     });
 
 
-    this.renderCloseButton();
-    this.renderResetButton();
+    // this.renderCloseButton();
+    // this.renderResetButton();
   }
 
   setDateRanges() {
@@ -143,6 +150,12 @@ class Datepicker {
 
       if (date2) {
         _this.setDates(date2, false);
+
+        if (_this.mqMobile.matches) {
+          $('html, body').animate({
+            scrollTop: $returnField.offset().top
+          }, 1000);
+        }
       }
 
       if (date2 && date2 < date1){
@@ -153,6 +166,7 @@ class Datepicker {
 
       _this.renderCloseButton();
       _this.renderResetButton();
+
     });
 
   }
@@ -176,21 +190,29 @@ class Datepicker {
     const $returnField = $(this.options.returnSelector);
     const date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $departureField.val());
 
-    $departureField.on('click', (e) => {
+    $departureField.on('focus', (e) => {
       this.current = e.target;
-      const _this = this;
       $mainDatePicker.show();
-
-      if (_this.mqMobile.matches) {
-        window.scroll(0,$mainDatePicker.width());
+            console.log('focus22');
+      if (this.mqMobile.matches) {
+        $('html, body').animate({
+          scrollTop: $returnField.offset().top
+        }, 1000);
       }
     });
 
-    $returnField.on('click', (e) => {
+
+    $returnField.on('focus', (e) => {
+      console.log('focus1');
       this.current = e.target;
       $mainDatePicker.show();
-    });
 
+      if (this.mqMobile.matches) {
+        $('html, body').animate({
+          scrollTop: $returnField.offset().top
+        }, 1000);
+      }
+    });
 
     // Hide DatePicker on click outside the widget container.
     // TODO: find an alterantive solution

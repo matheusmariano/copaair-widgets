@@ -664,7 +664,6 @@ var Datepicker = function () {
     this.current = null;
     this.options = _jquery2.default.extend({}, defaults, options);
     this.defaults = defaults;
-
     this.options.departureSelector = this.options.booking.find('.copaair-booking-datepicker-departure');
     this.options.returnSelector = this.options.booking.find('.copaair-booking-datepicker-return');
     this.options.datepickerSelector = this.options.booking.find('.js-copaair-booking-datepicker-container');
@@ -682,7 +681,6 @@ var Datepicker = function () {
       this.setLocale();
       this.init();
 
-      this.setPosition();
       this.setBeforeShowDaySettings();
       this.setDateRanges();
 
@@ -692,6 +690,7 @@ var Datepicker = function () {
       this.mqMobile.addListener(this.setSize);
 
       this.events();
+      this.setPosition();
     }
   }, {
     key: 'init',
@@ -723,7 +722,13 @@ var Datepicker = function () {
       var $mainDatePicker = (0, _jquery2.default)(this.options.datepickerSelector);
       var $departureField = (0, _jquery2.default)(this.options.departureSelector);
       var widget = $mainDatePicker.datepicker('widget');
-      var position = (0, _jquery2.default)('.copaair-booking-datepicker-position').height() + 10;
+      var position = 0;
+
+      if (this.mqMobile.matches) {
+        position = (0, _jquery2.default)('.copaair-booking-datepicker-position').height() * 2 + 10;
+      } else {
+        position = (0, _jquery2.default)('.copaair-booking-datepicker-position').height() + 15;
+      }
 
       var mapPosition = {
         top: 'bottom',
@@ -754,8 +759,8 @@ var Datepicker = function () {
         return [true, date1 && (date.getTime() == date1.getTime() || date2 && date >= date1 && date <= date2) ? "dp-highlight" : ""];
       });
 
-      this.renderCloseButton();
-      this.renderResetButton();
+      // this.renderCloseButton();
+      // this.renderResetButton();
     }
   }, {
     key: 'setDateRanges',
@@ -785,6 +790,12 @@ var Datepicker = function () {
 
         if (date2) {
           _this.setDates(date2, false);
+
+          if (_this.mqMobile.matches) {
+            (0, _jquery2.default)('html, body').animate({
+              scrollTop: $returnField.offset().top
+            }, 1000);
+          }
         }
 
         if (date2 && date2 < date1) {
@@ -819,19 +830,27 @@ var Datepicker = function () {
       var $returnField = (0, _jquery2.default)(this.options.returnSelector);
       var date1 = _jquery2.default.datepicker.parseDate(_jquery2.default.datepicker._defaults.dateFormat, $departureField.val());
 
-      $departureField.on('click', function (e) {
+      $departureField.on('focus', function (e) {
         _this2.current = e.target;
-        var _this = _this2;
         $mainDatePicker.show();
-
-        if (_this.mqMobile.matches) {
-          window.scroll(0, $mainDatePicker.width());
+        console.log('focus22');
+        if (_this2.mqMobile.matches) {
+          (0, _jquery2.default)('html, body').animate({
+            scrollTop: $returnField.offset().top
+          }, 1000);
         }
       });
 
-      $returnField.on('click', function (e) {
+      $returnField.on('focus', function (e) {
+        console.log('focus1');
         _this2.current = e.target;
         $mainDatePicker.show();
+
+        if (_this2.mqMobile.matches) {
+          (0, _jquery2.default)('html, body').animate({
+            scrollTop: $returnField.offset().top
+          }, 1000);
+        }
       });
 
       // Hide DatePicker on click outside the widget container.
