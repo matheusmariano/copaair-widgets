@@ -638,8 +638,7 @@ var defaults = {
     weekLater: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
   },
   lang: 'es',
-  position: 'top',
-  isMobile: false
+  position: 'top'
 };
 
 /**
@@ -670,10 +669,16 @@ var Datepicker = function () {
     value: function render() {
       this.setLocale();
       this.init();
-      this.setSize();
+
       this.setPosition();
       this.setBeforeShowDaySettings();
       this.setDateRanges();
+
+      this.mqMobile = window.matchMedia('(max-width: 720px)');
+      this.setSize(this.mqMobile);
+
+      this.mqMobile.addListener(this.setSize);
+
       this.events();
     }
   }, {
@@ -690,10 +695,13 @@ var Datepicker = function () {
     }
   }, {
     key: 'setSize',
-    value: function setSize() {
-      var $mainDatePicker = this.options.datepickerSelector;
-      if (this.options.isMobile) {
+    value: function setSize(mq) {
+      var $mainDatePicker = (0, _jquery2.default)('.js-copaair-booking-datepicker-container');
+
+      if (mq.matches) {
         $mainDatePicker.datepicker('option', 'numberOfMonths', 1);
+      } else {
+        $mainDatePicker.datepicker('option', 'numberOfMonths', 2);
       }
     }
   }, {
@@ -801,8 +809,10 @@ var Datepicker = function () {
 
       $departureField.on('click', function (e) {
         _this2.current = e.target;
+        var _this = _this2;
         $mainDatePicker.show();
-        if (_this2.options.isMobile) {
+
+        if (_this.mqMobile.matches) {
           window.scroll(0, $mainDatePicker.width());
         }
       });

@@ -15,7 +15,6 @@ const defaults = {
   },
   lang: 'es',
   position: 'top',
-  isMobile: false,
 };
 
 /**
@@ -40,13 +39,18 @@ class Datepicker {
   render() {
     this.setLocale();
     this.init();
-    this.setSize();
+
     this.setPosition();
     this.setBeforeShowDaySettings();
     this.setDateRanges();
+
+
+    this.mqMobile = window.matchMedia('(max-width: 720px)');
+    this.setSize(this.mqMobile);
+
+    this.mqMobile.addListener(this.setSize);
+
     this.events();
-
-
   }
 
   init() {
@@ -60,10 +64,13 @@ class Datepicker {
     $mainDatePicker.hide();
   }
 
-  setSize() {
-    const $mainDatePicker = this.options.datepickerSelector;
-    if (this.options.isMobile) {
+  setSize(mq) {
+    const $mainDatePicker = $('.js-copaair-booking-datepicker-container');
+
+    if (mq.matches) {
       $mainDatePicker.datepicker('option', 'numberOfMonths', 1);
+    } else {
+      $mainDatePicker.datepicker('option', 'numberOfMonths', 2);
     }
   }
 
@@ -171,9 +178,11 @@ class Datepicker {
 
     $departureField.on('click', (e) => {
       this.current = e.target;
+      const _this = this;
       $mainDatePicker.show();
-      if (this.options.isMobile) {
-          window.scroll(0,$mainDatePicker.width());
+
+      if (_this.mqMobile.matches) {
+        window.scroll(0,$mainDatePicker.width());
       }
     });
 
