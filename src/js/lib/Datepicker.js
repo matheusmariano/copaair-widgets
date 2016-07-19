@@ -193,23 +193,21 @@ class Datepicker {
     $departureField.on('focus', (e) => {
       this.current = e.target;
       $mainDatePicker.show();
-            console.log('focus22');
       if (this.mqMobile.matches) {
         $('html, body').animate({
-          scrollTop: $returnField.offset().top
+          scrollTop: $mainDatePicker.offset().top
         }, 1000);
       }
     });
 
 
     $returnField.on('focus', (e) => {
-      console.log('focus1');
       this.current = e.target;
       $mainDatePicker.show();
 
       if (this.mqMobile.matches) {
         $('html, body').animate({
-          scrollTop: $returnField.offset().top
+          scrollTop: $mainDatePicker.offset().top
         }, 1000);
       }
     });

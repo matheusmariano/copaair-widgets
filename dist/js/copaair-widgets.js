@@ -833,22 +833,20 @@ var Datepicker = function () {
       $departureField.on('focus', function (e) {
         _this2.current = e.target;
         $mainDatePicker.show();
-        console.log('focus22');
         if (_this2.mqMobile.matches) {
           (0, _jquery2.default)('html, body').animate({
-            scrollTop: $returnField.offset().top
+            scrollTop: $mainDatePicker.offset().top
           }, 1000);
         }
       });
 
       $returnField.on('focus', function (e) {
-        console.log('focus1');
         _this2.current = e.target;
         $mainDatePicker.show();
 
         if (_this2.mqMobile.matches) {
           (0, _jquery2.default)('html, body').animate({
-            scrollTop: $returnField.offset().top
+            scrollTop: $mainDatePicker.offset().top
           }, 1000);
         }
       });
