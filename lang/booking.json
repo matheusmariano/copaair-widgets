@@ -2,6 +2,7 @@
     "es": {
         "form": {
             "origin": "Desde",
+            "selectCity": "Selecciona una ciudad",
             "destination": "Hacia",
             "departure": "Salida",
             "return": "Regreso",
@@ -21,6 +22,7 @@
     "en": {
         "form": {
             "origin": "From",
+            "selectCity": "Select your city",
             "destination": "To",
             "departure": "Departure",
             "return": "Return",
@@ -40,6 +42,7 @@
     "pt": {
         "form": {
             "origin": "De",
+            "selectCity": "Selecione sua cidade",
             "destination": "Para",
             "departure": "Saída",
             "return": "Regresso",
