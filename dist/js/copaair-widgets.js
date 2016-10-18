@@ -101,6 +101,7 @@ module.exports={
     "es": {
         "form": {
             "origin": "Desde",
+            "selectCity": "Selecciona una ciudad",
             "destination": "Hacia",
             "departure": "Salida",
             "return": "Regreso",
@@ -120,6 +121,7 @@ module.exports={
     "en": {
         "form": {
             "origin": "From",
+            "selectCity": "Select your city",
             "destination": "To",
             "departure": "Departure",
             "return": "Return",
@@ -139,6 +141,7 @@ module.exports={
     "pt": {
         "form": {
             "origin": "De",
+            "selectCity": "Selecione sua cidade",
             "destination": "Para",
             "departure": "Saída",
             "return": "Regresso",
@@ -356,13 +359,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * for better usability than a native select menu.
  * @class
  */
-
 var Autocomplete = function () {
   /**
    * Constructor
    * @param  {Object} options Custom options for this widget instance.
    */
-
   function Autocomplete(options) {
     _classCallCheck(this, Autocomplete);
 
@@ -538,7 +539,6 @@ var DataMenu = function () {
    * Constructor
    * @param  {Object} options Custom options for this widget instance.
    */
-
   function DataMenu(options) {
     _classCallCheck(this, DataMenu);
 
