@@ -949,9 +949,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var defaults = {
   lang: 'es',
   api: {
-    destinations: 'https://flightcontrol.io/api/routes/destinations',
-    countries: 'https://flightcontrol.io/api/routes/countries',
-    regions: 'https://flightcontrol.io/api/routes/regions'
+    destinations: 'http://localhost:8000/api/routes/destinations',
+    countries: 'http://localhost:8000/api/routes/countries',
+    regions: 'http://localhost:8000/api/routes/regions'
   },
   storageExpiration: 86400000,
   storage: true
@@ -1770,7 +1770,7 @@ var Signup = function () {
       _jquery2.default.ajax({
         data: data,
         type: 'POST',
-        url: 'https://flightcontrol.io/api/signup/add'
+        url: 'http://localhost:8000/api/signup/add'
       }).done(function () {
         container.fadeOut();
         if (typeof ga !== 'undefined') {

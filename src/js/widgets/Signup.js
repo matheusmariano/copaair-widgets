@@ -129,7 +129,7 @@ class Signup {
     $.ajax({
       data,
       type: 'POST',
-      url: 'https://flightcontrol.io/api/signup/add',
+      url: 'http://localhost:8000/api/signup/add',
     }).done(() => {
       container.fadeOut();
       if (typeof(ga) !== 'undefined') {
